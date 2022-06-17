@@ -1,0 +1,7 @@
+# Editor cache
+.vscode
+
+# Python cache
+__pycache__
+*py[o|c]
+.ipynb_checkpoints
