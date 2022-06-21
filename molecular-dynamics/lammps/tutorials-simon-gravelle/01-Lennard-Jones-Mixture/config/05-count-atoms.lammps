@@ -1,0 +1,8 @@
+# NOTE: check groups in `04-groups-common.lammps`
+# and names of regions in `02-named-regions.lammps`.
+
+# Create variables to count atoms in different regions.
+variable     Nt1in equal count(type1,cylin)
+variable     Nt1ou equal count(type1,cylout)
+variable     Nt2in equal count(type2,cylin)
+variable     Nt2ou equal count(type2,cylout)

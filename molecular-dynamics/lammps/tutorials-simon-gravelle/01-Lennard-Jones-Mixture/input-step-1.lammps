@@ -1,0 +1,33 @@
+# Perform system initialization.
+include      "config/01-initialize.lammps"
+
+# Defines a geometric `block` region of space called `domain`.
+region       domain block -30 30 -30 30 -0.5 0.5
+
+# Simulation box with 2 atoms in region `domain`.
+create_box   2 domain
+
+# Create space regions for placing atoms inside `domain`.
+include      "config/02-named-regions.lammps"
+
+# Creates 1500 atoms of type `1`.
+create_atoms 1  random  1500  341341  cylout
+
+# Creates 100 atoms of type `2`
+create_atoms 2  random   100  127569  cylin
+
+# Describe atoms and interactions, etc.
+include      "config/03-settings-common.lammps"
+
+# Dump results to file for dynamics visualization.
+dump         state_minimized all atom 10 &
+             "dumps/step-1-dynamics.lammpstrj"
+
+# Print thermodynamic every 10 steps.
+thermo       10
+
+# Minimize system energy for initialization.
+minimize     1.0e-04  1.0e-06  1000  10000
+
+# Dump final state of energy minimization step to file.
+write_data   "dumps/step-1-restart.min.lammps"

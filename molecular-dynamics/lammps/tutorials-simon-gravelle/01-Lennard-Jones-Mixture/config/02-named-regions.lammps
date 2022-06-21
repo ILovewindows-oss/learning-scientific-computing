@@ -1,0 +1,4 @@
+# Create additional regions representing a cylinder
+# inner and outer zones for atom manipulations.
+region       cylin  cylinder z 0 0 15 INF INF side in
+region       cylout cylinder z 0 0 15 INF INF side out

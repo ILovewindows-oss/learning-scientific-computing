@@ -1,0 +1,350 @@
+\begin{frame}{\secname}
+To start with our learning path, let's take the dimensionless Lennard-Jones fluid as an example. We will make a rephrasing of \href{https://lammpstutorials.github.io/tutorials/01-SimpleMolecularSimulation.html}{this tutorial}.
+
+\vspace{1cm}
+
+The study will be comprised of three major steps:
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\item System creation and energy minimization for achieving a consistent initial state.
+\item Integration of motion with a proper velocity distribution and some other fixes.
+\item Modification of the case to apply global flow to the system.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+All steps will make use of the same initialization and thus we make use of the \lammpsInline{include} mechanism to keep it all in a single place.
+\end{frame}
+
+\subsection{Initialization}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Unit system definition}
+First of all, we define the \lammpsDocs{units} to be used in a simulation.
+
+\vspace{0.5cm}
+
+Different physical fields generally handle data with their units of choice so this has to be chosen compatible with the problem at hand. The default value \lammpsInline{lj} is strictly dimensionless.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Specify unit system to use.
+units        lj
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Simulation dimensions}
+In \LAMMPS\, the simulation \lammpsDocs{dimension} is by default the 3D space.
+
+\vspace{0.5cm}
+
+It must be noted that just declaring a simulation to be 2D here is not enough and \href{https://docs.lammps.org/Howto_2d.html}{additional steps} are required to enforce physical constraints.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Set the dimensionality of the simulation.
+dimension    2
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Atomic style}
+Command \lammpsDocs{atom_style} determines what attributes are associated with the atoms (and thus how the system definition is carried out later).
+
+\vspace{0.5cm}
+
+One must use the most generic style required to represent all particles in simulation since a more complex type also has the attributes of simpler ones.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Determines attributes are associated with the atoms.
+atom_style   atomic
+\end{lstlisting}
+
+\vspace{0.5cm}
+In the present case most basic constituent \lammpsInline{atomic} is selected.
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Pair style}
+Command \lammpsDocs{pair_style} provides what model is to be used to compute pairwise (in some cases even multi-body, please refer to the docs) interaction potential.
+
+\vspace{0.5cm}
+
+Given the large number of available models, \LAMMPS\ documentation provides a \href{https://docs.lammps.org/pairs.html}{dedicated section}. Notice that many of these models are domain-specific and only experience and external references can guide you on how to select the good one.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Set how pairwise interactions are computed.
+pair_style   lj/cut 2.5
+\end{lstlisting}
+
+\vspace{0.5cm}
+Here a Lennard-Jones interaction with a cut-off potential of 2.5 is applied.
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Boundary}
+Using \lammpsDocs{boundary} one specifies how the system interacts with its boundaries.
+
+\vspace{0.5cm}
+
+When simulating the behavior of a small fluid volume, it is reasonable in general to assume all boundaries are periodic, what approximates an infinite fluid domain.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Set the type of boundary conditions on box sides.
+boundary     p p p
+\end{lstlisting}
+
+\vspace{0.5cm}
+In this case we apply all periodic boundary conditions.
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Include file}
+With the elements of the previous slides we prepare the following include snippet that will be shared across the project steps.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\tiny]
+# Specify unit system to use.
+units        lj
+
+# Set the dimensionality of the simulation.
+dimension    2
+
+# Determines what attributes are associated with the atoms.
+atom_style   atomic
+
+# Set how pairwise interactions are computed.
+pair_style   lj/cut 2.5
+
+# Set the type of boundary conditions on box sides.
+boundary     p p p
+\end{lstlisting}
+\end{frame}
+
+\subsection{System definition}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Declare region}
+Quite often the first step in the system definition is the declaration of a bounded \lammpsDocs{region} of the space.
+
+\vspace{0.5cm}
+
+The syntax of this command depends on the \emph{style} provided by the second argument. Here with a block the values represent the bounds over $x$, $y$, and $z$ coordinate axes in Cartesian space.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Defines a `block` region of space called `domain`.
+region       domain block -30 30 -30 30 -0.5 0.5
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Create box}
+Once space is delimited, one creates a simulation box with \lammpsDocs{create_box}.
+
+\vspace{0.5cm}
+
+In the present case we state that there will be 2 types of atoms in the region called \Verb|domain| previously defined.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Simulation box with 2 atoms in region `domain`.
+create_box   2 domain
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Create atoms}
+We can then place atoms in the system by using \lammpsDocs{create_atoms}.
+
+\vspace{0.5cm}
+
+The first argument is the type number, followed by the \Verb|random| style and its arguments, here the number of atoms, a generator seed and the name of a region where to place the atoms (defined in the included file).
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Create space regions for placing atoms inside `domain`.
+include      "config/02-named-regions.lammps"
+
+# Creates 1500 atoms of type `1`.
+create_atoms 1  random  1500  341341  cylout
+
+# Creates 100 atoms of type `2`
+create_atoms 2  random   100  127569  cylin
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Selected regions}
+In the previous step we saw the use of additional regions defined in an external shared file. Here we make use of the \Verb|cylinder| style to delimit parts of the simulation box.
+
+\vspace{0.5cm}
+
+This is one of the cases where the order of commands matter. You cannot create these regions without previously calling the \lammpsDocs{create_box} command.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Create additional regions representing a cylinder
+# inner and outer zones for atom manipulations.
+region       cylin  cylinder z 0 0 15 INF INF side in
+region       cylout cylinder z 0 0 15 INF INF side out
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Final block}
+The previous settings being compiled and with help of included file \Verb|config/02-named-regions.lammps| we complete the system definition.
+
+\vspace{0.5cm}
+Listing below provides the full block of system definition.
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\tiny]
+# Defines a geometric `block` region of space called `domain`.
+region       domain block -30 30 -30 30 -0.5 0.5
+
+# Simulation box with 2 atoms in region `domain`.
+create_box   2 domain
+
+# Create space regions for placing atoms inside `domain`.
+include      "config/02-named-regions.lammps"
+
+# Creates 1500 atoms of type `1`.
+create_atoms 1  random  1500  341341  cylout
+
+# Creates 100 atoms of type `2`
+create_atoms 2  random   100  127569  cylin
+\end{lstlisting}
+\end{frame}
+
+\subsection{Simulation settings}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Atoms masses}
+For the simple \Verb|atomic| \lammpsDocs{atom_style} only the \lammpsDocs{mass} of atoms needs to be defined. Notice first argument given atom type is the one used with \lammpsDocs{create_atoms} and this will be true in many other occasions we might see.
+
+\vspace{0.5cm}
+
+This command also supports wildcards such as \lammpsInline{mass * 1.0} or \lammpsInline{mass 3* 2.0} for setting masses of whole families of atoms.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Set the mass for all atoms of one or more atom types.
+mass         1  1.0
+mass         2  1.0
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Pair coefficients}
+Particle interaction potentials is provided by \lammpsDocs{pair_coeff} declarations. At least interactions of atoms of same kind must be provided (types provided by first two arguments). Interactions between different kinds of atoms are computed from geometric mean of Lennard-Jones parameters well depth and cross-section.
+
+\vspace{0.5cm}
+
+Other types of dissimilar atoms computations may be specified or specific interactions may be declared but will not be done in this introductory case.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Specify the pairwise force field coefficients.
+pair_coeff   1  1  1.0  1.0
+pair_coeff   2  2  0.5  3.0
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Neighbor list update}
+Sometimes the default management of neighbor list update is not enough to ensure all possible configurations remain physical. Using \lammpsDocs{neigh_modify} we can manage this to avoid what \LAMMPS\ will call \Verb|dangerous builds|, \emph{i.e.} atomic placements with overlapping or similar nonphysical scenarios.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Rebuild the neighbor lists more often.
+neigh_modify every 1 delay 5 check yes
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Final block}
+The previous settings being compiled in file \Verb|config/03-settings-common.lammps| we add only a \lammpsDocs{dump} statement to configure steps to be written to file once the simulation is run.
+
+\vspace{0.5cm}
+Listing below provides the full block of simulation settings. Notice the use of an ampersand \& for splitting the \lammpsDocs{dump} statement across multiple lines.
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\tiny]
+# Describe atoms and interactions, etc.
+include      "config/03-settings-common.lammps"
+
+# Dump results to file for dynamics visualization.
+dump         state_minimized all atom 10 &
+             "dumps/step-1-dynamics.lammpstrj"
+\end{lstlisting}
+\end{frame}
+
+\subsection{Run simulation}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Thermodynamics verbosity}
+We reach the final step of simulation setup, the configuration to perform time integration. In this first script our aim is simply to minimize energy of initial state so that actual simulation can run without problems.
+
+\vspace{0.5cm}
+
+To follow the values of thermodynamic properties we make use of \lammpsDocs{thermo}.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Print thermodynamic every 10 steps.
+thermo       10
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Energy minimization}
+Energy minimization is performed with command \lammpsDocs{minimize}. Process is repeated iteratively until at least one of the four command arguments convergence/stop criteria listed below is reached:
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\item change in energy between two iterations is less than value.
+\item maximum force between two atoms in the system is lower than value.
+\item maximum number of iterations of minimizer.
+\item maximum number of force/energy evaluations.
+\end{enumerate}
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Minimize system energy for initialization.
+minimize     1.0e-04  1.0e-06  1000  10000
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Write data}
+After minimization we can call \lammpsDocs{write_data} to dump the state so that it can be used in several simulation variants.
+
+\vspace{0.5cm}
+
+This is particularly useful when minimization becomes costly and dumping the initial state only once for later reuse is useful. Otherwise we could have carried out the full simulation in this first step, and for this case it would be totally acceptable, but here we follow a non-orthodox learning path of doing things by thinking how they should be done in \emph{real world} the hard way.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+# Dump final state of energy minimization step to file.
+write_data   "dumps/step-1-restart.min.lammps"
+\end{lstlisting}
+\end{frame}
+
+\subsection{title}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - xx}
+xx
+
+\vspace{0.5cm}
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS]
+\end{lstlisting}
+\end{frame}
+
+\endinput

@@ -1,0 +1,68 @@
+\begin{frame}{\secname}
+This document describes the usage of \LAMMPS\ from beginner to advanced levels. No prior knowledge of the software is assumed. We will not strictly follow any references as the tutorials you find in this repository, but sometimes the order of some topics might seem related to those. For the external references, please consult the tutorial folders with proper links to their original sources.
+
+\vspace{1cm}
+
+Recommended operating system for learning \LAMMPS\ is Ubuntu under which you can install the software by running (with root rights) \Verb|sudo apt install lammps|. Test if it worked with \Verb|lmp -help|.
+
+\vspace{1cm}
+
+Installation under Windows is simple for single core and might get tricky if you wish to profit from parallelism. You can find more information \href{https://packages.lammps.org/windows.html}{here}.
+\end{frame}
+
+\begin{frame}{\secname}{Script structure}
+The overall structure of a typical \LAMMPS\ script is the following:
+
+\vspace{0.5cm}
+
+\begin{description}
+\item[Initialization]\hfill\\
+Provides things as unit system, dimensionality, atomic style, bond style, interaction models, boundary conditions, ...
+%
+\item[System definition]\hfill\\
+Declares regions, lattices, create atoms, place atoms in regions, load initialized data, ...
+%
+\item[Simulation settings]\hfill\\
+Provides mass to atoms, describes pair interactions, deals on how to manage list of neighbors, apply fixes, ...
+%
+\item[Simulation run]\hfill\\
+Set verbosity levels, declare data file dumps, provide integration parameters such as time step, ...
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{Script structure}
+Often \LAMMPS\ tutorials will teach you at a later point about \emph{snippet inclusion} in \LAMMPS\ scripts. It happens that if you learn about it earlier you can prevent many possible mistakes when dealing with multi-step calculations. Assume you have a subdirectory \Verb|config/| inside your computation project. You can place small text files with parts that are shared between several scripts using the keyword \lammpsInline{include} (\href{https://docs.lammps.org/include.html}{docs}):
+
+\vspace{1cm}
+
+\begin{lstlisting}[language={LAMMPS}]
+# This is a comment in LAMMPS syntax.
+# Next line includes some external script.
+include    config/initialization.lammps
+\end{lstlisting}
+
+\vspace{1cm}
+
+From now on we will make use of this feature whenever useful.
+\end{frame}
+
+\begin{frame}{\secname}{Script structure}
+In many cases the order of command calls in \LAMMPS\ matters and one shall pay close attention to these situations. Examples include the declaration of geometric regions selecting part of space without previous definition of a box or the fact that some commands will provide additional configuration for the last declared lattice. This will become evident in the context and whenever possible you will be warned about.
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{Running simulations}
+The most simple way of running sequential \LAMMPS\ from command line is
+
+\begin{verbatim}
+> lmp -in <script_file_path>
+\end{verbatim}
+
+\noindent{}where \Verb|>| represents a command prompt and \Verb|<script_file_path>| is generally a file with the \Verb|.lammps| extension. If parallelism is available (and for any serious MD simulation you will need it) you can specify the number of processors with
+
+\begin{verbatim}
+> mpiexec -np <number_of_cores> lmp -in <script_file_path>
+\end{verbatim}
+
+Other command line options will be explored when required.
+\end{frame}
+\endinput

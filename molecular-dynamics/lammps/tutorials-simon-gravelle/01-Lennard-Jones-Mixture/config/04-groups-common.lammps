@@ -1,0 +1,17 @@
+# NOTE: check names of regions in `02-named-regions.lammps`.
+
+# Create groups by atom types.
+group        type1 type 1
+group        type2 type 2
+
+# Create groups by regions over domain.
+group        incyl  region cylin
+group        outcyl region cylout
+
+# Create intesection groups (atoms 1 inside/atoms 2 outside).
+group        type1in  intersect type1 incyl
+group        type2out intersect type2 outcyl
+
+# Delete atoms from intersection groups.
+delete_atoms group type1in
+delete_atoms group type2out

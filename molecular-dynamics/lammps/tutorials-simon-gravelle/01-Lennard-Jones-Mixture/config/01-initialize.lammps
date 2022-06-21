@@ -1,0 +1,14 @@
+# Specify unit system to use.
+units        lj
+
+# Set the dimensionality of the simulation.
+dimension    2
+
+# Determines what attributes are associated with the atoms.
+atom_style   atomic
+
+# Set how pairwise interactions are computed.
+pair_style   lj/cut 2.5
+
+# Set the type of boundary conditions on box sides.
+boundary     p p p

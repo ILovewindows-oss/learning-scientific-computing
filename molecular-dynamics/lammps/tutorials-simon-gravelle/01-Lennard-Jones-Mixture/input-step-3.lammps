@@ -1,0 +1,53 @@
+# Perform system initialization.
+include      "config/01-initialize.lammps"
+
+# Path to data file with initial energy minimization.
+read_data    "dumps/step-1-restart.min.lammps"
+
+# Create space regions for placing atoms inside `domain`.
+include      "config/02-named-regions.lammps"
+
+# Create groups for filtering atoms from regions.
+include      "config/04-groups-common.lammps"
+
+# Describe atoms and interactions, etc.
+include      "config/03-settings-common.lammps"
+
+# Dump results to file for dynamics visualization.
+dump         state_minimized all atom 500 &
+             "dumps/step-3-dynamics.lammpstrj"
+
+# Include some more 
+include      "config/05-count-atoms.lammps"
+
+# Save number of atoms over time every 1000 steps.
+fix          at1 all ave/time 1000 1 1000 v_Nt1in v_Nt1ou &
+                 file "dumps/step-3-no-type-1.dat"
+fix          at2 all ave/time 1000 1 1000 v_Nt2in v_Nt2ou &
+                 file "dumps/step-3-no-type-2.dat"
+
+# Initial velocity is chosen so that the initial temperature is equal to 1.
+velocity     all create 1.0 4928459 mom yes rot yes dist gaussian
+
+# Fix operations. A "fix"  is any operation that is applied to the system
+# during timestepping or minimization.
+#  (1) constant NVE time integration - Stoermer-Verlet time integration
+#  (2) Langevin algorithm - Schneider and Stoll, Phys Rev B, 17, 1302 (1978)
+#  (3) ensure atoms do not move over z-axis (pure 2D simulation).
+# Note that using constant NVE with Langevin algorithm will perform Brownian
+# dynamics (BD).
+fix          mynve all nve
+fix          mylgv all langevin 1.0 1.0 0.1 1530917 zero yes
+fix          myefn all enforce2d
+
+# Experiment with imposed force to make particles flow.
+fix          myfrc all addforce 1.0 0.0 0.0
+
+# Time step used during integration.
+timestep     0.005
+
+# Print thermodynamic every 1000 steps.
+thermo       50000
+
+# Number of time steps to run.
+run          1500000

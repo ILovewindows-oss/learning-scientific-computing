@@ -1,0 +1,97 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LAMMPS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONFIGURATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{%
+	colorlinks      = true,
+	linkbordercolor = {white},
+	urlcolor        = {blue}
+}
+
+\colorlet{codebg}{lightgray!30}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LISTINGS LAMMPS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lstdefinelanguage{LAMMPS}{%
+	alsodigit       = {-},
+	basicstyle      = \ttfamily,
+	backgroundcolor = \color{codebg},
+    keywordstyle    = \color{blue},
+    numberstyle     = \color{magenta},
+	stringstyle     = \color{DarkGreen},
+	morecomment     = [f][\color{red}][0]{\#},
+	keywords        = {%
+		atom_style,
+		boundary,
+		create_atoms,
+		create_box,
+        delete_atoms,
+		dimension,
+		dump,
+        fix,
+        group,
+		include,
+		mass,
+        minimize,
+		neigh_modify,
+		pair_coeff,
+		pair_style,
+        read_data,
+		region,
+        run,
+        thermo,
+        timestep,
+		units,
+        velocity,
+        write_data,
+	}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\LAMMPS{%
+	\href{https://www.lammps.org/}{LAMMPS}}
+
+\newcommand\lammpsInline[1]{%
+	\lstinline[language=LAMMPS]|#1|}
+
+\newcommand\lammpsDocs[1]{%
+	\lammpsInline{#1} (\href{https://docs.lammps.org/#1.html}{docs})}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITLE PAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{LAMMPS}
+\subtitle{Molecular Dynamics simulator}
+\author{Walter Dal'Maz Silva}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\section{LAMMPS Introduction}
+\input{parts/01-general-introduction.tex}
+
+\section{Lennard-Jones Fluid}
+\input{parts/02-lennard-jones-fluid}
+\end{document}
