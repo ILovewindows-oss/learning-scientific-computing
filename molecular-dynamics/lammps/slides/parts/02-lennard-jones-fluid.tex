@@ -18,6 +18,22 @@ The study will be comprised of three major steps:
 All steps will make use of the same initialization and thus we make use of the \lammpsInline{include} mechanism to keep it all in a single place.
 \end{frame}
 
+\begin{frame}[fragile]{\secname}{\subsecname}
+In what follows we will model a 2D box with fixed size and filled with 1000 particles of type {I} and 500 particles of type {II}. The latter occupy initially a restricted cylinder in the center of the domain. Below we illustrate the random initialization, next the distribution after energy minimization, and finally the state by the end of simulation.
+
+\vspace{0.5cm}
+
+{%
+\hfill%
+\includegraphics[width=3cm]{media/000-lennard-jones-init-random.png}
+\hfill%
+\includegraphics[width=3cm]{media/001-lennard-jones-init-minimized.png}
+\hfill%
+\includegraphics[width=3cm]{media/002-lennard-jones-final-state.png}
+\hfill%
+}
+\end{frame}
+
 \subsection{Initialization}
 
 \begin{frame}[fragile]{\secname}{\subsecname\ - Unit system definition}
@@ -29,7 +45,7 @@ Different physical fields generally handle data with their units of choice so th
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Specify unit system to use.
 units        lj
 \end{lstlisting}
@@ -44,7 +60,7 @@ It must be noted that just declaring a simulation to be 2D here is not enough an
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Set the dimensionality of the simulation.
 dimension    2
 \end{lstlisting}
@@ -59,7 +75,7 @@ One must use the most generic style required to represent all particles in simul
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Determines attributes are associated with the atoms.
 atom_style   atomic
 \end{lstlisting}
@@ -77,7 +93,7 @@ Given the large number of available models, \LAMMPS\ documentation provides a \h
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Set how pairwise interactions are computed.
 pair_style   lj/cut 2.5
 \end{lstlisting}
@@ -95,7 +111,7 @@ When simulating the behavior of a small fluid volume, it is reasonable in genera
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Set the type of boundary conditions on box sides.
 boundary     p p p
 \end{lstlisting}
@@ -138,7 +154,7 @@ The syntax of this command depends on the \emph{style} provided by the second ar
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Defines a `block` region of space called `domain`.
 region       domain block -30 30 -30 30 -0.5 0.5
 \end{lstlisting}
@@ -153,7 +169,7 @@ In the present case we state that there will be 2 types of atoms in the region c
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Simulation box with 2 atoms in region `domain`.
 create_box   2 domain
 \end{lstlisting}
@@ -167,7 +183,7 @@ We can then place atoms in the system by using \lammpsDocs{create_atoms}.
 The first argument is the type number, followed by the \Verb|random| style and its arguments, here the number of atoms, a generator seed and the name of a region where to place the atoms (defined in the included file).
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Create space regions for placing atoms inside `domain`.
 include      "config/02-named-regions.lammps"
 
@@ -188,7 +204,7 @@ This is one of the cases where the order of commands matter. You cannot create t
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Create additional regions representing a cylinder
 # inner and outer zones for atom manipulations.
 region       cylin  cylinder z 0 0 15 INF INF side in
@@ -232,7 +248,7 @@ This command also supports wildcards such as \lammpsInline{mass * 1.0} or \lammp
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Set the mass for all atoms of one or more atom types.
 mass         1  1.0
 mass         2  1.0
@@ -248,7 +264,7 @@ Other types of dissimilar atoms computations may be specified or specific intera
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Specify the pairwise force field coefficients.
 pair_coeff   1  1  1.0  1.0
 pair_coeff   2  2  0.5  3.0
@@ -260,7 +276,7 @@ Sometimes the default management of neighbor list update is not enough to ensure
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Rebuild the neighbor lists more often.
 neigh_modify every 1 delay 5 check yes
 \end{lstlisting}
@@ -294,7 +310,7 @@ To follow the values of thermodynamic properties we make use of \lammpsDocs{ther
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Print thermodynamic every 10 steps.
 thermo       10
 \end{lstlisting}
@@ -313,7 +329,7 @@ Energy minimization is performed with command \lammpsDocs{minimize}. Process is 
 \end{enumerate}
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Minimize system energy for initialization.
 minimize     1.0e-04  1.0e-06  1000  10000
 \end{lstlisting}
@@ -328,22 +344,229 @@ This is particularly useful when minimization becomes costly and dumping the ini
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
 # Dump final state of energy minimization step to file.
 write_data   "dumps/step-1-restart.min.lammps"
 \end{lstlisting}
 \end{frame}
 
-\subsection{title}
+\subsection{System dynamics}
 
-\begin{frame}[fragile]{\secname}{\subsecname\ - xx}
-xx
-
-\vspace{0.5cm}
+\begin{frame}[fragile]{\secname}{\subsecname\ - Restarting a simulation}
+If you have followed the steps in previous slides and ran the simulation you have probably produced a minimized state for starting up other simulations. In \LAMMPS\ we always need to add the four basic steps described in the introduction to any particular script. That's why it is interesting to work from the beginning with included snippets.
 
 \vspace{0.5cm}
 
-\begin{lstlisting}[language=LAMMPS]
+Data from previous step is loaded here with \lammpsDocs{read_data} and the preceding \lammpsDocs{include} ensures same (compatible) initialization.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# Perform system initialization.
+include      "config/01-initialize.lammps"
+
+# Path to data file with initial energy minimization.
+read_data    "dumps/step-1-restart.min.lammps"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Cleaning up I}
+During minimization steps some particles might have left the initial cylinder defined in \Verb|config/02-named-regions.lammps|. \LAMMPS\ provides mechanisms to create groups and delete atoms for fine manipulation.
+
+\vspace{0.5cm}
+
+We create a shared snipped \Verb|config/04-groups-common.lammps| for the clean up.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# Create space regions for placing atoms inside `domain`.
+include      "config/02-named-regions.lammps"
+
+# Create groups for filtering atoms from regions.
+include      "config/04-groups-common.lammps"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Cleaning up II}
+The contents of \Verb|config/04-groups-common.lammps| are presented below. First we create groups of atoms and regions, then we intersect them to identify atoms that are outside the region they should be initialize, all with \lammpsDocs{group}. Finish by deleting them with \lammpsDocs{delete_atoms}.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\tiny]
+# NOTE: check names of regions in `02-named-regions.lammps`.
+
+# Create groups by atom types.
+group        type1 type 1
+group        type2 type 2
+
+# Create groups by regions over domain.
+group        incyl  region cylin
+group        outcyl region cylout
+
+# Create intesection groups (atoms 1 inside/atoms 2 outside).
+group        type1in  intersect type1 incyl
+group        type2out intersect type2 outcyl
+
+# Delete atoms from intersection groups.
+delete_atoms group type1in
+delete_atoms group type2out
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Simulation settings}
+To wrap-up the settings we include the shared snippet that you already know and add a dump of system states every 500 steps for later carrying out the post-processing.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# Describe atoms and interactions, etc.
+include      "config/03-settings-common.lammps"
+
+# Dump results to file for dynamics visualization.
+dump         state_minimized all atom 500 &
+             "dumps/step-2-dynamics.lammpstrj"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Simulation settings}
+Now we will start by introducing the concept of \lammpsDocs{variable} and \lammpsDocs{fix}. The first stores values for later evaluation in a symbol, compatible with many \LAMMPS\ commands. Fixes are operations performed to groups of atoms during time stepping or minimization. Let's delve into their details in next slides.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# Include some more settings for counting atoms.
+include      "config/05-count-atoms.lammps"
+
+# Save number of atoms over time every 1000 steps.
+fix          at1 all ave/time 1000 1 1000 v_Nt1in v_Nt1ou &
+                 file "dumps/step-2-no-type-1.dat"
+fix          at2 all ave/time 1000 1 1000 v_Nt2in v_Nt2ou &
+                 file "dumps/step-2-no-type-2.dat"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Addendum variables}
+File \Verb|config/05-count-atoms.lammps| contains the following code. To declare a \lammpsDocs{variable} one provides its name, a style (here \Verb|equal|) and the arguments. Operation \lammpsInline{count} is one of the many available for this command and allows for counting objects of a given identifier or group in a region.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# NOTE: check groups in `04-groups-common.lammps`
+# and names of regions in `02-named-regions.lammps`.
+
+# Create variables to count atoms in different regions.
+variable     Nt1in equal count(type1,cylin)
+variable     Nt1ou equal count(type1,cylout)
+variable     Nt2in equal count(type2,cylin)
+variable     Nt2ou equal count(type2,cylout)
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Addendum fixes}
+A \lammpsDocs{fix} is also composed by an identifier, a group of atoms it applies to (here \lammpsInline{all}), and a style (here \lammpsInline{ave/time}) followed by its arguments. Styles for fixed have their own documentation, \emph{e.g} \href{https://docs.lammps.org/fix_ave_time.html}{\lammpsInline{ave/time}}, which will compute time averaged quantities.
+
+\vspace{0.5cm}
+
+In the following block we see that the variables introduced in previous slide are accessed by prepending their names with \Verb|v_|, as in \Verb|v_Nt1in|.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+fix          at1 all ave/time 1000 1 1000 v_Nt1in v_Nt1ou &
+                 file "dumps/step-2-no-type-1.dat"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Run simulation}
+Initialization, system definition, and settings provided, it is time to prepare the simulation to run. It is a good idea to ensure \lammpsDocs{velocity} distribution is compatible with temperature.
+
+\vspace{0.5cm}
+
+Below we enforce a Gaussian distributed velocity with no overall linear or angular momenta are applied to the system.
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# Initial velocity distribution compatible with temperature.
+velocity     all create 1.0 4928459 mom yes rot yes dist gaussian
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Run simulation}
+Next we set the simulation to run with constant number of atoms, volume, and energy through \lammpsDocs{fix} \lammpsInline{nve}. During integration a \href{https://doi.org/10.1103/PhysRevB.17.1302}{Langevin thermostat} fix is applied to hold system temperature approximately constant.
+
+\vspace{0.5cm}
+
+Note that using constant NVE with Langevin algorithm will perform Brownian
+dynamics (BD).
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# Constant NVE time integration - Stoermer-Verlet time integration
+fix          mynve all nve
+
+# Langevin thermostat algorithm.
+fix          mylgv all langevin 1.0 1.0 0.1 1530917 zero yes
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Run simulation}
+We have already discussed that \href{https://docs.lammps.org/Howto_2d.html}{further measures} are required to ensure a simulation is performed in 2D. Here we provide the required \lammpsDocs{fix}.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# Ensure atoms do not move over z-axis (pure 2D simulation).
+fix          myefn all enforce2d
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Run simulation}
+We provide the \lammpsDocs{timestep}, verbosity control \lammpsDocs{thermo}, and ask the simulation to \lammpsDocs{run}`. You might be interested in dumping the final state for starting other simulations with \lammpsDocs{write_data}, as we did previously.
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# Time step used during integration.
+timestep     0.005
+
+# Print thermodynamic every 1000 steps.
+thermo       50000
+
+# Number of time steps to run.
+run          1500000
+
+# Dump final state of simulation step to file.
+write_data   "dumps/step-2-restart.min.lammps"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Post-processing}
+After running the script you can read generated files and generate some plots or other types of post-processing (see \href{http://www.ks.uiuc.edu/Research/vmd/}{VMD}). Below we illustrate the number of particles of each type inside the cylinder initialized with particles of type 2 only.
+
+\vspace{0.5cm}
+
+{%
+\hfill
+\includegraphics[width=7cm]{media/003-lennard-jones-concentration-evolution.png}
+\hfill
+}
+\end{frame}
+
+\begin{frame}[fragile]{\secname}{\subsecname\ - Next steps}
+Some exercises are provided in the \href{https://lammpstutorials.github.io/tutorials/01-SimpleMolecularSimulation.html}{original source}.
+
+\vspace{0.5cm}
+
+What will happen if you add one more \lammpsDocs{fix} to add a net force with  \lammpsInline{addforce} to the system after the last fix we did previously?
+
+\vspace{0.5cm}
+
+\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
+# Experiment with imposed force to make particles flow.
+fix          myfrc all addforce 1.0 0.0 0.0
 \end{lstlisting}
 \end{frame}
 

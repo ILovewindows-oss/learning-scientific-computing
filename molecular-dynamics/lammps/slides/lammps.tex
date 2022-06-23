@@ -5,6 +5,7 @@
 \documentclass[aspectratio=169]{beamer}
 
 \usepackage{fancyvrb}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{xcolor}
@@ -21,6 +22,17 @@
 
 \colorlet{codebg}{lightgray!30}
 
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LISTINGS LAMMPS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,11 +41,22 @@
 	alsodigit       = {-},
 	basicstyle      = \ttfamily,
 	backgroundcolor = \color{codebg},
-    keywordstyle    = \color{blue},
+    keywordstyle    = [1]\color{magenta},
+    keywordstyle    = [2]\color{blue},
+    keywordstyle    = [3]\color{violet},
+    keywordstyle    = [4]\color{orange},
     numberstyle     = \color{magenta},
-	stringstyle     = \color{DarkGreen},
+    stringstyle     = \color{olive}\ttfamily,
+    morestring      = [b]',
+    morestring      = [b]",
 	morecomment     = [f][\color{red}][0]{\#},
-	keywords        = {%
+    keywords        = [1]{
+        addforce,
+        enforce2d,
+        langevin,
+        nve
+    },
+	keywords        = [2]{%
 		atom_style,
 		boundary,
 		create_atoms,
@@ -55,9 +78,21 @@
         thermo,
         timestep,
 		units,
+        variable,
         velocity,
         write_data,
-	}
+	},
+    keywords        = [3]{%
+        count
+    },
+    keywords        = [4]{%
+        all,
+        equal
+    },
+    otherkeywords  = {
+        &,
+        ave/time
+    }
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

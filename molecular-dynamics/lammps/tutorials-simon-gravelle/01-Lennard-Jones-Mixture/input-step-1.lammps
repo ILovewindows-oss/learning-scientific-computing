@@ -11,10 +11,10 @@ create_box   2 domain
 include      "config/02-named-regions.lammps"
 
 # Creates 1500 atoms of type `1`.
-create_atoms 1  random  1500  341341  cylout
+create_atoms 1  random  1000  341341  cylout
 
 # Creates 100 atoms of type `2`
-create_atoms 2  random   100  127569  cylin
+create_atoms 2  random   150  127569  cylin
 
 # Describe atoms and interactions, etc.
 include      "config/03-settings-common.lammps"

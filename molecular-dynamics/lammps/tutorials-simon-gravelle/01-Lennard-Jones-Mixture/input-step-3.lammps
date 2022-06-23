@@ -17,7 +17,7 @@ include      "config/03-settings-common.lammps"
 dump         state_minimized all atom 500 &
              "dumps/step-3-dynamics.lammpstrj"
 
-# Include some more 
+# Include some more settings for counting atoms.
 include      "config/05-count-atoms.lammps"
 
 # Save number of atoms over time every 1000 steps.
@@ -26,18 +26,16 @@ fix          at1 all ave/time 1000 1 1000 v_Nt1in v_Nt1ou &
 fix          at2 all ave/time 1000 1 1000 v_Nt2in v_Nt2ou &
                  file "dumps/step-3-no-type-2.dat"
 
-# Initial velocity is chosen so that the initial temperature is equal to 1.
+# Initial velocity distribution compatible with temperature.
 velocity     all create 1.0 4928459 mom yes rot yes dist gaussian
 
-# Fix operations. A "fix"  is any operation that is applied to the system
-# during timestepping or minimization.
-#  (1) constant NVE time integration - Stoermer-Verlet time integration
-#  (2) Langevin algorithm - Schneider and Stoll, Phys Rev B, 17, 1302 (1978)
-#  (3) ensure atoms do not move over z-axis (pure 2D simulation).
-# Note that using constant NVE with Langevin algorithm will perform Brownian
-# dynamics (BD).
+# Constant NVE time integration - Stoermer-Verlet time integration
 fix          mynve all nve
+
+# Langevin thermostat algorithm.
 fix          mylgv all langevin 1.0 1.0 0.1 1530917 zero yes
+
+# Ensure atoms do not move over z-axis (pure 2D simulation).
 fix          myefn all enforce2d
 
 # Experiment with imposed force to make particles flow.
@@ -51,3 +49,6 @@ thermo       50000
 
 # Number of time steps to run.
 run          1500000
+
+# Dump final state of simulation step to file.
+write_data   "dumps/step-3-restart.min.lammps"
