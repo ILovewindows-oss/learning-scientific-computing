@@ -3,4 +3,5 @@
 /**/dumps/*.lammpstrj
 /**/dumps/*.min.lammps
 /**/dumps/*.dat
+/**/dumps/*.vmd
 log.lammps
