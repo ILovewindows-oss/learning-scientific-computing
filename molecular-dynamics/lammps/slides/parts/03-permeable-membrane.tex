@@ -1,15 +1,18 @@
 \begin{frame}[fragile]{\secname}
+This tutorial deals with the osmosis through a semi-permeable membrane in 3D. So far you have already learned the basics of \LAMMPS\ and we will not provide all the code in this presentation, but only the blocks with new commands or explanations of how to do things differently. The full code can be found \href{https://github.com/WallyTutor/learning-scientific-computing/tree/main/molecular-dynamics/lammps/tutorials-simon-gravelle/02-Permeable-Membrane}{here}.
 
 \vspace{0.5cm}
 
-\vspace{0.5cm}
-
-\begin{lstlisting}[language=LAMMPS,basicstyle=\small]
-\end{lstlisting}
+You may notice that we have not provided the \lammpsInline{units}, \lammpsInline{atom_style}, or \lammpsInline{dimension} in the scripts or snippets. That's because we will use default values adopted by \LAMMPS\, \lammpsInline{lj}, \lammpsInline{atomic}, \lammpsInline{3D}, respectively. We will also reduce the amount of comments around common commands.
 \end{frame}
 
 \begin{frame}[fragile]{\secname}{\subsecname\ - Next steps}
 
+Set boundary types. Here with `s` "shrink-wrapped", the position of the box faces along  are set so as to integrate the atoms in that dimension, no matter how far they move.
+
+Reduce slightly the affinity between the solvent and the walls, and even more the affinity between the solute and the wall
+
+Since solid is frozen, do not create neighbor list between these atoms. This is not required but will slightly speed up the simulation.
 \vspace{0.5cm}
 
 \vspace{0.5cm}

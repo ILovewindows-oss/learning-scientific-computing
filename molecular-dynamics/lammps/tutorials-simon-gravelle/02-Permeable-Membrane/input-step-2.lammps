@@ -1,0 +1,32 @@
+# Initialization -------------------------------------------------------------
+
+include       "config/01-initialize.lammps"
+
+# System definition ----------------------------------------------------------
+
+read_data     "dumps/step-1-restart.min.lammps"
+include       "config/02-system-definition.lammps"
+
+# Simulation settings --------------------------------------------------------
+
+include       "config/03-simulation-settings.lammps"
+
+fix           myat1 all ave/time 1000 1 1000 v_solvent_right         &
+               file "dumps/step-2-solvent-right.dat"
+fix           myat2 all ave/time 1000 1 1000 v_solute_right          &
+               file "dumps/step-2-solute-right.dat"
+fix           myat3 all ave/time 1000 1 1000 v_position_piston_left  &
+               file "dumps/step-2-position-piston-left.dat"
+fix           myat4 all ave/time 1000 1 1000 v_position_piston_right &
+               file "dumps/step-2-position-piston-right.dat"
+
+dump          mydmp all atom 1000 &
+              "dumps/step-2-dynamics.lammpstrj"
+
+thermo_modify temp temperature_fluid
+
+# Run simulation -------------------------------------------------------------
+
+thermo        10000
+run           500000
+write_data    "dumps/step-2-restart.min.lammps" pair ij

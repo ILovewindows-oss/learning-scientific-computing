@@ -1,0 +1,29 @@
+velocity      fluid create 1.0 4928459 mom yes rot yes dist gaussian
+fix           mynve all nve
+
+# The `fix_modify` ensures that the temperature of the fluid is used as a
+# reference temperature. This must be done every time a thermostat is not
+# applied to group all.
+compute       temperature_fluid fluid temp
+fix           mylgv fluid langevin 1.0 1.0 0.1 1530917 zero yes
+fix_modify    mylgv temp temperature_fluid
+
+# Cancel forces on membrane to keep it fixed.
+fix           mysf1 membrane setforce 0 0 0
+
+# Freeze pistons but allow movement over x with NULL (leave a DoF).
+fix           mysf2 piston_left  setforce NULL 0 0
+fix           mysf3 piston_right setforce NULL 0 0
+
+# Then apply an average force over pistons to allow movement.
+variable      F equal 0.025
+fix           myaf1 piston_left  aveforce +${F} NULL NULL
+fix           myaf2 piston_right aveforce -${F} NULL NULL
+
+# Evaluate concentration of solvent/solute.
+variable      solvent_right equal count(solvent,right)
+variable      solute_right  equal count(solute,right)
+
+# Get center of mass over x of pistons for sanity check.
+variable      position_piston_left  equal xcm(piston_left,x)
+variable      position_piston_right equal xcm(piston_right,x)

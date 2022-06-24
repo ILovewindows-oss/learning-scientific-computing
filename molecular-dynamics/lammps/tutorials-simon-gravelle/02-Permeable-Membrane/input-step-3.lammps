@@ -1,0 +1,39 @@
+# Initialization -------------------------------------------------------------
+
+include       "config/01-initialize.lammps"
+
+# System definition ----------------------------------------------------------
+
+read_data     "dumps/step-2-restart.min.lammps"
+include       "config/02-system-definition.lammps"
+
+# Delete 50% of atoms from membrane.
+# delete_atoms random fraction 0.5 no all membrane 482793
+region       membrane block -0.25 0.25 INF INF INF INF
+delete_atoms porosity membrane 0.5 482793
+
+# Simulation settings --------------------------------------------------------
+
+include       "config/03-simulation-settings.lammps"
+
+fix           myat1 all ave/time 10000 1 10000 v_solvent_right         &
+               file "dumps/step-3-solvent-right.dat"
+fix           myat2 all ave/time 10000 1 10000 v_solute_right          &
+               file "dumps/step-3-solute-right.dat"
+fix           myat3 all ave/time 10000 1 10000 v_position_piston_left  &
+               file "dumps/step-3-position-piston-left.dat"
+fix           myat4 all ave/time 10000 1 10000 v_position_piston_right &
+               file "dumps/step-3-position-piston-right.dat"
+fix           myat5 all ave/time 10000 1 10000 f_mysf1[1]              &
+               file "dumps/step-3-force-membrane.dat"
+
+dump          mydmp all atom 10000 &
+              "dumps/step-3-dynamics.lammpstrj"
+
+thermo_modify temp temperature_fluid
+
+# Run simulation -------------------------------------------------------------
+
+thermo        10000
+run           2000000
+write_data    "dumps/step-3-restart.min.lammps" pair ij
