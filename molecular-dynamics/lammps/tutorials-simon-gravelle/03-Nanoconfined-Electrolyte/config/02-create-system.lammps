@@ -1,0 +1,29 @@
+lattice       diamond 4.04
+region        box block -5 5 -5 5 -13 13
+create_box    6 box                      &
+                bond/types 1             &
+                angle/types 1            &
+                extra/bond/per/atom 2    &
+                extra/angle/per/atom 1   &
+                extra/special/per/atom 2
+
+# Create walls (using region associated to previous lattice).
+region        rbotwall block -5  5 -5  5 -12 -10
+region        rtopwall block -5  5 -5  5  10  12
+create_atoms  5 region rtopwall
+create_atoms  6 region rbotwall
+
+# Create fluid (still in previous lattice).
+region        rliquid  block -5  5 -5  5  -9   9
+
+# Declare a simple cubic lattice to place the water molecules.
+lattice       sc 4.04
+
+# File TIP4P2005.txt describe water molecule. First parameter of atom
+# creation is 0 because we are using the molecule from the file.
+molecule      h2omol "config/TIP4P2005.txt"
+create_atoms  0 region rliquid mol h2omol 482793
+
+# Deposit 20 ions (10 Na, 10 Cl) in between the water molecules.
+fix           mydep1 all deposit ${num_ions} 3 1 56513 region rliquid near 0.3
+fix           mydep2 all deposit ${num_ions} 4 1 58613 region rliquid near 0.3

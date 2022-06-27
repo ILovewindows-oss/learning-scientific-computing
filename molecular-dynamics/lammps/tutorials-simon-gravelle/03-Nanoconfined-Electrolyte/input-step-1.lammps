@@ -1,0 +1,16 @@
+variable      num_ions equal 10
+
+include       "config/01-initialize.lammps"
+include       "config/02-create-system.lammps"
+include       "config/03-parameters.lammps"
+
+# Charges of Na+ and Cl-
+set           type 3 charge  1.0
+set           type 4 charge -1.0
+
+dump          dmp1 all image 10 "dumps/step-1.*.jpg" type type
+dump          dmp2 all atom 1 &
+              "dumps/step-1-dynamics.lammpstrj"
+
+run           ${num_ions}
+write_data    "dumps/step-1-restart.min.lammps"

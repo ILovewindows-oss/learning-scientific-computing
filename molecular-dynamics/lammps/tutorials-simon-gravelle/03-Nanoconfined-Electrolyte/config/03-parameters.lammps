@@ -1,0 +1,21 @@
+# Mass of atoms in system [g/mol].
+mass          1 15.9994
+mass          2 1.008
+mass          3 28.990
+mass          4 35.453
+mass          5 26.9815
+mass          6 26.9815
+
+# From force fields TIP4P/2005, CHARMM-27, AL.
+# Depth in [kcal/mol] and distance in [Å] for pairs.
+pair_coeff    1 1 0.185199 3.158900
+pair_coeff    2 2 0.000000 0.000000
+pair_coeff    3 3 0.046900 2.429900
+pair_coeff    4 4 0.150000 4.044700
+pair_coeff    5 5 11.69700 2.574000
+pair_coeff    6 6 11.69700 2.574000
+
+# From force field TIP4P/2005. The value 0 implies the energy is fixed,
+# what means a rigid model for the water molecule.
+bond_coeff    1 0 0.9572
+angle_coeff   1 0 104.52
