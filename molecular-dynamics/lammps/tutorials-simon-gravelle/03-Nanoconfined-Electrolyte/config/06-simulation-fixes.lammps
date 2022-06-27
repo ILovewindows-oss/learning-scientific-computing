@@ -1,0 +1,8 @@
+fix           mynve all nve
+
+compute       tliq gliquid temp
+fix           myber gliquid temp/berendsen ${Tstart} ${Tstop} ${Tdump}
+fix_modify    myber temp tliq
+
+fix           myshk gH2O shake 1.0e-04 200 0 b 1 a 1
+fix           myrct all recenter NULL NULL INIT

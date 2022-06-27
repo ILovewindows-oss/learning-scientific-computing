@@ -1,0 +1,10 @@
+group         gH2O     type 1 2
+group         gNa      type 3
+group         gCl      type 4
+group         gliquid  type 1 2 3 4
+group         gtopwall type 5
+group         gbotwall type 6
+group         gwall    type 5 6
+
+# Not necessary, but saves computation time.
+neigh_modify  exclude group gwall gwall

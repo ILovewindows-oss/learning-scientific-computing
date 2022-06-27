@@ -1,0 +1,19 @@
+boundary      p p p
+include       "config/01-initialize.lammps"
+read_data     "dumps/step-1-restart.min.lammps"
+include       "config/03-parameters.lammps"
+include       "config/04-groups.lammps"
+include       "config/05-fixed-walls.lammps"
+
+dump          dmp1 all atom 1000 &
+              "dumps/step-2-dynamics.lammpstrj"
+
+variable      Tstart equal 1
+variable      Tstop  equal 1
+variable      Tdump  equal 1
+include       "config/06-simulation-fixes.lammps"
+
+timestep      0.1
+thermo        500
+run           5000
+write_data    "dumps/step-2-restart.min.lammps"

@@ -1,0 +1,5 @@
+# Force walls to remain rigid during the simulation.
+fix           mysf1 gtopwall setforce 0    0    NULL
+fix           mysf2 gbotwall setforce 0    0    NULL
+fix           myaf1 gtopwall aveforce NULL NULL 0
+fix           myaf2 gbotwall aveforce NULL NULL 0
