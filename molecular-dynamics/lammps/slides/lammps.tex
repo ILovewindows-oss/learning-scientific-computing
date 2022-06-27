@@ -52,36 +52,47 @@
 	morecomment     = [f][\color{red}][0]{\#},
     keywords        = [1]{
         addforce,
+        deposit,
         enforce2d,
+        image,
         langevin,
-        nve
+        nve,
+        recenter,
+        setforce,
+        shake,
+        temp
     },
 	keywords        = [2]{%
 		atom_style,
 		boundary,
+        compute,
 		create_atoms,
 		create_box,
         delete_atoms,
 		dimension,
 		dump,
         fix,
+        fix_modify,
         group,
 		include,
         lattice,
 		mass,
         minimize,
+        molecule,
 		neigh_modify,
 		pair_coeff,
 		pair_style,
         read_data,
 		region,
         run,
+        set,
         thermo,
+        thermo_modify,
         timestep,
 		units,
         variable,
         velocity,
-        write_data,
+        write_data
 	},
     keywords        = [3]{%
         count
@@ -93,7 +104,8 @@
     otherkeywords  = {
         &,
         ave/time,
-        lj/cut
+        lj/cut,
+        temp/berendsen
     }
 }
 
@@ -134,5 +146,8 @@
 
 \section{Permeable Membrane}
 \input{parts/03-permeable-membrane.tex}
+
+\section{Nanoconfined electrolyte}
+\input{parts/04-nanoconfined-electrolyte.tex}
 
 \end{document}
