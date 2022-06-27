@@ -33,7 +33,7 @@ pair_coeff    1*3  1*3  1.0  1.0
 pair_coeff    4    4    1.0  1.0
 pair_coeff    5    5    2.0  3.0
 
-# Impose dissimetric coefficients for walls and solvent/solute.
+# Impose asymmetric coefficients for walls and solvent/solute.
 pair_coeff    1*3  4    0.8  1.0
 pair_coeff    1*3  5    0.1  3.0
 
