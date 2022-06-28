@@ -1,0 +1,78 @@
+# Parametrization -------------------------------------------------
+
+variable           T equal 300
+
+# Initialization --------------------------------------------------
+
+units              real
+atom_style         full
+boundary           p p p
+pair_style         lj/cut 14.0
+
+bond_style         harmonic
+angle_style        harmonic
+dihedral_style     opls
+improper_style     harmonic
+
+special_bonds      lj 0.0 0.0 0.5
+
+# System definition -----------------------------------------------
+
+read_data          "config/graphene.lammps"
+pair_coeff         1 1 0.066047 3.4
+bond_coeff         1 469 1.4
+angle_coeff        1 63 120
+dihedral_coeff     1 0 7.25 0 0
+improper_coeff     1 5 180
+
+# Simulation settings ---------------------------------------------
+
+group              gcar type 1
+variable           xmax equal bound(gcar,xmax)-0.5
+variable           xmin equal bound(gcar,xmin)+0.5
+
+region             rtop block ${xmax} INF     INF INF INF INF
+region             rmid block ${xmin} ${xmax} INF INF INF INF
+region             rbot block INF     ${xmin} INF INF INF INF
+
+group              gtop region rtop
+group              gbot region rbot
+group              gmid region rmid
+
+velocity           gmid create ${T} 48455 mom yes rot yes
+fix                mynve all nve
+
+compute            Tmid gmid temp
+fix                myber gmid temp/berendsen ${T} ${T} 100
+fix_modify         myber temp Tmid
+
+fix                mysf1 gtop setforce 0 NULL 0
+fix                mysf2 gbot setforce 0 NULL 0
+velocity           gtop set 0 NULL 0
+velocity           gbot set 0 NULL 0
+
+variable           L equal xcm(gtop,x)-xcm(gbot,x)
+fix                at1 all ave/time 10 100 1000 &
+                     v_L                        &
+                     file "dumps/step-1-length.dat"
+fix                at2 all ave/time 10 100 1000 &
+                     f_mysf1[1] f_mysf2[1]      &
+                     file "dumps/step-1-force.dat"
+dump               mydmp all atom 1000 &
+                     "dumps/step-1-dynamics.lammpstrj"
+
+thermo             100
+thermo_modify      temp Tmid
+
+# Run simulation --------------------------------------------------
+
+timestep           1.0
+run                5000
+
+variable           loop_counter loop 10
+label              loop
+  displace_atoms   gtop move 0.1 0 0
+  displace_atoms   gbot move -0.1 0 0
+  run              1000
+  next             loop_counter
+jump               SELF loop

@@ -50,8 +50,17 @@
     morestring      = [b]',
     morestring      = [b]",
 	morecomment     = [f][\color{red}][0]{\#},
+    otherkeywords  = {
+        &,
+        ave/time,
+        lj/cut,
+        lj/cut/tip4p/long,
+        pppm/tip4p,
+        temp/berendsen
+    },
     keywords        = [1]{
         addforce,
+        airebo,
         deposit,
         enforce2d,
         image,
@@ -69,11 +78,13 @@
 		create_atoms,
 		create_box,
         delete_atoms,
+        dihedral_style,
 		dimension,
 		dump,
         fix,
         fix_modify,
         group,
+        improper_style,
 		include,
         lattice,
 		mass,
@@ -86,6 +97,7 @@
 		region,
         run,
         set,
+        special_bonds,
         thermo,
         thermo_modify,
         timestep,
@@ -95,19 +107,13 @@
         write_data
 	},
     keywords        = [3]{%
-        count
+        bound,
+        count,
+        xcm
     },
     keywords        = [4]{%
         all,
         equal
-    },
-    otherkeywords  = {
-        &,
-        ave/time,
-        lj/cut,
-        lj/cut/tip4p/long,
-        pppm/tip4p,
-        temp/berendsen
     }
 }
 
