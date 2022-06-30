@@ -1,0 +1,31 @@
+# Initialization --------------------------------------------------
+
+include            "config/01-initialize.lammps"
+
+# System definition -----------------------------------------------
+
+read_data          "dumps/step-1-amorphous-SiO.lammps"
+
+# Simulation settings ---------------------------------------------
+
+pair_coeff         * * "config/SiO.1990.vashishta" Si O
+
+dump               dmp all atom 1000 &
+                   "dumps/step-2-dynamics.lammpstrj"
+
+# Run -------------------------------------------------------------
+
+timestep           0.001
+thermo             1000
+
+fix                nvt1 all nvt temp 300 300 0.1
+
+variable           loop_counter loop 35
+label              loop
+  change_box       all z scale 1.005 remap
+  run              2000
+  next             loop_counter
+jump               SELF loop
+
+run                20000
+write_data         "dumps/step-2-dilated-SiO.lammps"

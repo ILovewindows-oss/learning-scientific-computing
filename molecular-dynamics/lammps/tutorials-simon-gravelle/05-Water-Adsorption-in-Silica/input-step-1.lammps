@@ -1,0 +1,38 @@
+# Initialization --------------------------------------------------
+
+include            "config/01-initialize.lammps"
+
+# System definition -----------------------------------------------
+
+read_data          "config/SiO.lammps"
+replicate          4 4 4
+
+# Simulation settings ---------------------------------------------
+
+pair_coeff         * * "config/SiO.1990.vashishta" Si O
+
+dump               dmp all atom 5000 &
+                   "dumps/step-1-dynamics.lammpstrj"
+
+# Run -------------------------------------------------------------
+
+timestep           0.001
+thermo             1000
+
+velocity           all create 6000 4928459 rot yes dist gaussian
+
+fix                nvt1 all nvt temp 6000 6000 0.1
+run                5000
+
+unfix              nvt1
+
+fix                npt1 all npt temp 6000 4000 0.1 aniso 100 100 1
+run                50000
+
+fix                npt1 all npt temp 4000  300 0.1 aniso 100   1 1
+run                200000
+
+fix                npt1 all npt temp  300  300 0.1 aniso   1   1 1
+run                4000
+
+write_data         "dumps/step-1-amorphous-SiO.lammps"
