@@ -5,3 +5,4 @@
 /**/dumps/*.dat
 /**/dumps/*.vmd
 log.lammps
+*.log
