@@ -4,6 +4,7 @@ include            "config/01-initialize.lammps"
 
 # System definition -----------------------------------------------
 
+pair_style         vashishta
 read_data          "dumps/step-1-amorphous-SiO.lammps"
 
 # Simulation settings ---------------------------------------------
