@@ -27,7 +27,7 @@ compute_atomic_fraction(0.9, 3.0)
 compute_atomic_fraction(0.9, 1.0)
 
 # Between C1A1 and C1A2
-compute_atomic_fraction(1.9, 1.0)
+compute_atomic_fraction(2.0, 1.2)
 
 # Between C1A2 and C1A6
 compute_atomic_fraction(6.0, 0.9)
