@@ -73,7 +73,7 @@ $ ---------------------------------------------------------------------------
  PHASE CORUNDUM % 3 2 1 3 !
     CONSTITUENT CORUNDUM : AL+3 : VA : O-2 :  !
 
- PHASE HALITE %' 2 1 1 !
+ PHASE HALITE % 2 1 1 !
     CONSTITUENT HALITE : CA+2 : O-2 :  !
 
  PHASE C3A1 % 2 3 1 !
