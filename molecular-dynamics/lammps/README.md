@@ -22,3 +22,9 @@ The original sources of these tutoriais can be found [here](https://lammpstutori
 - [Graphene sheet and CNT](tutorials-simon-gravelle/04-Graphene-Deformation)
 - [Water adsorption in silica](tutorials-simon-gravelle/05-Water-Adsorption-in-Silica)
 - [Free energy calculation](tutorials-simon-gravelle/06-Free-Energy-Calculation)
+
+### LAMMPS tutorials by Mark Tschopp
+
+The original sources of these tutoriais can be found [here](https://github.com/mrkllntschpp/lammps-tutorials). The following reinterpretations of these simulations were studied here:
+
+*Ongoing work...*
