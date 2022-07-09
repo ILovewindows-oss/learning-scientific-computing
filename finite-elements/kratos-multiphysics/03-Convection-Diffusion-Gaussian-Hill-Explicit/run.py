@@ -38,8 +38,8 @@ class GaussianHillExplicit(ConvectionDiffusionAnalysis):
                 den = 4 * diffusivity * t
                 phi_analytical = math.exp(-r2 / den) / (math.pi * den)
                 
-                node.SetSolutionStepValue(KratosMultiphysics.TEMPERATURE,
-                                          1, phi_analytical)
+                node.SetSolutionStepValue(
+                    KratosMultiphysics.TEMPERATURE, 1, phi_analytical)
 
             self.apply_initial_condition = False
 

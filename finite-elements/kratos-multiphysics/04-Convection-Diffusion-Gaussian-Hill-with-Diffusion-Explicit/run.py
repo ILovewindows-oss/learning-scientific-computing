@@ -11,10 +11,11 @@ from KratosMultiphysics\
 class GaussianHillWithDiffusionExplicit(ConvectionDiffusionAnalysis):
     """ Problem specification with variable boundary condition. """
     def __init__(self,model,parameters):
-        super().__init__(model,parameters)
+        super().__init__(model, parameters)
         self.apply_initial_condition = True
 
     def ApplyBoundaryConditions(self):
+        """ Time-dependent boundary condition. """
         super().ApplyBoundaryConditions()
 
         if self.apply_initial_condition:
