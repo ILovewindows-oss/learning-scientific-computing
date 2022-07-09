@@ -1,0 +1,139 @@
+{
+    "problem_data": {
+        "problem_name": "gaussian_hill_with_diffusion_explicit",
+        "model_part_name": "MainModelPart",
+        "domain_size": 2,
+        "parallel_type": "OpenMP",
+        "start_time": 0.0,
+        "end_time": 0.5,
+        "echo_level": 0
+    },
+    "solver_settings": {
+        "analysis_type": "linear",
+        "auxiliary_variables_list": [],
+        "block_builder": true,
+        "clear_storage": false,
+        "compute_reactions": false,
+        "convection_diffusion_variables": {
+            "convection_variable": "CONVECTION_VELOCITY",
+            "density_variable": "DENSITY",
+            "diffusion_variable": "CONDUCTIVITY",
+            "gradient_variable": "TEMPERATURE_GRADIENT",
+            "mesh_velocity_variable": "MESH_VELOCITY",
+            "projection_variable": "PROJECTED_SCALAR1",
+            "reaction_gradient_variable": "REACTION",
+            "reaction_variable": "REACTION_FLUX",
+            "specific_heat_variable": "SPECIFIC_HEAT",
+            "surface_source_variable": "FACE_HEAT_FLUX",
+            "transfer_coefficient_variable": "TRANSFER_COEFFICIENT",
+            "unknown_variable": "TEMPERATURE",
+            "velocity_variable": "VELOCITY",
+            "volume_source_variable": "HEAT_FLUX"
+        },
+        "convergence_criterion": "residual_criterion",
+        "domain_size": 2,
+        "dynamic_tau": 1.0,
+        "echo_level": 0,
+        "element_replace_settings": {
+            "condition_name": "ThermalFace",
+            "element_name": "DConvectionDiffusionExplicit"
+        },
+        "gradient_dofs": false,
+        "line_search": false,
+        "linear_solver_settings": {
+            "coarsening_type": "aggregation",
+            "krylov_type": "gmres",
+            "max_iteration": 5000,
+            "scaling": false,
+            "smoother_type": "ilu0",
+            "solver_type": "amgcl",
+            "tolerance": 1e-09
+        },
+        "material_import_settings": {
+            "materials_filename": "settings/materials.json"
+        },
+        "max_iteration": 10,
+        "model_import_settings": {
+            "input_filename": "settings/domain",
+            "input_type": "mdpa"
+        },
+        "model_part_name": "MainModelPart",
+        "move_mesh_flag": false,
+        "problem_domain_sub_model_part_list": [
+            "Parts_Domain"
+        ],
+        "processes_sub_model_part_list": [
+            "Subpart_Boundary"
+        ],
+        "reform_dofs_at_each_step": false,
+        "residual_absolute_tolerance": 1e-09,
+        "residual_relative_tolerance": 0.0001,
+        "solution_absolute_tolerance": 1e-09,
+        "solution_relative_tolerance": 0.0001,
+        "solver_type": "transient",
+        "time_integration_method": "explicit",
+        "time_stepping": {
+            "time_step": 0.002
+        },
+        "use_orthogonal_subscales": true
+    },
+    "processes": {
+        "constraints_process_list": [
+            {
+                "python_module": "assign_vector_variable_process",
+                "kratos_module": "KratosMultiphysics",
+                "Parameters": {
+                    "model_part_name": "MainModelPart",
+                    "variable_name": "VELOCITY",
+                    "constrained": false,
+                    "value": [
+                        1.0,
+                        0.0,
+                        0.0
+                    ],
+                    "interval": [
+                        0.0,
+                        "End"
+                    ]
+                }
+            }
+        ]
+    },
+    "output_processes": {
+        "vtk_output": [
+            {
+                "python_module": "vtk_output_process",
+                "kratos_module": "KratosMultiphysics",
+                "process_name": "VtkOutputProcess",
+                "help": "This process writes postprocessing files for Paraview",
+                "Parameters": {
+                    "condition_data_value_variables": [],
+                    "condition_flags": [],
+                    "custom_name_postfix": "",
+                    "custom_name_prefix": "",
+                    "element_data_value_variables": [],
+                    "element_flags": [],
+                    "file_format": "ascii",
+                    "gauss_point_variables_extrapolated_to_nodes": [],
+                    "gauss_point_variables_in_elements": [],
+                    "model_part_name": "MainModelPart",
+                    "nodal_data_value_variables": [],
+                    "nodal_flags": [],
+                    "nodal_solution_step_data_variables": [
+                        "TEMPERATURE",
+                        "HEAT_FLUX",
+                        "VELOCITY"
+                    ],
+                    "output_control_type": "step",
+                    "output_interval": 1.0,
+                    "output_path": "results/gaussian_hill_with_diffusion_explicit",
+                    "output_precision": 7,
+                    "output_sub_model_parts": true,
+                    "save_output_files_in_folder": true,
+                    "write_deformed_configuration": false,
+                    "write_ids": false
+                }
+            }
+        ]
+    }
+}

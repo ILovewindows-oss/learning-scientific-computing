@@ -9,3 +9,8 @@ Here you will find the following tutorials/cases in Python:
 - [CHT Cylinder Cooling Re=100 Pr=2](02-CHT-Cylinder-Cooling-Re100-Pr2): check folder for sources. It was reworked to be made compatible with Kratos Multiphysics 9.1.
 
 Once you have mastered Python API, it is recommended to follow the [full C++/Python tutorial for dummies](https://github.com/KratosMultiphysics/Kratos/wiki/Kratos-For-Dummies:-Stationary-heat-transfer) tutorial. It is intended to be a first contact with FEM and the use of Kratos at lower level and development.
+
+
+## Running in parallel
+
+For running in parallel the libraries must be compiled with [Metis](https://github.com/KratosMultiphysics/Kratos/tree/master/applications/MetisApplication) and [Trilinos](https://github.com/KratosMultiphysics/Kratos/tree/master/applications/TrilinosApplication) support. From a terminal you can simply call `mpiexec -np 4 python3 run.py --with-mpi` to run an application.
