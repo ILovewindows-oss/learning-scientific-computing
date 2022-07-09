@@ -1,0 +1,454 @@
+{
+    "problem_data": {
+        "problem_name": "test_cylinder_cooling_Re100_Pr2",
+        "parallel_type": "OpenMP",
+        "echo_level": 0,
+        "start_time": 0.0,
+        "end_time": 15.0
+    },
+    "solver_settings": {
+        "solver_type": "conjugate_heat_transfer",
+        "domain_size": 2,
+        "echo_level": 0,
+        "fluid_domain_solver_settings": {
+            "solver_type": "ThermallyCoupled",
+            "domain_size": 2,
+            "echo_level": 0,
+            "fluid_solver_settings": {
+                "absolute_pressure_tolerance": 1e-05,
+                "absolute_velocity_tolerance": 1e-05,
+                "alpha": -0.3,
+                "analysis_type": "non_linear",
+                "assign_neighbour_elements_to_conditions": true,
+                "compute_reactions": true,
+                "consider_periodic_conditions": false,
+                "domain_size": 2,
+                "echo_level": 0,
+                "formulation": {
+                    "element_type": "vms",
+                    "use_orthogonal_subscales": false,
+                    "dynamic_tau": 1.0
+                },
+                "linear_solver_settings": {
+                    "solver_type": "amgcl"
+                },
+                "material_import_settings": {
+                    "materials_filename": ""
+                },
+                "maximum_iterations": 10,
+                "model_import_settings": {
+                    "input_filename": "settings/domain/test_cylinder_cooling_Re100_Pr2_Fluid",
+                    "input_type": "mdpa",
+                    "reorder": false
+                },
+                "model_part_name": "FluidModelPart",
+                "move_mesh_flag": false,
+                "move_mesh_strategy": 0,
+                "no_skin_parts": [],
+                "periodic": "periodic",
+                "pressure_relaxation": 0.9,
+                "reform_dofs_at_each_step": true,
+                "relative_pressure_tolerance": 0.001,
+                "relative_velocity_tolerance": 0.001,
+                "skin_parts": [
+                    "AutomaticInlet2D_Fluid_Left_Wall",
+                    "Outlet2D_Fluid_Right_Wall",
+                    "Slip2D",
+                    "NoSlip2D_Fluid_Interface"
+                ],
+                "solver_type": "monolithic",
+                "time_scheme": "bossak",
+                "time_stepping": {
+                    "CFL_number": 1,
+                    "automatic_time_step": false,
+                    "maximum_delta_time": 0.01,
+                    "minimum_delta_time": 0.0001,
+                    "time_step": 0.1
+                },
+                "velocity_relaxation": 0.9,
+                "volume_model_part_name": "Parts_Fluid"
+            },
+            "thermal_solver_settings": {
+                "analysis_type": "non_linear",
+                "auxiliary_variables_list": [],
+                "block_builder": true,
+                "clear_storage": false,
+                "compute_reactions": false,
+                "convection_diffusion_variables": {
+                    "convection_variable": "CONVECTION_VELOCITY",
+                    "density_variable": "DENSITY",
+                    "diffusion_variable": "CONDUCTIVITY",
+                    "gradient_variable": "TEMPERATURE_GRADIENT",
+                    "mesh_velocity_variable": "MESH_VELOCITY",
+                    "projection_variable": "PROJECTED_SCALAR1",
+                    "reaction_gradient_variable": "REACTION",
+                    "reaction_variable": "REACTION_FLUX",
+                    "specific_heat_variable": "SPECIFIC_HEAT",
+                    "surface_source_variable": "FACE_HEAT_FLUX",
+                    "transfer_coefficient_variable": "TRANSFER_COEFFICIENT",
+                    "unknown_variable": "TEMPERATURE",
+                    "velocity_variable": "VELOCITY",
+                    "volume_source_variable": "HEAT_FLUX"
+                },
+                "convergence_criterion": "residual_criterion",
+                "domain_size": 2,
+                "echo_level": 0,
+                "element_replace_settings": {
+                    "condition_name": "ThermalFace",
+                    "element_name": "EulerianConvDiff"
+                },
+                "gradient_dofs": false,
+                "line_search": false,
+                "linear_solver_settings": {
+                    "coarsening_type": "aggregation",
+                    "krylov_type": "gmres",
+                    "max_iteration": 5000,
+                    "scaling": false,
+                    "smoother_type": "ilu0",
+                    "solver_type": "amgcl",
+                    "tolerance": 1e-09
+                },
+                "material_import_settings": {
+                    "materials_filename": "settings/materials/fluid.json"
+                },
+                "max_iteration": 10,
+                "model_import_settings": {
+                    "input_filename": "use_input_model_part",
+                    "input_type": "mdpa"
+                },
+                "model_part_name": "FluidThermalModelPart",
+                "move_mesh_flag": false,
+                "problem_domain_sub_model_part_list": [
+                    "Parts_Fluid"
+                ],
+                "processes_sub_model_part_list": [
+                    "ImposedTemperature2D_Fluid_Left_Wall",
+                    "FluidThermalInterface2D_Fluid_Interface"
+                ],
+                "reform_dofs_at_each_step": false,
+                "residual_absolute_tolerance": 1e-07,
+                "residual_relative_tolerance": 1e-05,
+                "solution_absolute_tolerance": 1e-07,
+                "solution_relative_tolerance": 1e-05,
+                "solver_type": "transient",
+                "time_integration_method": "implicit",
+                "time_stepping": {
+                    "time_step": 1.0
+                },
+                "transient_parameters": {
+                    "dynamic_tau": 1.0,
+                    "theta": 0.5
+                }
+            }
+        },
+        "solid_domain_solver_settings": {
+            "thermal_solver_settings": {
+                "analysis_type": "non_linear",
+                "auxiliary_variables_list": [],
+                "block_builder": true,
+                "clear_storage": false,
+                "compute_reactions": false,
+                "convection_diffusion_variables": {
+                    "convection_variable": "CONVECTION_VELOCITY",
+                    "density_variable": "DENSITY",
+                    "diffusion_variable": "CONDUCTIVITY",
+                    "gradient_variable": "TEMPERATURE_GRADIENT",
+                    "mesh_velocity_variable": "MESH_VELOCITY",
+                    "projection_variable": "PROJECTED_SCALAR1",
+                    "reaction_gradient_variable": "REACTION",
+                    "reaction_variable": "REACTION_FLUX",
+                    "specific_heat_variable": "SPECIFIC_HEAT",
+                    "surface_source_variable": "FACE_HEAT_FLUX",
+                    "transfer_coefficient_variable": "TRANSFER_COEFFICIENT",
+                    "unknown_variable": "TEMPERATURE",
+                    "velocity_variable": "VELOCITY",
+                    "volume_source_variable": "HEAT_FLUX"
+                },
+                "convergence_criterion": "residual_criterion",
+                "domain_size": 2,
+                "echo_level": 0,
+                "element_replace_settings": {
+                    "condition_name": "ThermalFace",
+                    "element_name": "EulerianConvDiff"
+                },
+                "gradient_dofs": false,
+                "line_search": false,
+                "linear_solver_settings": {
+                    "coarsening_type": "aggregation",
+                    "krylov_type": "gmres",
+                    "max_iteration": 5000,
+                    "scaling": false,
+                    "smoother_type": "ilu0",
+                    "solver_type": "amgcl",
+                    "tolerance": 1e-09
+                },
+                "material_import_settings": {
+                    "materials_filename": "settings/materials/solid.json"
+                },
+                "max_iteration": 10,
+                "model_import_settings": {
+                    "input_filename": "settings/domain/test_cylinder_cooling_Re100_Pr2_Solid",
+                    "input_type": "mdpa"
+                },
+                "model_part_name": "ThermalModelPart",
+                "move_mesh_flag": false,
+                "problem_domain_sub_model_part_list": [
+                    "Parts_Solid"
+                ],
+                "processes_sub_model_part_list": [
+                    "TEMPERATURE_Solid",
+                    "SolidThermalInterface2D_Solid_Interface"
+                ],
+                "reform_dofs_at_each_step": false,
+                "residual_absolute_tolerance": 1e-07,
+                "residual_relative_tolerance": 1e-05,
+                "solution_absolute_tolerance": 1e-07,
+                "solution_relative_tolerance": 1e-05,
+                "solver_type": "transient",
+                "time_integration_method": "implicit",
+                "time_stepping": {
+                    "time_step": 0.1
+                },
+                "transient_parameters": {
+                    "dynamic_tau": 1.0,
+                    "theta": 0.5
+                }
+            }
+        },
+        "coupling_settings": {
+            "convergence_accelerator_settings": {
+                "acceleration_type": "Aitken",
+                "solver_type": "Relaxation",
+                "w_0": 0.5
+            },
+            "dirichlet_coupling_interface": "fluid",
+            "fluid_interfaces_list": [
+                "FluidModelPart.FluidThermalInterface2D_Fluid_Interface"
+            ],
+            "mappers_settings": {
+                "absolute_convergence_tolerance": 1e-09,
+                "distance_threshold": 1e+24,
+                "echo_level": 0,
+                "integration_order": 2,
+                "max_number_iterations": 10,
+                "relative_convergence_tolerance": 1e-07,
+                "search_parameters": {
+                    "allocation_size": 1000,
+                    "bucket_size": 4,
+                    "search_factor": 1.0
+                }
+            },
+            "max_iteration": 10,
+            "solid_interfaces_list": [
+                "ThermalModelPart.SolidThermalInterface2D_Solid_Interface"
+            ],
+            "temperature_relative_tolerance": 1e-05,
+            "variable_redistribution_settings": {
+                "absolute_tolerance": 1e-09,
+                "max_iterations": 200
+            }
+        }
+    },
+    "output_processes": {
+        "vtk_output": [
+            {
+                "python_module": "vtk_output_process",
+                "kratos_module": "KratosMultiphysics",
+                "process_name": "VtkOutputProcess",
+                "help": "This process writes postprocessing files for Paraview",
+                "Parameters": {
+                    "condition_data_value_variables": [],
+                    "condition_flags": [],
+                    "custom_name_postfix": "",
+                    "custom_name_prefix": "",
+                    "element_data_value_variables": [],
+                    "element_flags": [],
+                    "file_format": "ascii",
+                    "gauss_point_variables_extrapolated_to_nodes": [],
+                    "gauss_point_variables_in_elements": [],
+                    "model_part_name": "FluidModelPart.Parts_Fluid",
+                    "nodal_data_value_variables": [],
+                    "nodal_flags": [],
+                    "nodal_solution_step_data_variables": [
+                        "VELOCITY",
+                        "PRESSURE",
+                        "TEMPERATURE"
+                    ],
+                    "output_control_type": "step",
+                    "output_interval": 0.1,
+                    "output_path": "results/test_cylinder_cooling_Re100_Pr2_fluid",
+                    "output_precision": 7,
+                    "output_sub_model_parts": true,
+                    "save_output_files_in_folder": true,
+                    "write_deformed_configuration": false,
+                    "write_ids": false
+                }
+            },
+            {
+                "python_module": "vtk_output_process",
+                "kratos_module": "KratosMultiphysics",
+                "process_name": "VtkOutputProcess",
+                "help": "This process writes postprocessing files for Paraview",
+                "Parameters": {
+                    "condition_data_value_variables": [],
+                    "condition_flags": [],
+                    "custom_name_postfix": "",
+                    "custom_name_prefix": "",
+                    "element_data_value_variables": [],
+                    "element_flags": [],
+                    "file_format": "ascii",
+                    "gauss_point_variables_extrapolated_to_nodes": [],
+                    "gauss_point_variables_in_elements": [],
+                    "model_part_name": "ThermalModelPart.Parts_Solid",
+                    "nodal_data_value_variables": [],
+                    "nodal_flags": [],
+                    "nodal_solution_step_data_variables": [
+                        "TEMPERATURE"
+                    ],
+                    "output_control_type": "step",
+                    "output_interval": 0.1,
+                    "output_path": "results/test_cylinder_cooling_Re100_Pr2_solid",
+                    "output_precision": 7,
+                    "output_sub_model_parts": true,
+                    "save_output_files_in_folder": true,
+                    "write_deformed_configuration": false,
+                    "write_ids": false
+                }
+            }
+        ]
+    },
+    "restart_options": {
+        "SaveRestart": "False",
+        "RestartFrequency": 0,
+        "LoadRestart": "False",
+        "Restart_Step": 0
+    },
+    "processes": {
+        "fluid_constraints_process_list": [
+            {
+                "python_module": "apply_inlet_process",
+                "kratos_module": "KratosMultiphysics.FluidDynamicsApplication",
+                "Parameters": {
+                    "model_part_name": "FluidModelPart.AutomaticInlet2D_Fluid_Left_Wall",
+                    "variable_name": "VELOCITY",
+                    "modulus": "1.0",
+                    "direction": "automatic_inwards_normal",
+                    "interval": [
+                        0.0,
+                        "End"
+                    ]
+                }
+            },
+            {
+                "python_module": "apply_outlet_process",
+                "kratos_module": "KratosMultiphysics.FluidDynamicsApplication",
+                "Parameters": {
+                    "model_part_name": "FluidModelPart.Outlet2D_Fluid_Right_Wall",
+                    "variable_name": "PRESSURE",
+                    "constrained": true,
+                    "value": 0.0,
+                    "hydrostatic_outlet": false,
+                    "h_top": 0.0
+                }
+            },
+            {
+                "python_module": "apply_noslip_process",
+                "kratos_module": "KratosMultiphysics.FluidDynamicsApplication",
+                "Parameters": {
+                    "model_part_name": "FluidModelPart.NoSlip2D_Fluid_Interface"
+                }
+            },
+            {
+                "python_module": "apply_slip_process",
+                "kratos_module": "KratosMultiphysics.FluidDynamicsApplication",
+                "process_name": "ApplySlipProcess",
+                "Parameters": {
+                    "model_part_name": "FluidModelPart.Slip2D"
+                }
+            },
+            {
+                "python_module": "assign_scalar_variable_process",
+                "kratos_module": "KratosMultiphysics",
+                "Parameters": {
+                    "model_part_name": "FluidThermalModelPart.ImposedTemperature2D_Fluid_Left_Wall",
+                    "variable_name": "TEMPERATURE",
+                    "constrained": true,
+                    "value": 0.0,
+                    "interval": [
+                        0.0,
+                        "End"
+                    ]
+                }
+            },
+            {
+                "python_module": "apply_thermal_face_process",
+                "kratos_module": "KratosMultiphysics.ConvectionDiffusionApplication",
+                "Parameters": {
+                    "model_part_name": "FluidThermalModelPart.FluidThermalInterface2D_Fluid_Interface",
+                    "ambient_temperature": 0.0,
+                    "add_ambient_radiation": false,
+                    "emissivity": 0.0,
+                    "add_ambient_convection": false,
+                    "convection_coefficient": 0.0
+                }
+            },
+            {
+                "python_module": "apply_boussinesq_force_process",
+                "kratos_module": "KratosMultiphysics.FluidDynamicsApplication",
+                "process_name": "ApplyBoussinesqForceProcess",
+                "Parameters": {
+                    "model_part_name": "FluidThermalModelPart.Boussinesq__Boussinesq_hidden_",
+                    "gravity": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "ambient_temperature": 273.15
+                }
+            }
+        ],
+        "solid_initial_conditions_process_list": [
+            {
+                "python_module": "assign_scalar_variable_process",
+                "kratos_module": "KratosMultiphysics",
+                "Parameters": {
+                    "model_part_name": "ThermalModelPart.TEMPERATURE_Solid",
+                    "variable_name": "TEMPERATURE",
+                    "constrained": false,
+                    "value": 1.0,
+                    "interval": [
+                        0.0,
+                        0.0
+                    ]
+                }
+            }
+        ],
+        "solid_constraints_process_list": [
+            {
+                "python_module": "apply_thermal_face_process",
+                "kratos_module": "KratosMultiphysics.ConvectionDiffusionApplication",
+                "Parameters": {
+                    "model_part_name": "ThermalModelPart.SolidThermalInterface2D_Solid_Interface",
+                    "ambient_temperature": 0.0,
+                    "add_ambient_radiation": false,
+                    "emissivity": 0.0,
+                    "add_ambient_convection": false,
+                    "convection_coefficient": 0.0
+                }
+            }
+        ],
+        "solid_list_other_processes": [
+            {
+                "python_module": "assign_scalar_variable_process",
+                "kratos_module": "KratosMultiphysics",
+                "process_name": "AssignScalarVariableProcess",
+                "Parameters": {
+                    "model_part_name": "ThermalModelPart.Parts_Solid",
+                    "variable_name": "HEAT_FLUX",
+                    "value": 0.0,
+                    "constrained": false
+                }
+            }
+        ]
+    }
+}
