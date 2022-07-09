@@ -1,0 +1,97 @@
+{
+    "problem_data": {
+        "problem_name": "rotating_pulse_explicit",
+        "model_part_name": "MainModelPart",
+        "domain_size": 2,
+        "parallel_type": "OpenMP",
+        "start_time": 0.0,
+        "end_time": 10.0,
+        "echo_level": 0
+    },
+    "solver_settings": {
+        "model_part_name": "MainModelPart",
+        "domain_size": 2,
+        "echo_level": 0,
+        "time_integration_method": "explicit",
+        "solver_type": "transient",
+        "model_import_settings": {
+            "input_type": "mdpa",
+            "input_filename": "settings/domain"
+        },
+        "material_import_settings": {
+            "materials_filename": "settings/materials.json"
+        },
+        "time_stepping": {
+            "time_step": 0.005
+        },
+        "compute_reactions": false,
+        "problem_domain_sub_model_part_list": [
+            "Parts_Domain"
+        ],
+        "processes_sub_model_part_list": [
+            "Subpart_Boundary"
+        ],
+        "auxiliary_variables_list": [],
+        "element_replace_settings": {
+            "element_name": "DConvectionDiffusionExplicit",
+            "condition_name": "ThermalFace"
+        },
+        "use_orthogonal_subscales": true,
+        "dynamic_tau": 1.0
+    },
+    "processes": {
+        "constraints_process_list": [
+            {
+                "python_module": "assign_scalar_variable_process",
+                "kratos_module": "KratosMultiphysics",
+                "Parameters": {
+                    "model_part_name": "MainModelPart.Subpart_Boundary",
+                    "variable_name": "TEMPERATURE",
+                    "constrained": true,
+                    "value": 0,
+                    "interval": [
+                        0.0,
+                        "End"
+                    ]
+                }
+            }
+        ]
+    },
+    "output_processes": {
+        "vtk_output": [
+            {
+                "python_module": "vtk_output_process",
+                "kratos_module": "KratosMultiphysics",
+                "process_name": "VtkOutputProcess",
+                "help": "This process writes postprocessing files for Paraview",
+                "Parameters": {
+                    "condition_data_value_variables": [],
+                    "condition_flags": [],
+                    "custom_name_postfix": "",
+                    "custom_name_prefix": "",
+                    "element_data_value_variables": [],
+                    "element_flags": [],
+                    "file_format": "ascii",
+                    "gauss_point_variables_extrapolated_to_nodes": [],
+                    "gauss_point_variables_in_elements": [],
+                    "model_part_name": "MainModelPart",
+                    "nodal_data_value_variables": [],
+                    "nodal_flags": [],
+                    "nodal_solution_step_data_variables": [
+                        "TEMPERATURE",
+                        "HEAT_FLUX",
+                        "VELOCITY"
+                    ],
+                    "output_control_type": "step",
+                    "output_interval": 0.1,
+                    "output_path": "results/rotating_pulse_explicit",
+                    "output_precision": 7,
+                    "output_sub_model_parts": true,
+                    "save_output_files_in_folder": true,
+                    "write_deformed_configuration": false,
+                    "write_ids": false
+                }
+            }
+        ]
+    }
+}
