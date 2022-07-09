@@ -31,18 +31,18 @@ class RotatingPulse(ConvectionDiffusionAnalysis):
             distance = math.sqrt(node.X**2 + node.Y**2)
 
             node.SetSolutionStepValue(
-                KratosMultiphysics.VELOCITY,convective_velocity)
+                KratosMultiphysics.VELOCITY, convective_velocity)
             node.SetSolutionStepValue(
-                KratosMultiphysics.VELOCITY,1,convective_velocity)
+                KratosMultiphysics.VELOCITY, 1, convective_velocity)
             
             if (distance <= 1):
-                forcing =  self._force(self.time, distance)
+                forcing_currents = self._force(self.time, distance)
                 forcing_previous = self._force(self.time - tstep, distance)
             else:
-                forcing = 0
+                forcing_currents = 0
             
             node.SetSolutionStepValue(
-                KratosMultiphysics.HEAT_FLUX, forcing)
+                KratosMultiphysics.HEAT_FLUX, 0, forcing_currents)
             node.SetSolutionStepValue(
                 KratosMultiphysics.HEAT_FLUX, 1, forcing_previous)
 
