@@ -1,8 +1,8 @@
 
 $ ===========================================================================
-$ Database file written 2021 - 09 -13
-$ Thermodynamic modeling of the CaO–Al2O3 system
-$ Based on Hallstedt(1990), Mao et al.(2004), Guo et al. (2015)
+$ Database file written 2021-09-13
+$ Thermodynamic modeling of the CaO-Al2O3 system
+$ Based on Hallstedt (1990)
 $ ---------------------------------------------------------------------------
 
  ELEMENT /-   ELECTRON_GAS              0.0000E+00  0.0000E+00  0.0000E+00 !
