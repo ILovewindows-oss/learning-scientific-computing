@@ -24,4 +24,8 @@ PLOT T NP(*)
 GRAPHICS_FORMAT 5 dumps/results-macro-01 Y
 RENDER
 
+LIST EXCELL_CSV_FILE T NP(*) post/results-macro-01.csv
+
+EXIT Y
+
 SET INTERACTIVE
