@@ -57,13 +57,16 @@ g_quartz = np.piecewise(T, condlist_quartz, funclist_quartz) / 1.0e+06
 g_tridym = np.piecewise(T, condlist_tridym, funclist_tridym) / 1.0e+06
 g_cristo = np.piecewise(T, condlist_cristo, funclist_cristo) / 1.0e+06
 
-# g_tridym += g_quartz
-# g_cristo += g_quartz
+g_tridym += g_quartz
+g_cristo += g_quartz
 
-# plt.plot(T, g_quartz, label="Quartz")
+plt.close("all")
+plt.style.use("seaborn-white")
+plt.plot(T, g_quartz, label="Quartz")
 plt.plot(T, g_tridym, label="Tridymite")
 plt.plot(T, g_cristo, label="Cristobalite")
 plt.grid(linestyle=":")
-# plt.ylim(-1.20, -0.95)
+plt.xlabel("Temperature [K]")
+plt.ylabel("G [J/mol]")
 plt.legend()
 plt.show()
