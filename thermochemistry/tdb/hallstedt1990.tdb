@@ -18,7 +18,7 @@ $ ---------------------------------------------------------------------------
  SPECIES AL2O3                       AL2O3  !
  SPECIES O2                          O2     !
 
- TYPE_DEFINITION % SEQ *!
+ TYPE_DEFINITION % SEQ * !
  DEFAULT_COMMAND DEF_SYS_ELEMENT VA !
 
 $ ===========================================================================
