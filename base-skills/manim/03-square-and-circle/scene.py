@@ -17,7 +17,7 @@ from manim import RIGHT
 
 
 class SquareAndCircle(Scene):
-    """ Scene for converting a square into a circle. """
+    """ Scene for placing a square beside a circle. """
     def construct(self):
         """ Construct and display the animation. """
         circle = Circle()
