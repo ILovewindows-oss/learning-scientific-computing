@@ -27,7 +27,7 @@ $ ===========================================================================
 $ DEFINITIONS
 $ ---------------------------------------------------------------------------
 
- TYPE_DEFINITION % SEQ *!
+ TYPE_DEFINITION % SEQ * !
  DEFINE_SYSTEM_DEFAULT ELEMENT 2 !
  DEFAULT_COMMAND DEF_SYS_ELEMENT VA /- !
 
