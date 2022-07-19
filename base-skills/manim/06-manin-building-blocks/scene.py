@@ -219,5 +219,9 @@ class ExampleRotation(Scene):
             points = np.roll(points, int(len(points)/4), axis=0)
             m2a.points = points
 
-        self.play(Transform(m1a,m1b),Transform(m2a,m2b), run_time=1)
+        self.play(
+            Transform(m1a, m1b),
+            Transform(m2a, m2b), 
+            run_time=2
+        )
 
