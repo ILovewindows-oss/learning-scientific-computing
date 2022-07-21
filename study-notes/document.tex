@@ -10,6 +10,8 @@
 ]{biblatex}
 \usepackage{chemformula}
 \usepackage{geometry}
+\usepackage{paralist}
+\usepackage{xfrac}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONFIGURATION
@@ -21,6 +23,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COMMANDS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\newSection}[1]{\cleardoublepage\section{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TITLE
@@ -36,22 +40,25 @@
 
 \begin{document}
 \maketitle%
-\tableofcontents%
 
 \begin{abstract}
-This document has no specific or fixed structure. It is intended to be a single place to group study notes and short discussions about papers and books so that they can be reused later \emph{i.e.} to give a lecture or as reminder for a review for a paper. Please do not rely on this document as a perennial source or as a source of truth since there is no reviewer checking it to date.
+	This document has no specific or fixed structure. It is intended to be a single place to group study notes and short discussions about papers and books so that they can be reused later \emph{i.e.} to give a lecture or as reminder for a review for a paper. Please do not rely on this document as a perennial source or as a source of truth since there is no reviewer checking it to date.
 \end{abstract}
 
-\section{Thermodynamics}
+\cleardoublepage\tableofcontents%
+
+\newSection{Thermodynamics}
 
 \subsection{Oxide systems for minerals}
 
 System \ch{CaO - MgO - SiO2}~\textcite{Huang1995}
 
-\section{Transport Phenomena}
+\newSection{Transport Phenomena}
 
-\section{Molecular Dynamics}
+\input{parts/transport/multiphase_granular.tex}
 
+\newSection{Molecular Dynamics}
 
+\newpage%
 \printbibliography%
 \end{document}

@@ -1,0 +1,42 @@
+\subsection{Multiphase modeling of packed granular media in gases}
+
+This section discusses the physical modeling of packed granular media transport applied to multiphase CFD simulations. This is a particularly complex field because dynamic response of same material solid particles respond differently to flow field depending on their size, \emph{i.e.} they can be treated as separate phases. It is easy to understand this if you think of a packed bed where particles of different sizes will have coordination numbers that differ. In what follows, focus on gas-solid flows with high solid content will be given. This includes, but is not restricted to \begin{inparaenum}[(i)] \item pneumatic transport (dune/slug flow), \item fluidized/packed bed \end{inparaenum} flows. The case of particle-laden (particles in a continuous gas) is not treated here since particles are dispersed. There are two main approaches for modeling these sort of flows \begin{inparaenum}[(i)] \item Euler-Lagrange, and \item Euler-Euler\end{inparaenum}. In the first, fluid is treated as a continuum (thus Euler in the name) and particles are tracked individually (Lagrangian approach). From this explanation, one may correctly guess that Euler-Euler approach by its term describes both phases as interpenetrating continua, introducing the notion of phase fraction that is solved over computational domain. A detailed discussion of the subject is given by \textcite{Crowe2011}.
+
+\subsubsection{Selecting an Euler-Euler model and solver in Ansys Fluent}
+
+For the case of granular flows, the system of equations closure is achieved by application of kinetic theory adapted to macroscopic scale. Thus, several of the topics we discuss in this section are related to it and sometimes adapted from molecular dynamics. Ansys Fluent Euler-Euler models suitable for granular flow include the Mixture Model and Eulerian Model. Notice that these models cannot treat particle combustion, phenomenon that must use a DPM approach. Solidification and melting are also not supported.
+
+Mixture Model is best suited for low loading flows, such as particle-laden and cyclone separators. It is also less computationally expensive than its counterpart and should be selected whenever in its applicability range. Eulerian Model is the most complex and general multiphase model in Fluent. Momentum is solved individually for each phase and coupling is achieved through pressure and interphase exchange coefficients. It can be used to model particle suspension and fluidized/packed beds. Since focus is given on packed granular media, Eulerian Model must be selected because particles are concentrated only in certain portions of the flow field. It is then selected as the \emph{right} choice for the case being treated here.
+
+To justify this choice we first evaluate the particulate loading or mass concentration\footnote{As it is referred to in reference \cite{Crowe2011}.} $\beta$ given by the ratio of relative specific weights of dispersed phase $d$ and carrier $c$: 
+
+\begin{equation}
+\beta=\frac{\rho_{d}\alpha_{d}}{\rho_{c}\alpha_{c}}
+\end{equation}
+
+\noindent{}where $\alpha$ denote the volume phase fraction and $\rho$ the specific weight. For a typical gas-solid flow in a packed bed $\beta>1000$ and high loading implies the use of Eulerian model. The inter-particle space~\cite{Crowe2011} can be estimated from dispersed phase volume fraction as
+
+\begin{equation}
+\frac{L}{d}=\left(\frac{\pi}{6\alpha_{d}}\right)^{\frac{1}{3}}
+\end{equation}
+
+For packed beds where $\alpha_{d}>0.5$ we have $\sfrac{L}{d}\le{}1$, meaning particles are in contact. Under such conditions two-way coupling of transport is required with addition of particle pressure and viscous stresses due to particles, what is only handled by the Eulerian Model.
+
+Because of its complexity, higher order spatial and time discretization schemes are necessary. Second order time scheme is implemented using a Euler backward approximation in Fluent. Although a fully coupled solver is available, it is not as robust as the others for multiphase flows. In that case the best option is PC SIMPLE. In the case of steady-state solution, reducing the Courant number to as low as 4 can be useful for smooth convergence. If using PC SIMPLE, low under-relaxation of volume fraction is required, but that would dramatically increase computation time if using coupled solver.
+
+\subsubsection{Setting up Eulerian Model for packed granular flows in Fluent}
+
+Eulerian Model supports any number of secondary phases, thus if polydispersed particles are to be modeled they can be treated as separate phases, as discussed in the introduction. A single pressure is shared by all phases and momentum and continuity are solved for each phase. Setting up the interactions of solid phases between themselves and with the fluid requires additional models and related parameters. All $k-\varepsilon$ and $k-\omega$ are available and may apply to all phases or mixture.
+
+Momentum conservation equation must include lift, wall lubrication, and turbulent dispersion forces. Virtual mass force can be neglected in this case because secondary phase is denser than carrier. Given the interactions between phases, an additional term is added to model those forces. This section will guide the selection of required models for the packed bed application. It must be emphasized that at the present there is no general formulation in the literature and these models are mostly empirically based.
+
+% Interphase exchange coefficients
+% Lift coefficient correction and lift force
+% Wall lubrication force
+% Turbulent dispersion
+% Solids pressure
+% Solids shear stresses
+% Heat transfer
+% Turbulence models
+ 
+\endinput

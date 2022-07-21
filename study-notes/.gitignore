@@ -15,6 +15,7 @@
 *.run.xml
 *.bib.bak
 *.bib.sav
+*.bib.sav.tmp
 
 # Comment this out once finished first release.
 *.pdf
