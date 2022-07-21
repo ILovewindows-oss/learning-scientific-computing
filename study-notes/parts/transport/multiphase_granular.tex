@@ -30,7 +30,17 @@ Eulerian Model supports any number of secondary phases, thus if polydispersed pa
 
 Momentum conservation equation must include lift, wall lubrication, and turbulent dispersion forces. Virtual mass force can be neglected in this case because secondary phase is denser than carrier. Given the interactions between phases, an additional term is added to model those forces. This section will guide the selection of required models for the packed bed application. It must be emphasized that at the present there is no general formulation in the literature and these models are mostly empirically based.
 
-% Interphase exchange coefficients
+For a single fluid packed bed reactor only fluid-solid exchange coefficients $K_{sl}$ are required. In its general form this coefficient is expressed as
+
+\begin{equation}
+K_{sl}=\frac{\rho_{s}\alpha_{s}}{\tau_{s}}f\quad\text{where}\quad\tau_{s}=\frac{\rho_{s}d_{s}^{2}}{18\mu_{l}}\implies{}K_{sl}=\frac{18\alpha_{s}\mu_{l}}{d_{s}^{2}}f
+\end{equation}
+
+\noindent{}where the first denominator $\tau_{s}$ represents the particulate relaxation time. From this equation we see that viscous fluids and high particulate contents increase the interaction, while larger particles reduce it. The factor $f$ is a function of drag coefficient $C_{D}$ and it is the law describing it that must be adapted for the present case. Default option is \textcite{Syamlal1989} model which should only be used in conjunction of solid shear stresses kinetic component as defined by \textcite{Syamlal1993}, also the default. Although the model by \textcite{Wen1966} is not applicable to dense systems, an improvement proposed by \textcite{Gidaspow1992} through the use of \textcite{Ergun1952} equation allows the application to densely packed systems, better suited for the present case.
+%TODO check Fluent EMMS appliability too.
+
+Regarding solid-solid exchanges, coefficient $K_{ls}$ is computed taking into account the pair-wise restitution coefficient, the friction coefficient, and particle sizes~\cite{Syamlal1987b}. Drag modification does not seem required in the present context.
+
 % Lift coefficient correction and lift force
 % Wall lubrication force
 % Turbulent dispersion
