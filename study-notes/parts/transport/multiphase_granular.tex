@@ -8,7 +8,7 @@ For the case of granular flows, the system of equations closure is achieved by a
 
 Mixture Model is best suited for low loading flows, such as particle-laden and cyclone separators. It is also less computationally expensive than its counterpart and should be selected whenever in its applicability range. Eulerian Model is the most complex and general multiphase model in Fluent. Momentum is solved individually for each phase and coupling is achieved through pressure and interphase exchange coefficients. It can be used to model particle suspension and fluidized/packed beds. Since focus is given on packed granular media, Eulerian Model must be selected because particles are concentrated only in certain portions of the flow field. It is then selected as the \emph{right} choice for the case being treated here.
 
-To justify this choice we first evaluate the particulate loading or mass concentration\footnote{As it is referred to in reference \cite{Crowe2011}.} $\beta$ given by the ratio of relative specific weights of dispersed phase $d$ and carrier $c$: 
+To justify this choice we first evaluate the particulate loading or mass concentration\footnote{As it is referred to in reference \cite{Crowe2011}.} $\beta$ given by the ratio of relative specific weights of dispersed phase $d$ and carrier $c$:
 
 \begin{equation}
 \beta=\frac{\rho_{d}\alpha_{d}}{\rho_{c}\alpha_{c}}
@@ -26,7 +26,7 @@ Because of its complexity, higher order spatial and time discretization schemes 
 
 \subsubsection{Setting up Eulerian Model for packed granular flows in Fluent}
 
-Eulerian Model supports any number of secondary phases, thus if polydispersed particles are to be modeled they can be treated as separate phases, as discussed in the introduction. A single pressure is shared by all phases and momentum and continuity are solved for each phase. Setting up the interactions of solid phases between themselves and with the fluid requires additional models and related parameters. All $k-\varepsilon$ and $k-\omega$ are available and may apply to all phases or mixture.
+Eulerian Model supports any number of secondary phases, thus if poly-dispersed particles are to be modeled they can be treated as separate phases, as discussed in the introduction. A single pressure is shared by all phases and momentum and continuity are solved for each phase. Setting up the interactions of solid phases between themselves and with the fluid requires additional models and related parameters. All $k-\varepsilon$ and $k-\omega$ are available and may apply to all phases or mixture.
 
 Momentum conservation equation must include lift, wall lubrication, and turbulent dispersion forces. Virtual mass force can be neglected in this case because secondary phase is denser than carrier. Given the interactions between phases, an additional term is added to model those forces. This section will guide the selection of required models for the packed bed application. It must be emphasized that at the present there is no general formulation in the literature and these models are mostly empirically based.
 
@@ -48,5 +48,5 @@ Regarding solid-solid exchanges, coefficient $K_{ls}$ is computed taking into ac
 % Solids shear stresses
 % Heat transfer
 % Turbulence models
- 
+
 \endinput
