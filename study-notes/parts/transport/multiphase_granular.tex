@@ -39,14 +39,14 @@ K_{sl}=\frac{\rho_{s}\alpha_{s}}{\tau_{s}}f\quad\text{where}\quad\tau_{s}=\frac{
 \noindent{}where the first denominator $\tau_{s}$ represents the particulate relaxation time. From this equation we see that viscous fluids and high particulate contents increase the interaction, while larger particles reduce it. The factor $f$ is a function of drag coefficient $C_{D}$ and it is the law describing it that must be adapted for the present case. Default option is \textcite{Syamlal1989} model which should only be used in conjunction of solid shear stresses kinetic component as defined by \textcite{Syamlal1993}, also the default. Although the model by \textcite{Wen1966} is not applicable to dense systems, an improvement proposed by \textcite{Gidaspow1992} through the use of \textcite{Ergun1952} equation allows the application to densely packed systems, better suited for the present case.
 %TODO check Fluent EMMS appliability too.
 
-Regarding solid-solid exchanges, coefficient $K_{ls}$ is computed taking into account the pair-wise restitution coefficient, the friction coefficient, and particle sizes~\cite{Syamlal1987b}. Drag modification does not seem required in the present context.
+Regarding solid-solid exchanges, coefficient $K_{ls}$ is computed taking into account the pair-wise restitution coefficient, the friction coefficient, and particle sizes~\cite{Syamlal1987b}. Drag modification does not seem required in the present context. Lift correction, wall lubrication model, and virtual mass are all non-applicable because they concern only liquid-gas systems, specially droplets and bubbles. Lift force modeling is also discarded because in dense bed reactors particle distances are small, same reason for why we may neglect turbulent dispersion corrections. Since in dense beds the kinetics theory application to particles is less relevant, then a granular temperature set to a constant low value. Impacts of this on shear stress are discussed in what follows.
 
-% Lift coefficient correction and lift force
-% Wall lubrication force
-% Turbulent dispersion
-% Solids pressure
-% Solids shear stresses
-% Heat transfer
-% Turbulence models
+In cases where solids volume fraction is below the packing limit, the granular flow is said to be in compressible regime. In that case a solids pressure is computed independently and added by Ansys Fluent in the momentum equation. The most important parameter intervening in this case is the coefficient of restitution $e_{ss}$. Formulations are presented by \textcite{Gidaspow1994}, \textcite{Syamlal1993}, and \textcite{Ahmadi1990}. For solid phases the radial distribution function $g_{0}$ proposed by \textcite{Gidaspow1994} is to be used.
+
+Solids shear stress contains terms due to translation and collision. Pure collision term is modeled as proposed by \textcite{Gidaspow1992}. For its kinetic component the default model is the one by \textcite{Syamlal1993} and the one by \textcite{Gidaspow1992} is also available.  Once a threshold frictional packing limit is reached, a corresponding component of bulk viscosity can be included to account for the viscous-plastic transition that occurs. This component is by default zero and the model by \textcite{Lun1984} can be activated. It is recommended to apply this term because at solid fraction the application of kinetic theory is no longer relevant and frictional stresses need to be considered. Frictional pressure is mainly semi-empirical and models are provided by \textcite{Johnson1987} and \textcite{Syamlal1993}. If using one of the models by \textcite{Lun1984} or \textcite{Gidaspow1992} for the radial distribution function, the Ansys Fluent provides an \emph{based-ktgf} model for handling high packing fraction solids pressure.
+ 
+Heat transfer in granular flow can be described through the Nusselt number correlation proposed by \textcite{Gunn1978}. Notice that this is applicable to Reynolds numbers below $10^5$. Thermal conductivity $\kappa_q$ of phases is then required as a parameter.
+
+To close the set of required closure models one needs to select a turbulence description. Since we are discussing granular multiphase flow, turbulence applies only to the primary gas phase. Standard $k-\varepsilon$ or $k-\omega$ models can be selected and no turbulence interaction parameters are required.
 
 \endinput
