@@ -1,7 +1,7 @@
 name: Embed code in README
 
 on:
-  pull:
+  push:
     branches:
       - main
 jobs:
