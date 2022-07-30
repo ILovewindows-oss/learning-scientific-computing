@@ -16,7 +16,7 @@ jobs:
 
       - uses: tokusumi/markdown-embed-code@main
         with:
-          markdown: "base-skills/programming-rust/barba12steps/step_01.md"
+          markdown: "/base-skills/programming-rust/barba12steps/step_01.md"
           token: ${{ secrets.GITHUB_TOKEN }}
           message: "synchronizing Readme"
           silent: true
