@@ -1,0 +1,29 @@
+[package]
+name = "barba12steps"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+plotters = "0.3.1"
+
+[[bin]]
+name = "step_01"
+path = "src/step_01.rs"
+
+[[bin]]
+name = "step_02"
+path = "src/step_02.rs"
+
+[[bin]]
+name = "step_03"
+path = "src/step_03.rs"
+
+[[bin]]
+name = "step_04"
+path = "src/step_04.rs"
+
+[[bin]]
+name = "step_05"
+path = "src/step_05.rs"
