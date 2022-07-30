@@ -4,9 +4,9 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   embed-code:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -14,9 +14,16 @@ jobs:
           fetch-depth: 0
           ref: refs/heads/${{ github.head_ref }}
 
-      - uses: tokusumi/markdown-embed-code@main
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          markdown: "/base-skills/programming-rust/barba12steps/step_01.md"
+          python-version: 3.7
+
+      - name: embedding code
+        uses: tokusumi/markdown-embed-code@v1.0.0
+        with:
+          markdown: "base-skills/programming-rust/barba12steps/step_01.md"
           token: ${{ secrets.GITHUB_TOKEN }}
-          message: "synchronizing Readme"
-          silent: true
+          message: "Synchronizing file"
+          no_change: "No change on file"
+          silent: false
