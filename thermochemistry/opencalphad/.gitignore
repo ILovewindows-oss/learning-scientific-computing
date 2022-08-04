@@ -9,3 +9,6 @@
 # Log files
 *.log
 *.LOG
+
+# OpenCalphad dist
+oc6P/
