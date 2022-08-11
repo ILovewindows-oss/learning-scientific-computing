@@ -1,0 +1,23 @@
+\subsection{Meshing in Ansys Fluent}
+
+\subsubsection{Dynamical meshing for a linear movement}
+
+Ansys Fluent supporting documentation for moving bodies is mainly focused on rotating parts (turbo-machinery) and falling bodies (aerodynamics). Instructions for parts moving linearly is quite limited, as online tutorials. \href{https://www.youtube.com/watch?v=fbaV_knzzks}{This video} provides a good basis for modeling this sort of movement. In this section we discuss some ideas and provide a basic checklist with aspects to consider when modeling a system containing a plug-like moving part.
+
+\begin{itemize}
+\item It is a good idea to split domain into multiple parts to avoid remeshing zones far from the moving parts or where the movement is irrelevant. This can provide an important computational effort reduction.
+
+\item When setting up the case, do not forget to set up the deformation movement of the zone where parts are moving so that the smoothing of mesh is propagated in the region.
+
+\item Use of layering with a good peel layer thickness estimation is almost a requirement for successful simulation of a plug-like system.
+
+\item Do not forget that the macro \verb+DEFINE_CG_MOTION+ can only be used when compiled (it is incompatible with interpreted macro loading).
+
+\item Structured boundary layers can be set as stationary zones if re-meshing is undesirable.
+
+\item In most cases you should set remeshing interval to unity or activate implicit update (and accept the high computational overhead associated to it).
+
+\item To avoid movement of a part that crosses or touches a wall, it might be useful to consider a zone where fluid should not flow through as a porous zone (parametrized in an UDF) with closed porosity.
+\end{itemize}
+
+\endinput
