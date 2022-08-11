@@ -58,7 +58,28 @@ make -j40 && make install
 ## CGNS
 
 ```bash
+sudo apt install -y tcl8.6-dev tk8.6-dev
+
 git clone -b master https://github.com/CGNS/CGNS.git
+cd CGNS && mkdir build && cd build
+
+cmake \
+    -DCMAKE_PREFIX_PATH=$HOME/Apps/local/ \
+    -DCGNS_BUILD_CGNSTOOLS=true \
+    -DCGNS_BUILD_SHARED=true \
+    -DCGNS_BUILD_TESTING=true \
+    -DCGNS_ENABLE_64BIT=true \
+    -DCGNS_ENABLE_FORTRAN=true \
+    -DCGNS_ENABLE_HDF5=true \
+    -DCGNS_ENABLE_TESTS=true \
+    -DCGNS_USE_SHARED=true \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DHDF5_DIR=$HOME/Apps/local/lib \
+    -DHDF5_NEED_MPI=false \
+    -DHDF5_NEED_ZLIB=false \
+    -DHDF5_NEED_SZIP=false \
+    -DFORTRAN_NAMING=LOWERCASE_ \
+    ..
 ```
 
 ## Scotch
