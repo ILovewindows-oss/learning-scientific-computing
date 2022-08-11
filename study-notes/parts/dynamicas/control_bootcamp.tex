@@ -1,0 +1,38 @@
+\subsection{Linear systems}
+
+A linear dynamical system of states $x\in\mathbb{R}^{n}$ is simply denoted in matrix form as $\dot{x}=\mathbf{A}x$, where $\mathbf{A}$ provides the dynamics. If an action $u\in\mathbb{R}^{m}$ is taken to control the system one might write it as $\dot{x}=\mathbf{A}x+\mathbf{B}u$. In this section we are mostly interested in the first formulation (without control) for which a general solution is $x(t)=\exp(\mathbf{A}t)x(0)$, where $\exp(\mathbf{A}t)$ is a matrix given by the Taylor series expansion:
+
+\begin{equation}
+\exp(\mathbf{A}t)=\mathbf{I}+\mathbf{A}t+\frac{\mathbf{A}^2t^2}{2!}+\frac{\mathbf{A}^3t^3}{3!}+\dots+\frac{\mathbf{A}^kt^k}{k!}
+\end{equation}
+
+Evaluation of this expression is non-trivial and good precision would require a large number of terms in the expansion. For linear systems the uncoupling of equations can be done through the eigenvalues and eigenvectors of $\mathbf{A}$ obtained by solving $\mathbf{A}\xi=\lambda\xi$. If we assembly a diagonal matrix $\mathbf{D}$ with eigenvalues and the column space of eigenvectors $\mathbf{T}$ as follows
+
+\begin{equation}
+\mathbf{D}=
+\begin{bmatrix}
+\lambda_{1} & & & \\
+& \lambda_{2} & & \\ 
+& & \ddots & \\
+& & & \lambda_{n}
+\end{bmatrix}
+\qquad\text{and}\qquad
+\mathbf{T}=
+\begin{bmatrix}
+\xi_{1} & \xi_{2} & \dots & \xi_{n}
+\end{bmatrix}
+\end{equation}
+
+\noindent{}then we have $\mathbf{A}\mathbf{T}=\mathbf{T}\mathbf{D}$, which is easy to proof given the eigenvalue problem definition. We can use $\mathbf{T}$ to perform the transformations $x=\mathbf{T}z$ and $\dot{x}=\mathbf{T}\dot{z}$ from which the linear dynamical system can be written as $\mathbf{T}\dot{z}=\mathbf{A}\mathbf{T}z$ or reformulated as $\dot{z}=\mathbf{T}^{-1}\mathbf{A}\mathbf{T}z$. Since $\mathbf{D}=\mathbf{T}^{-1}\mathbf{A}$, the dynamics is fully uncoupled, \emph{i.e.} all equations become independent, and stated as $\dot{z}=\mathbf{D}z$. The solution of this system takes the same form as the coupled version, but now the evaluation of $\exp(\mathbf{D}t)$ which replaces $\exp(\mathbf{A}t)$ is a simple matrix as in
+
+\begin{equation}
+\exp(\mathbf{D}t)=
+\begin{bmatrix}
+	\exp(\lambda_{1}t) & & & \\
+	& \exp(\lambda_{2}t) & & \\ 
+	& & \ddots & \\
+	& & & \exp(\lambda_{n}t)
+\end{bmatrix}
+\end{equation}
+
+\endinput
