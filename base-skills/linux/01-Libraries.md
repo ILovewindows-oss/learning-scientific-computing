@@ -35,6 +35,24 @@ make && make install
 
 ```bash
 git clone https://github.com/HDFGroup/hdf5.git
+git checkout hdf5-1_10_6
+
+./configure --prefix=$HOME/Apps/local/ \
+    --enable-build-mode=production \
+    --enable-fortran=yes \
+    --enable-cxx=yes \
+    --enable-hl=yes \
+    --enable-tests=yes \
+    --enable-tools=yes \
+    --enable-shared=yes \
+    --enable-static=yes \
+    --enable-optimization=high \
+    --enable-parallel=no
+
+make -j40 && make install
+
+# Also consider running tests.
+# make test
 ```
 
 ## CGNS
