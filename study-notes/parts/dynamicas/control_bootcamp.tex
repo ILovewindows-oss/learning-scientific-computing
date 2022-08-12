@@ -35,4 +35,6 @@ Evaluation of this expression is non-trivial and good precision would require a 
 \end{bmatrix}
 \end{equation}
 
+Reverting the solution back to physical space $x$ is quite simple. First we note that $\mathbf{A}=\mathbf{T}\mathbf{D}\mathbf{T}^{-1}$ what can be used to show that $\mathbf{A}^{k}=\mathbf{T}\mathbf{D}^{k}\mathbf{T}^{-1}$. This property can be used to demonstrate that $\exp(\mathbf{A}t)=\mathbf{T}\exp(\mathbf{D}t)\mathbf{T}^{-1}$. Thus, the problem solution can be rewritten as $x(t)=\mathbf{T}\exp(\mathbf{D}t)\mathbf{T}^{-1}x(0)$. By the definition of $z$ we have that $z(0)=\mathbf{T}^{-1}x(0)$, then $x(t)=\mathbf{T}\exp(\mathbf{D}t)z(0)$, but $z(t)=\exp(\mathbf{D}t)z(0)$ from which the trivial solution $x(t)=\mathbf{T}z(t)$ is found.
+
 \endinput
