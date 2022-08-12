@@ -2,7 +2,7 @@
 
 Pure-C library for solving ODE's with a simple RK4 ODE integrator.
 
-It is intended only for library construction teaching and should not be used for any serious ends, for which better methods and libraries are available.
+It is intended only for library construction teaching and should not be used for any serious ends, for which validated libraries are available.
 
 A `Makefile` is provided with basic compilation instructions, also for teaching purposes.
 
@@ -16,6 +16,6 @@ At any time `t` the solution of sample should approach `exp(-t)` and you can che
 
 **NOTE:** on Windows Cygwin the compilation produces statically linked executables for both cases.
 
-<p text-align="center">
+<p align="center">
     <img src="data/results.png" width="800px" alt="Exponential decay results" />
 </p>
