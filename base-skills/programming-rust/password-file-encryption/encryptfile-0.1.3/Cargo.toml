@@ -1,0 +1,23 @@
+[package]
+name = "encryptfile"
+version = "0.1.3"
+authors = ["John Quigley <jmquigs@gmail.com>"]
+description = "Provides an interface to Rust Crypto for encrypting and decrypting files."
+documentation = "http://jmquigs.github.io/rustdocs/encryptfile/"
+#homepage = "https://github.com/jmquigs/rs-encryptfile"
+repository = "https://github.com/jmquigs/rs-encryptfile"
+readme = "README.md"
+keywords = ["encrypt", "decrypt", "encryption", "decryption", "file"]
+license = "MIT"
+
+[dependencies]
+rust-crypto = "^0.2.34"
+rand = "^0.3.12"
+byteorder = "^0.4"
+#clippy = "*"
+
+[lib]
+name = "encryptfile"
+
+[dev-dependencies]
+tempdir = "^0.3.4"
