@@ -1,6 +1,8 @@
 # Extensions with default CPython modules
 
-In this note we list the main points to remember when developing a pure CPython module. You can find more details in the official Python documentation on [extensions](https://docs.python.org/3/extending/extending.html). Also notice that an exemple module is provided by default in [CPython sources](https://github.com/python/cpython/blob/main/Modules/xxmodule.c).
+In this note we list the main points to remember when developing a pure CPython module. You can find more details in the official Python documentation on [extensions](https://docs.python.org/3/extending/extending.html). Also notice that an exemple module is provided by default in [CPython sources](https://github.com/python/cpython/blob/main/Modules/xxmodule.c). Although not from the official sources, this [Real Python tutorial](https://realpython.com/build-python-c-extension-module/) provides a better entrypoint for beginners.
+
+To build a distributable wheel for your system run `python setup.py bdist_wheel`. For a local install `pip install .`.
 
 Main takes:
 

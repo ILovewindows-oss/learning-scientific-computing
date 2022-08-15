@@ -1,3 +1,4 @@
 # Generated libraries
-*.so
-*.dll
+/build/
+/dist/
+*.egg-info
