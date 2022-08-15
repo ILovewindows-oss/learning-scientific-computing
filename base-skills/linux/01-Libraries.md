@@ -87,3 +87,9 @@ cmake \
 ```
 git clone https://gitlab.inria.fr/scotch/scotch.git
 ```
+
+## Sundials
+
+```
+git clone https://github.com/LLNL/sundials.git
+```
