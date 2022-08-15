@@ -1,0 +1,2320 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       IOobject;
+    location    "constant";
+    object      reactions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+elements
+4
+(
+C
+H
+O
+N
+)
+;
+
+species
+41
+(
+C2H2
+H2
+H
+CH4
+CH3
+C2H4
+C2H3
+C2H6
+C2H5
+C4H2
+C4H4
+C6H6
+C6H5
+C3H6
+C3H3
+AC3H5
+AC3H4
+PC3H4
+SC3H5
+C4H6
+C4H61
+C4H612
+I-C4H51
+I-C4H3
+C5H6
+C5H5
+C7H7
+C8H8
+C9H8
+C9H7
+A1C2H
+A1C2H3
+A2
+CO
+A2CH3-2
+A2CH2-2
+CH3COCH3
+CH3COCH2
+CH2CO
+CH3CO
+N2
+)
+;
+
+reactions
+{
+    un-named-reaction-0
+    {
+        type            reversiblethirdBodyArrheniusReaction;
+        reaction        "H + H = H2";
+        A               1e+12;
+        beta            -1;
+        Ta              0;
+        coeffs          
+41
+(
+(C2H2 1)
+(H2 0)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+    }
+    un-named-reaction-1
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "H + H + H2 = 2H2";
+        A               9.2e+10;
+        beta            -0.6;
+        Ta              0;
+    }
+    un-named-reaction-2
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "CH3 + H = CH4";
+        k0
+        {
+            A               2.477e+27;
+            beta            -4.76;
+            Ta              1227.973747;
+        }
+        kInf
+        {
+            A               1.27e+13;
+            beta            -0.63;
+            Ta              192.4346714;
+        }
+        F
+        {
+            alpha           0.783;
+            Tsss            74;
+            Ts              2941;
+            Tss             6964;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-3
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "CH3 + CH3 = C2H6";
+        k0
+        {
+            A               1.77e+44;
+            beta            -9.67;
+            Ta              3130.671561;
+        }
+        kInf
+        {
+            A               2.12e+13;
+            beta            -0.97;
+            Ta              311.5036244;
+        }
+        F
+        {
+            alpha           0.532;
+            Tsss            151;
+            Ts              1038;
+            Tss             4970;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-4
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3 + CH4 = C2H5 + H2";
+        A               1e+10;
+        beta            0;
+        Ta              11574.94549;
+    }
+    un-named-reaction-5
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3 + CH4 = C2H6 + H";
+        A               8e+10;
+        beta            0;
+        Ta              20129.86935;
+    }
+    un-named-reaction-6
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3 + CH3 = C2H4 + H2";
+        A               1e+13;
+        beta            0;
+        Ta              16118.80917;
+    }
+    un-named-reaction-7
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3 + CH3 = C2H5 + H";
+        A               4990000000;
+        beta            0.1;
+        Ta              5334.048549;
+    }
+    un-named-reaction-8
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3 + I-C4H3 = C5H6";
+        A               1000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-9
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3 + PC3H4 = C3H3 + CH4";
+        A               1000000000;
+        beta            0;
+        Ta              4025.492783;
+    }
+    un-named-reaction-10
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3 + SC3H5 = AC3H4 + CH4";
+        A               100000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-11
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH4 + H = CH3 + H2";
+        A               660000;
+        beta            1.62;
+        Ta              5455.522935;
+    }
+    un-named-reaction-12
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "C2H2 + H = C2H3";
+        k0
+        {
+            A               3.8e+34;
+            beta            -7.27;
+            Ta              3633.40714;
+        }
+        kInf
+        {
+            A               5600000000;
+            beta            0;
+            Ta              1207.527563;
+        }
+        F
+        {
+            alpha           0.751;
+            Tsss            98.5;
+            Ts              1302;
+            Tss             4167;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-13
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "C2H3 + H = C2H4";
+        k0
+        {
+            A               1.4e+24;
+            beta            -3.86;
+            Ta              1670.573491;
+        }
+        kInf
+        {
+            A               6080000000;
+            beta            0.27;
+            Ta              140.7178535;
+        }
+        F
+        {
+            alpha           0.782;
+            Tsss            207.5;
+            Ts              2663;
+            Tss             6095;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-14
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "C2H4 = C2H2 + H2";
+        k0
+        {
+            A               7e+47;
+            beta            -9.31;
+            Ta              50253.11173;
+        }
+        kInf
+        {
+            A               8e+12;
+            beta            0.44;
+            Ta              44672.50626;
+        }
+        F
+        {
+            alpha           0.735;
+            Tsss            180;
+            Ts              1035;
+            Tss             5417;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-15
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "C2H4 + H = C2H5";
+        k0
+        {
+            A               1.2e+36;
+            beta            -7.62;
+            Ta              3507.121887;
+        }
+        kInf
+        {
+            A               1080000000;
+            beta            0.454;
+            Ta              916.4701227;
+        }
+        F
+        {
+            alpha           0.975;
+            Tsss            210;
+            Ts              987;
+            Tss             4374;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-16
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "C2H5 + H = C2H6";
+        k0
+        {
+            A               1.99e+35;
+            beta            -7.08;
+            Ta              3363.9986;
+        }
+        kInf
+        {
+            A               5.21e+14;
+            beta            -0.99;
+            Ta              794.9957364;
+        }
+        F
+        {
+            alpha           0.842;
+            Tsss            125;
+            Ts              2219;
+            Tss             6882;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-17
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + C2H2 = C4H2 + H2";
+        A               1.5e+10;
+        beta            0;
+        Ta              21488.93922;
+    }
+    un-named-reaction-18
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + C2H2 = C4H4";
+        A               5500000000;
+        beta            0;
+        Ta              18600.01371;
+    }
+    un-named-reaction-19
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + C2H3 = C4H4 + H";
+        A               4.6e+13;
+        beta            -1.25;
+        Ta              4227.549188;
+    }
+    un-named-reaction-20
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + C4H4 = C6H5 + H";
+        A               1000000;
+        beta            0;
+        Ta              15154.23038;
+    }
+    un-named-reaction-21
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + C4H4 = C6H6";
+        A               447000000;
+        beta            0;
+        Ta              15154.23038;
+    }
+    un-named-reaction-22
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + C6H5 = A1C2H + H";
+        A               8.32e+19;
+        beta            -2.68;
+        Ta              8756.980267;
+    }
+    un-named-reaction-23
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + C7H7 = C9H8 + H";
+        A               100000000;
+        beta            0;
+        Ta              3522.757204;
+    }
+    un-named-reaction-24
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + C9H7 = A2CH2-2";
+        A               500000000;
+        beta            0;
+        Ta              5201.749712;
+    }
+    un-named-reaction-25
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + CH3 = AC3H4 + H";
+        A               2.87e+18;
+        beta            -2.74;
+        Ta              12480.59116;
+    }
+    un-named-reaction-26
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + CH3 = AC3H5";
+        A               14;
+        beta            2.21;
+        Ta              8303.556072;
+    }
+    un-named-reaction-27
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + CH3 = H + PC3H4";
+        A               1e+10;
+        beta            -0.53;
+        Ta              6743.632517;
+    }
+    un-named-reaction-28
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H2 + H2 = C2H4";
+        A               1.41e+38;
+        beta            -9.06;
+        Ta              25731.52236;
+    }
+    un-named-reaction-29
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C2H3 = C2H2 + C2H4";
+        A               1.44e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-30
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C2H3 = C4H6";
+        A               1.5e+49;
+        beta            -11.97;
+        Ta              8102.702384;
+    }
+    un-named-reaction-31
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C2H4 = C4H6 + H";
+        A               7.4e+11;
+        beta            -0.66;
+        Ta              4237.170922;
+    }
+    un-named-reaction-32
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C2H5 = C2H2 + C2H6";
+        A               482000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-33
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C2H6 = C2H4 + C2H5";
+        A               1.5e+10;
+        beta            0;
+        Ta              5027.355791;
+    }
+    un-named-reaction-34
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C3H3 = C5H5 + H";
+        A               9.63e+37;
+        beta            -7.8;
+        Ta              14503.56064;
+    }
+    un-named-reaction-35
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C3H6 = AC3H5 + C2H4";
+        A               0.0022;
+        beta            3.5;
+        Ta              2357.324725;
+    }
+    un-named-reaction-36
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C3H6 = C2H4 + SC3H5";
+        A               0.0013;
+        beta            3.5;
+        Ta              5484.388136;
+    }
+    un-named-reaction-37
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C3H6 = C4H6 + CH3";
+        A               723000000;
+        beta            0;
+        Ta              2520.894196;
+    }
+    un-named-reaction-38
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C4H4 = C2H4 + I-C4H3";
+        A               500000000;
+        beta            0;
+        Ta              8202.52787;
+    }
+    un-named-reaction-39
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C5H6 = C2H4 + C5H5";
+        A               6000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-40
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C6H5 = A1C2H3";
+        A               3.9e+35;
+        beta            -7.63;
+        Ta              6492.264728;
+    }
+    un-named-reaction-41
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C6H6 = A1C2H3 + H";
+        A               800000000;
+        beta            0;
+        Ta              3220.875313;
+    }
+    un-named-reaction-42
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C6H6 = C2H4 + C6H5";
+        A               600000000;
+        beta            0;
+        Ta              6530.751662;
+    }
+    un-named-reaction-43
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + C9H8 = C2H4 + C9H7";
+        A               0.0044;
+        beta            3.5;
+        Ta              2056.645551;
+    }
+    un-named-reaction-44
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + CH3 = AC3H5 + H";
+        A               7.2e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-45
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + CH3 = C2H2 + CH4";
+        A               392000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-46
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + CH3 = C3H6";
+        A               2.5e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-47
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + H = C2H2 + H2";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-48
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + I-C4H3 = C6H5 + H";
+        A               6000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-49
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + PC3H4 = C2H4 + C3H3";
+        A               0.0022;
+        beta            3.5;
+        Ta              2357.324725;
+    }
+    un-named-reaction-50
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H3 + SC3H5 = AC3H4 + C2H4";
+        A               100000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-51
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H4 + C2H4 = C2H3 + C2H5";
+        A               4.82e+11;
+        beta            0;
+        Ta              36000.91888;
+    }
+    un-named-reaction-52
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H4 + C6H5 = A1C2H3 + H";
+        A               2500000000;
+        beta            0;
+        Ta              3119.847111;
+    }
+    un-named-reaction-53
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H4 + CH3 = C2H3 + CH4";
+        A               227;
+        beta            2;
+        Ta              4629.256565;
+    }
+    un-named-reaction-54
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H4 + H = C2H3 + H2";
+        A               1330;
+        beta            2.53;
+        Ta              6159.112203;
+    }
+    un-named-reaction-55
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H5 + C2H5 = C2H4 + C2H6";
+        A               1390000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-56
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H5 + C3H6 = AC3H5 + C2H6";
+        A               0.00223;
+        beta            3.5;
+        Ta              3339.944266;
+    }
+    un-named-reaction-57
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H5 + C6H6 = C2H6 + C6H5";
+        A               600000000;
+        beta            0;
+        Ta              7541.033687;
+    }
+    un-named-reaction-58
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H5 + C9H8 = C2H6 + C9H7";
+        A               0.0044;
+        beta            3.5;
+        Ta              2056.645551;
+    }
+    un-named-reaction-59
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H5 + CH3 = C2H4 + CH4";
+        A               1.95e+10;
+        beta            -0.5;
+        Ta              0;
+    }
+    un-named-reaction-60
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H5 + H = C2H4 + H2";
+        A               2000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-61
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H5 + PC3H4 = C2H6 + C3H3";
+        A               0.0022;
+        beta            3.5;
+        Ta              3319.498082;
+    }
+    un-named-reaction-62
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H5 + SC3H5 = AC3H4 + C2H6";
+        A               100000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-63
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H6 + CH3 = C2H5 + CH4";
+        A               6140;
+        beta            1.74;
+        Ta              5258.277397;
+    }
+    un-named-reaction-64
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C2H6 + H = C2H5 + H2";
+        A               115000;
+        beta            1.9;
+        Ta              3789.760311;
+    }
+    un-named-reaction-65
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "C3H3 + H = AC3H4";
+        k0
+        {
+            A               1.4e+25;
+            beta            -5;
+            Ta              -3020.021625;
+        }
+        kInf
+        {
+            A               3e+10;
+            beta            0;
+            Ta              0;
+        }
+        F
+        {
+            alpha           0.5;
+            Tsss            2000;
+            Ts              10;
+            Tss             10000;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-66
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "C3H3 + H = PC3H4";
+        k0
+        {
+            A               1.4e+25;
+            beta            -5;
+            Ta              -3020.021625;
+        }
+        kInf
+        {
+            A               3e+10;
+            beta            0;
+            Ta              0;
+        }
+        F
+        {
+            alpha           0.5;
+            Tsss            2000;
+            Ts              10;
+            Tss             10000;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-67
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "C3H3 + CH3 = C4H612";
+        k0
+        {
+            A               2.6e+52;
+            beta            -11.94;
+            Ta              4916.705855;
+        }
+        kInf
+        {
+            A               1.5e+10;
+            beta            0;
+            Ta              0;
+        }
+        F
+        {
+            alpha           0.175;
+            Tsss            1340;
+            Ts              60000;
+            Tss             9769;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-68
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "AC3H4 + H = AC3H5";
+        k0
+        {
+            A               5.56e+27;
+            beta            -5;
+            Ta              2238.255772;
+        }
+        kInf
+        {
+            A               120000000;
+            beta            0.69;
+            Ta              1513.017604;
+        }
+        F
+        {
+            alpha           0.5;
+            Tsss            1e+30;
+            Ts              1e+30;
+            Tss             0;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-69
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H3 + C4H4 = AC3H4 + I-C4H3";
+        A               1e+10;
+        beta            0;
+        Ta              9802.141076;
+    }
+    un-named-reaction-70
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H3 + C4H61 = I-C4H51 + PC3H4";
+        A               4000000000;
+        beta            0;
+        Ta              649.4670161;
+    }
+    un-named-reaction-71
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H3 + C6H6 = C6H5 + PC3H4";
+        A               630000000;
+        beta            0;
+        Ta              10054.71158;
+    }
+    un-named-reaction-72
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H3 + C9H8 = C9H7 + PC3H4";
+        A               160000000;
+        beta            0;
+        Ta              7589.142355;
+    }
+    un-named-reaction-73
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H3 + C3H3 = C6H5 + H";
+        A               3000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-74
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H3 + I-C4H51 = C7H7 + H";
+        A               3000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-75
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H6 + CH3 = AC3H5 + CH4";
+        A               0.00221;
+        beta            3.5;
+        Ta              2856.452154;
+    }
+    un-named-reaction-76
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H6 + CH3 = CH4 + SC3H5";
+        A               210000000;
+        beta            0;
+        Ta              5585.416338;
+    }
+    un-named-reaction-77
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H6 + H = AC3H5 + H2";
+        A               6000000000;
+        beta            0;
+        Ta              755.3060854;
+    }
+    un-named-reaction-78
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H6 + H = C2H4 + CH3";
+        A               3.4e+10;
+        beta            0;
+        Ta              1760.777244;
+    }
+    un-named-reaction-79
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H6 + H = H2 + SC3H5";
+        A               2.5e+12;
+        beta            0;
+        Ta              11473.91728;
+    }
+    un-named-reaction-80
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H6 = C2H2 + CH4";
+        A               1.8e+12;
+        beta            0;
+        Ta              35203.51771;
+    }
+    un-named-reaction-81
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C3H6 = H2 + PC3H4";
+        A               2e+13;
+        beta            0;
+        Ta              40259.7387;
+    }
+    un-named-reaction-82
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H4 + AC3H4 = AC3H5 + C3H3";
+        A               5e+11;
+        beta            0;
+        Ta              32581.59531;
+    }
+    un-named-reaction-83
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H4 + C3H3 = C6H6 + H";
+        A               1400000000;
+        beta            0;
+        Ta              5032.166658;
+    }
+    un-named-reaction-84
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H4 + CH3 = C3H3 + CH4";
+        A               1000000000;
+        beta            0;
+        Ta              4025.492783;
+    }
+    un-named-reaction-85
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H4 + H = C3H3 + H2";
+        A               115000;
+        beta            1.9;
+        Ta              3789.760311;
+    }
+    un-named-reaction-86
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H4 = PC3H4";
+        A               2.5e+12;
+        beta            0;
+        Ta              29691.46709;
+    }
+    un-named-reaction-87
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "PC3H4 + H = C3H3 + H2";
+        A               115000;
+        beta            1.9;
+        Ta              3789.760311;
+    }
+    un-named-reaction-88
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + AC3H5 = AC3H4 + C3H6";
+        A               84300000;
+        beta            0;
+        Ta              -132.2988366;
+    }
+    un-named-reaction-89
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + C2H3 = AC3H4 + C2H4";
+        A               2410000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-90
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + C2H3 = C2H2 + C3H6";
+        A               4820000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-91
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + C2H3 = C5H6 + 2H";
+        A               1.59e+62;
+        beta            -14;
+        Ta              30830.4398;
+    }
+    un-named-reaction-92
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + C2H5 = AC3H4 + C2H6";
+        A               964000000;
+        beta            0;
+        Ta              -66.14941831;
+    }
+    un-named-reaction-93
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + C2H5 = C2H4 + C3H6";
+        A               2590000000;
+        beta            0;
+        Ta              -66.14941831;
+    }
+    un-named-reaction-94
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + C3H3 = C6H6 + 2H";
+        A               5.6e+17;
+        beta            -2.54;
+        Ta              853.9288545;
+    }
+    un-named-reaction-95
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + C4H4 = C3H6 + I-C4H3";
+        A               1e+10;
+        beta            0;
+        Ta              9802.141076;
+    }
+    un-named-reaction-96
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + C5H5 = AC3H4 + C5H6";
+        A               1000000000;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-97
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + C5H6 = C3H6 + C5H5";
+        A               0.0002;
+        beta            4;
+        Ta              0;
+    }
+    un-named-reaction-98
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + CH3 = AC3H4 + CH4";
+        A               3010000000;
+        beta            -0.32;
+        Ta              66.14941831;
+    }
+    un-named-reaction-99
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + H = AC3H4 + H2";
+        A               1e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-100
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "AC3H5 + H = C3H6";
+        A               2e+11;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-101
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "SC3H5 = AC3H5";
+        A               5e+13;
+        beta            0;
+        Ta              18606.02729;
+    }
+    un-named-reaction-102
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "SC3H5 = C2H2 + CH3";
+        A               1.3e+13;
+        beta            0;
+        Ta              16807.96583;
+    }
+    un-named-reaction-103
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "SC3H5 = H + PC3H4";
+        A               1.4e+13;
+        beta            0;
+        Ta              17595.74527;
+    }
+    un-named-reaction-104
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "SC3H5 + H = AC3H5 + H";
+        A               1e+11;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-105
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "SC3H5 + H = C3H6";
+        A               1e+11;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-106
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "SC3H5 + H = H2 + PC3H4";
+        A               2e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-107
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "I-C4H3 = C4H2 + H";
+        k0
+        {
+            A               2e+12;
+            beta            0;
+            Ta              24155.36213;
+        }
+        kInf
+        {
+            A               1e+14;
+            beta            0;
+            Ta              27678.11934;
+        }
+        F
+        {
+            alpha           0.5;
+            Tsss            1e+30;
+            Ts              1e+30;
+            Tss             0;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-108
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "I-C4H51 = C4H4 + H";
+        k0
+        {
+            A               2e+11;
+            beta            0;
+            Ta              4931.138456;
+        }
+        kInf
+        {
+            A               1e+13;
+            beta            0;
+            Ta              24631.63794;
+        }
+        F
+        {
+            alpha           0.5;
+            Tsss            1e+30;
+            Ts              1e+30;
+            Tss             0;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-109
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H4 + C4H4 = A1C2H3";
+        A               7.5e+10;
+        beta            0;
+        Ta              19123.19547;
+    }
+    un-named-reaction-110
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H4 + C4H4 = C8H8";
+        A               43700000;
+        beta            0;
+        Ta              9259.715846;
+    }
+    un-named-reaction-111
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H4 + C6H5 = A1C2H + C2H3";
+        A               320000000;
+        beta            0;
+        Ta              679.5349335;
+    }
+    un-named-reaction-112
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H4 + C6H5 = A2 + H";
+        A               9.9e+27;
+        beta            -5.07;
+        Ta              10618.78571;
+    }
+    un-named-reaction-113
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H4 + CH3 = CH4 + I-C4H3";
+        A               630000000;
+        beta            0;
+        Ta              8046.174699;
+    }
+    un-named-reaction-114
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H4 + H = H2 + I-C4H3";
+        A               333;
+        beta            2.53;
+        Ta              4649.702749;
+    }
+    un-named-reaction-115
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H4 = C4H2 + H2";
+        A               1.26e+15;
+        beta            0;
+        Ta              47656.44638;
+    }
+    un-named-reaction-116
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H6 + C6H5 = A1C2H3 + C2H3";
+        A               320000000;
+        beta            0;
+        Ta              956.1597737;
+    }
+    un-named-reaction-117
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H6 = C2H2 + C2H4";
+        A               6.4e+13;
+        beta            0;
+        Ta              38799.64063;
+    }
+    un-named-reaction-118
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H6 = C4H4 + H2";
+        A               2.52e+15;
+        beta            0;
+        Ta              47656.44638;
+    }
+    un-named-reaction-119
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H61 + CH3 = CH4 + I-C4H51";
+        A               1e+11;
+        beta            0;
+        Ta              9812.965527;
+    }
+    un-named-reaction-120
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H61 + H = AC3H4 + CH3";
+        A               130;
+        beta            2.5;
+        Ta              502.7355791;
+    }
+    un-named-reaction-121
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H61 + H = C2H2 + C2H5";
+        A               65;
+        beta            2.5;
+        Ta              502.7355791;
+    }
+    un-named-reaction-122
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H61 + H = H2 + I-C4H51";
+        A               6.5e+10;
+        beta            0;
+        Ta              4730.284767;
+    }
+    un-named-reaction-123
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H61 + I-C4H3 = C4H4 + I-C4H51";
+        A               2000000000;
+        beta            0;
+        Ta              6530.751662;
+    }
+    un-named-reaction-124
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H61 = C3H3 + CH3";
+        A               3e+15;
+        beta            0;
+        Ta              38145.36275;
+    }
+    un-named-reaction-125
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H61 = C4H612";
+        A               2.5e+13;
+        beta            0;
+        Ta              32710.28599;
+    }
+    un-named-reaction-126
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H61 = H + I-C4H51";
+        A               7.7e+14;
+        beta            0;
+        Ta              44187.81143;
+    }
+    un-named-reaction-127
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H612 + H = AC3H4 + CH3";
+        A               6000000000;
+        beta            0;
+        Ta              1057.187976;
+    }
+    un-named-reaction-128
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H612 + H = C4H6 + H";
+        A               2e+10;
+        beta            0;
+        Ta              2013.34775;
+    }
+    un-named-reaction-129
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H612 + H = H2 + I-C4H51";
+        A               30000;
+        beta            2;
+        Ta              3271.389414;
+    }
+    un-named-reaction-130
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C4H612 = C4H6";
+        A               2.5e+13;
+        beta            0;
+        Ta              31703.61212;
+    }
+    un-named-reaction-131
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "I-C4H3 + H = 2C2H2";
+        A               3.7e+19;
+        beta            -2.5;
+        Ta              2587.043614;
+    }
+    un-named-reaction-132
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "I-C4H3 + H = C4H2 + H2";
+        A               3e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-133
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "I-C4H3 + H = C4H4";
+        A               5.3e+43;
+        beta            -10.68;
+        Ta              4665.338066;
+    }
+    un-named-reaction-134
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "I-C4H3 + H2 = C2H2 + C2H3";
+        A               50100000;
+        beta            0;
+        Ta              10064.33332;
+    }
+    un-named-reaction-135
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "I-C4H51 + H = C3H3 + CH3";
+        A               1e+11;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-136
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "I-C4H51 + H = C4H4 + H2";
+        A               2e+10;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-137
+    {
+        type            irreversibleArrheniusReaction;
+        reaction        "C5H5 + C5H5 = A2 + 2H";
+        A               2e+10;
+        beta            0;
+        Ta              4025.492783;
+    }
+    un-named-reaction-138
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C5H5 + H = C5H6";
+        A               2e+11;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-139
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C5H5 = C2H2 + C3H3";
+        A               2.79e+79;
+        beta            -18.3;
+        Ta              65841.52283;
+    }
+    un-named-reaction-140
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C5H6 + C6H5 = C5H5 + C6H6";
+        A               0.0001;
+        beta            4;
+        Ta              0;
+    }
+    un-named-reaction-141
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C5H6 + CH3 = C5H5 + CH4";
+        A               311000000;
+        beta            0;
+        Ta              2767.451119;
+    }
+    un-named-reaction-142
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C5H6 + H = AC3H5 + C2H2";
+        A               6.6e+11;
+        beta            0;
+        Ta              6212.031737;
+    }
+    un-named-reaction-143
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C5H6 + H = C5H5 + H2";
+        A               219000;
+        beta            1.77;
+        Ta              1509.409454;
+    }
+    un-named-reaction-144
+    {
+        type            reversibleArrheniusTroeFallOffReaction;
+        reaction        "C6H5 + H = C6H6";
+        k0
+        {
+            A               6.6e+69;
+            beta            -16.3;
+            Ta              3522.757204;
+        }
+        kInf
+        {
+            A               1e+11;
+            beta            0;
+            Ta              0;
+        }
+        F
+        {
+            alpha           1;
+            Tsss            0.1;
+            Ts              584.9;
+            Tss             6113;
+        }
+        thirdBodyEfficiencies
+        {
+            coeffs          
+41
+(
+(C2H2 1)
+(H2 2)
+(H 1)
+(CH4 2)
+(CH3 1)
+(C2H4 1)
+(C2H3 1)
+(C2H6 3)
+(C2H5 1)
+(C4H2 1)
+(C4H4 1)
+(C6H6 1)
+(C6H5 1)
+(C3H6 1)
+(C3H3 1)
+(AC3H5 1)
+(AC3H4 1)
+(PC3H4 1)
+(SC3H5 1)
+(C4H6 1)
+(C4H61 1)
+(C4H612 1)
+(I-C4H51 1)
+(I-C4H3 1)
+(C5H6 1)
+(C5H5 1)
+(C7H7 1)
+(C8H8 1)
+(C9H8 1)
+(C9H7 1)
+(A1C2H 1)
+(A1C2H3 1)
+(A2 1)
+(CO 1)
+(A2CH3-2 1)
+(A2CH2-2 1)
+(CH3COCH3 1)
+(CH3COCH2 1)
+(CH2CO 1)
+(CH3CO 1)
+(N2 1)
+)
+;
+        }
+    }
+    un-named-reaction-145
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C6H5 + CH3 = C7H7 + H";
+        A               4.44e+30;
+        beta            -5.45;
+        Ta              12223.20979;
+    }
+    un-named-reaction-146
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C6H6 + CH3 = C6H5 + CH4";
+        A               2000000000;
+        beta            0;
+        Ta              7541.033687;
+    }
+    un-named-reaction-147
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C6H6 + H = C6H5 + H2";
+        A               600000;
+        beta            1.8;
+        Ta              8443.071209;
+    }
+    un-named-reaction-148
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C6H6 + I-C4H3 = C4H4 + C6H5";
+        A               630000000;
+        beta            0;
+        Ta              10054.71158;
+    }
+    un-named-reaction-149
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C7H7 = C2H2 + C5H5";
+        A               6e+13;
+        beta            0;
+        Ta              35239.59921;
+    }
+    un-named-reaction-150
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C9H7 + H = C9H8";
+        A               2e+11;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-151
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C9H8 + CH3 = C9H7 + CH4";
+        A               310000000;
+        beta            0;
+        Ta              2766.248402;
+    }
+    un-named-reaction-152
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "C9H8 + H = C9H7 + H2";
+        A               219000;
+        beta            1.77;
+        Ta              1509.409454;
+    }
+    un-named-reaction-153
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "A2CH2-2 + H = A2CH3-2";
+        A               1e+11;
+        beta            0;
+        Ta              0;
+    }
+    un-named-reaction-154
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "A2CH3-2 + H = A2 + CH3";
+        A               1.2e+10;
+        beta            0;
+        Ta              2590.651764;
+    }
+    un-named-reaction-155
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "A2CH3-2 + H = A2CH2-2 + H2";
+        A               0.398;
+        beta            3.44;
+        Ta              1569.545289;
+    }
+    un-named-reaction-156
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3CO = CH3 + CO";
+        A               8.74e+42;
+        beta            -8.62;
+        Ta              11285.09076;
+    }
+    un-named-reaction-157
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3COCH2 = CH2CO + CH3";
+        A               1e+13;
+        beta            0;
+        Ta              14091.02882;
+    }
+    un-named-reaction-158
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3COCH3 + H = CH3COCH2 + H2";
+        A               23000;
+        beta            2;
+        Ta              2516.083329;
+    }
+    un-named-reaction-159
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3COCH3 = CH3 + CH3CO";
+        A               1.13e+16;
+        beta            0;
+        Ta              41114.87027;
+    }
+    un-named-reaction-160
+    {
+        type            reversibleArrheniusReaction;
+        reaction        "CH3COCH3 + CH3 = CH3COCH2 + CH4";
+        A               9.5;
+        beta            2.5;
+        Ta              4227.549188;
+    }
+}
