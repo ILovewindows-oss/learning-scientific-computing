@@ -27,3 +27,7 @@ path = "src/step_04.rs"
 [[bin]]
 name = "step_05"
 path = "src/step_05.rs"
+
+[[bin]]
+name = "sample_nitriding"
+path = "src/sample_nitriding/main.rs"

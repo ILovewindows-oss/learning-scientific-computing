@@ -29,3 +29,39 @@ It is not intended to be a faithful translation, but an adaptation for learning 
 - *Cavity flow with Navier-Stokes* from this [notebook](https://github.com/WallyMirrors/CFDPython/blob/master/lessons/14_Step_11.ipynb).
 - *Channel flow with Navier-Stokes* from this [notebook](https://github.com/WallyMirrors/CFDPython/blob/master/lessons/15_Step_12.ipynb).
 
+## Other sample programs
+
+### Nitriding solver
+
+Solution of diffusion equation in Rust. To run it simply execute `cargo run --bin sample_nitriding`.
+Output should be something like this:
+
+```
+*** NITRIDING MASS INTAKE MODEL ***
+
+
+* Using B.C. DirichletDirichlet
+* The following concerns the full exposed length
+* Mass intake by material 3.24 kg/h
+* Simulation took is: 190.921184ms
+
+
+* Using B.C. DirichletSymmetry
+* The following concerns the full exposed length
+* Mass intake by material 3.24 kg/h
+* Simulation took is: 112.42829ms
+
+
+*** NITRIDING MASS INTAKE MODEL ***
+```
+
+Please notice that currently there is no parser for inputs. If you need to simulate with other conditions consider editing `main`, the inputs are reasoably documented with comments for now.
+
+To-Do's for this solver:
+- [ ] Migrate reusable code to main library.
+- [ ] Implement final state plotting.
+- [ ] Implement parameter parsing from input file (JSON/YAML,...).
+- [ ] Provide phase transformation (BCC > FCC) during process.
+- [ ] Create a library with reusable code for diffusion.
+- [ ] Provide a 2-D solver for border effects investigation.
+- [ ] [Implement Python API](https://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-python-using-pyo3/)
