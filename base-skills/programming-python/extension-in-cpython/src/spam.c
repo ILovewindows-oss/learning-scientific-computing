@@ -104,6 +104,15 @@ PyInit_spam(void)
         return NULL;
     }
 
+    // Add int constant by name
+    PyModule_AddIntConstant(m, "SPAM_FLAG", 666);
+
+    // Define int macro
+    #define SPAM_MACRO 256
+
+    // Add macro to module
+    PyModule_AddIntMacro(m, SPAM_MACRO);
+
     return m;
 }
 
