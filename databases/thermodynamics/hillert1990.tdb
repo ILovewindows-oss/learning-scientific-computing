@@ -146,9 +146,9 @@ $ ===========================================================================
 $ PARAMETERS
 $ ---------------------------------------------------------------------------
 
- PARAMETER G(IONIC_LIQ,CA+2:O-2)         298.15 
+ PARAMETER G(IONIC_LIQ,CA+2:O-2)             298.15 
     +2*GCAO_L#;                                           6000.00 N REF000 !
- PARAMETER G(IONIC_LIQ,CA+2:SI1O4-4)     298.15 
+ PARAMETER G(IONIC_LIQ,CA+2:SI1O4-4)         298.15 
     +2*GSIO2_L#+4*GCAO_L#-390979;                         6000.00 N REF000 !
 
  PARAMETER L(IONIC_LIQ,CA+2:O-2,SI1O2;0)     298.15 
@@ -161,24 +161,24 @@ $ ---------------------------------------------------------------------------
     -39120;                                               6000.00 N REF000 !
 
  PARAMETER L(IONIC_LIQ,CA+2:SI1O4-4,SI1O2;0) 298.15 
-    -2*37.687*T;                                            6000.00 N REF000 !
+    -37.687*T;                                            6000.00 N REF000 !
  PARAMETER L(IONIC_LIQ,CA+2:SI1O4-4,SI1O2;1) 298.15 
-    -2*157124+2*65.776*T;                                     6000.00 N REF000 !
+    -157124+65.776*T;                                     6000.00 N REF000 !
  PARAMETER L(IONIC_LIQ,CA+2:SI1O4-4,SI1O2;2) 298.15 
-    +2*33772-2*11.132*T;                                      6000.00 N REF000 !
+    +33772-11.132*T;                                      6000.00 N REF000 !
  PARAMETER L(IONIC_LIQ,CA+2:SI1O4-4,SI1O2;2) 298.15 
-    -2*39120;                                               6000.00 N REF000 !
+    -39120;                                               6000.00 N REF000 !
 
- PARAMETER G(HALITE,CA+2:O-2)            298.15 
+ PARAMETER G(HALITE,CA+2:O-2)                298.15 
     +1*GCAO_S#;                                           6000.00 N REF000 !
 
- PARAMETER G(QUARTZ,SI1O2)               298.15 
+ PARAMETER G(QUARTZ,SI1O2)                   298.15 
     +1*GSIO2_QUARTZ#;                                     4000.00 N REF000 !
 
- PARAMETER G(TRIDYMITE,SI1O2)            900.00 
+ PARAMETER G(TRIDYMITE,SI1O2)                900.00 
     +1*GSIO2_QUARTZ#+1*GSIO2_TRIDY#;                      1800.00 N REF000 !
 
- PARAMETER G(CRISTOBALITE,SI1O2)         848.00 
+ PARAMETER G(CRISTOBALITE,SI1O2)             848.00 
     +1*GSIO2_QUARTZ#+1*GSIO2_CRISTO#;                     2960.00 N REF000 !
 
 $============================================================================
