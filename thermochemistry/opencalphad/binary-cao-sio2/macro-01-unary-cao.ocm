@@ -1,7 +1,7 @@
-SET LOG_FILE dumps/results-macro-02
+SET LOG_FILE dumps/results-macro-01
 
 SET NUMERIC_OPTIONS 5000 1.0e-06 0.004 -0.01
-READ TDB ../../tdb/hillert1990.tdb CA SI O
+READ TDB ../../../databases/thermodynamics/hillert1990.tdb CA SI O
 
 SET CONDITION N=1
 SET CONDITION P=100000
@@ -28,4 +28,4 @@ LIST EXCELL_CSV_FILE T NP(*) post/results-macro-01.csv
 
 EXIT Y
 
-SET INTERACTIVE
+@$ SET INTERACTIVE
