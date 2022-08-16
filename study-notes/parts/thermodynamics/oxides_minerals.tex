@@ -2,4 +2,121 @@
 
 \textcite{Huang1995} provide an assessment of \ch{CaO - MgO - SiO2} system at atmospheric pressure. The authors make use of a two-sublattice model for ionic liquid since it presents ions of different charges, and solid phases as ionic compounds with oxygen as anion and metals representing the cations. This can be achieved through an extension of \emph{compound energy model}.
 
+\paragraph{System \ch{Al2O3 - CaO}}
+
+\paragraph{System \ch{Al2O3 - SiO2}}
+
+\paragraph{System \ch{CaO - SiO2}} For this system \textcite{Huang1995} made use of data from \textcite{Hillert1990} and \textcite{Hillert1991}. According to \textcite{Hillert1990}, at that time the main difficulty in describing \ch{CaO - SiO2} binary was related to liquid miscibility gap. Other difficulties arise from extending the data to higher order systems. Liquid phase is modeled through the two-sublattice ionic solution model proposed by \textcite{Hillert1985} with an unit formula is given by \ch{(Ca^{+2})_P(SiO4^{-4},SiO3^{-2},O^{-2},SiO4^{0})_Q}, where $P$ and $Q$ can be computed from charge balance to ensure neutrality. Table~\ref{tab:phases-hillert-1990} lists the phases considered in this binary. A database implemented as per \textcite{Hillert1990} second assessment (without ion \ch{SiO3^{-2}} in liquid)is found \href{https://github.com/WallyTutor/learning-scientific-computing/blob/main/databases/thermodynamics/hillert1990.tdb}{here}.
+
+\begin{table}[h!]
+\caption{\label{tab:phases-hillert-1990}Phases in binary \ch{CaO - SiO2}~\cite{Hillert1990}.}
+
+\centering\footnotesize%
+\begin{tabular*}{\textwidth}{lc@{\extracolsep{\fill}}cccc}
+\toprule[2pt]
+Name
+& Formula
+& Notation
+& Representation
+& Stability
+& Melting \\
+\midrule
+Liquid
+& See text
+& --
+& --
+& --
+& -- \\
+% ---
+\midrule
+Halite (Lime)
+& \ch{CaO}
+& --
+& --
+& Up to \SI{3172}{\kelvin}
+& -- \\
+\midrule
+Quartz
+& \ch{SiO2}
+& --
+& --
+& TODO
+& -- \\
+% ---
+Tridymite
+& \ch{SiO2}
+& --
+& --
+& TODO
+& -- \\
+% ---
+Cristobalite
+& \ch{SiO2}
+& --
+& --
+& TODO
+& -- \\
+\midrule
+% ---
+Larnite (metastable)
+& \ch{Ca2SiO4}
+& C2S1
+& \ch{(CaO)2.(SiO2)1}
+& Up to \SI{963}{\kelvin}
+& -- \\
+% ---
+Olivine
+& \ch{Ca2SiO4}
+& C2S1
+& \ch{(CaO)2.(SiO2)1}
+& Up to \SI{1120}{\kelvin}
+& -- \\
+% ---
+$\alpha\prime$-Olivine
+& $\alpha\prime$-\ch{Ca2SiO4}
+& C2S1
+& \ch{(CaO)2.(SiO2)1}
+& \SIrange{1120}{1710}{\kelvin}
+& -- \\
+% ---
+$\alpha$-Olivine
+& $\alpha$-\ch{Ca2SiO4}
+& C2S1
+& \ch{(CaO)2.(SiO2)1}
+& \SIrange{1710}{2403}{\kelvin}
+& Congruent \\
+\midrule
+% ---
+Wollastonite
+& \ch{CaSiO3}
+& C1S1
+& \ch{(CaO)1.(SiO2)1}
+& Up to \SI{1398}{\kelvin}
+& -- \\
+% ---
+Pseudowollastonite
+& \ch{CaSiO3}
+& C1S1
+& \ch{(CaO)1.(SiO2)1}
+& \SIrange{1398}{1817}{\kelvin}
+& Congruent \\
+\midrule
+% ---
+Hatrurite
+& \ch{Ca3SiO5}
+& C3S1
+& \ch{(CaO)3.(SiO2)1}
+& \SIrange{1523}{2323}{\kelvin}
+& Incongruent \\
+\midrule
+% ---
+Rankinite
+& \ch{Ca3Si2O7}
+& C3S2
+& \ch{(CaO)3.(SiO2)2}
+& Up to \SI{1737}{\kelvin}
+& Incongruent 	\\
+\bottomrule[2pt]
+\end{tabular*}
+\end{table}
 \endinput
