@@ -1,0 +1,14 @@
+\subsection{Usage reminders and lessons from Ansys solutions}
+
+\begin{itemize}
+%% 18/02/2022
+\item In Space Claim (SC), take care with thin-walled solids if they are intended to bound fluid regions in Fluent meshing module. This can lead to self-intersecting elements when generating surface mesh, forcing you to move back and fix it.
+%% 17/03/2022
+\item If conceiving a 2D multi-region geometry in Design Modeler (DM) or Space Claim, do not forget to select all blocks (surfaces) and add to new part. In DM topology is shared by default, while in SC you need to add it in part options. This avoids the creation of interfaces in Fluent and provide contiguous meshes.
+%% 17/03/2022
+\item When visualizing 2D color maps, do not display internal fields of regions otherwise the plot will be a grid instead of a continuous field of variables.
+%% 21/04/2022
+\item The meaning of Global Courant Number in adaptive time stepping of Fluent is actually the ration of employed time-step to the one computed by CFL criterion (or other physics-based alternative).
+%% 18/25/2022
+\item If a mass flow inlet is placed on a symmetry plane, \emph{i.e.} half of inlet is on domain, the other half is symmetrical, also set the flow rate to half of actual value. It seems obvious but it is worth checking this to better understand how the software applies boundary conditions.
+\end{itemize}
