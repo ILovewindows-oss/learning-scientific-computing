@@ -14,6 +14,8 @@ Study materials for general scientific computing matters.
 
 ### Haskell
 
+- [Course by Dmitrii Kovanikov](https://github.com/haskell-beginners-2022/course-plan)
+
 ### Julia
 
 ### Lisp
