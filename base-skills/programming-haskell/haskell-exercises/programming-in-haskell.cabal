@@ -1,0 +1,124 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           programming-in-haskell
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/programming-in-haskell#readme>
+homepage:       https://github.com/githubuser/programming-in-haskell#readme
+bug-reports:    https://github.com/githubuser/programming-in-haskell/issues
+author:         Walter Dal'Maz Silva
+maintainer:     walter.dalmazsilva@gmail.com
+copyright:      2021 Walter Dal'Maz Silva
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/programming-in-haskell
+
+library
+  exposed-modules:
+      Hutton.Chapter01
+      Hutton.Chapter02
+      Hutton.Chapter03
+      Hutton.Chapter04
+      Hutton.Chapter05
+      Hutton.Chapter06
+      Hutton.Chapter07
+      Hutton.Chapter08
+      Hutton.Chapter09
+      Hutton.Extended.Chapter05.Caesar
+      Hutton.Extended.Chapter07.Transmit
+      Hutton.Extended.Chapter07.TransmitExercise
+      Hutton.Extended.Chapter07.Voting
+      Hutton.Extended.Chapter08.AbstractMachine
+      Hutton.Extended.Chapter08.Tautology
+      Hutton.Extended.Chapter09.Countdown
+      Hutton.Extended.Chapter09.CountdownInteractive
+      Hutton.Spec.Chapter01
+      Hutton.Spec.Chapter02
+      Hutton.Spec.Chapter03
+      Hutton.Spec.Chapter04
+      Hutton.Spec.Chapter05
+      Hutton.Spec.Chapter06
+      Hutton.Spec.Chapter07
+      Hutton.Spec.Chapter08
+      Hutton.Spec.Chapter09
+      Hutton.Spec.Chapter10
+      Hutton.Spec.Chapter11
+      Hutton.Spec.Chapter12
+      Hutton.Spec.Chapter13
+      Hutton.Spec.Chapter14
+      Hutton.Spec.Chapter15
+      Hutton.Spec.Chapter16
+      Hutton.Spec.Chapter17
+      Hutton.Spec.Main
+      Physics.Furnace.Balance
+      Physics.Numerical.Integrator
+      Physics.Oxidation.Model
+      Physics.Oxidation.OdeSystem
+      Physics.Oxidation.Thermophysical
+      Physics.Typing
+  other-modules:
+      Paths_programming_in_haskell
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -O3
+  build-depends:
+      base >=4.7 && <5
+    , directory
+    , hspec
+  default-language: Haskell2010
+
+executable Countdown
+  main-is: Countdown.hs
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -O3 -threaded -rtsopts -with-rtsopts=-N -static
+  build-depends:
+      base >=4.7 && <5
+    , programming-in-haskell
+  default-language: Haskell2010
+
+executable FurnaceBalance
+  main-is: FurnaceBalance.hs
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -O3 -threaded -rtsopts -with-rtsopts=-N -static
+  build-depends:
+      Chart
+    , Chart-cairo
+    , base >=4.7 && <5
+    , directory
+    , programming-in-haskell
+  default-language: Haskell2010
+
+executable Oxidation
+  main-is: Oxidation.hs
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -O3 -threaded -rtsopts -with-rtsopts=-N -static
+  build-depends:
+      base >=4.7 && <5
+    , programming-in-haskell
+  default-language: Haskell2010
+
+test-suite programming-in-haskell-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_programming_in_haskell
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , programming-in-haskell
+  default-language: Haskell2010

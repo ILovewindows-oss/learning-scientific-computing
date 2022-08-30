@@ -1,0 +1,14 @@
+# Temporary files
+*~
+
+# Stack environment
+.stack-work/
+
+# HSpec dump
+.hspec-failures
+
+# Any sandbox
+sandbox/
+
+# Applications results
+results/

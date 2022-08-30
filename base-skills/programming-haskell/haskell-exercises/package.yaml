@@ -1,0 +1,90 @@
+name:                programming-in-haskell
+version:             0.1.0.0
+github:              "githubuser/programming-in-haskell"
+license:             BSD3
+author:              "Walter Dal'Maz Silva"
+maintainer:          "walter.dalmazsilva@gmail.com"
+copyright:           "2021 Walter Dal'Maz Silva"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/programming-in-haskell#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+executables:
+  Countdown:
+    main:                Countdown.hs
+    other-modules:       []
+    source-dirs:         app
+    ghc-options:
+    - -Wall
+    - -O3
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -static
+    dependencies:
+    - programming-in-haskell
+
+  FurnaceBalance:
+    main:                FurnaceBalance.hs
+    other-modules:       []
+    source-dirs:         app
+    ghc-options:
+    - -Wall
+    - -O3
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -static
+    dependencies:
+    - directory
+    - Chart
+    - Chart-cairo
+    - programming-in-haskell
+
+  Oxidation:
+    main:                Oxidation.hs
+    other-modules:       []
+    source-dirs:         app
+    ghc-options:
+    - -Wall
+    - -O3
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -static
+    dependencies:
+    - programming-in-haskell
+
+library:
+  source-dirs: src
+  ghc-options:
+  - -Wall
+  - -O3
+  dependencies:
+  - directory
+  - hspec
+
+tests:
+  programming-in-haskell-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -Wall
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - programming-in-haskell
