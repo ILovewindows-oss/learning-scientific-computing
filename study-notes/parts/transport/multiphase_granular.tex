@@ -6,15 +6,15 @@
 
 %TODO
 
-\subsection{Multiphase modeling of packed granular media in gases}
+\subsection{Multiphase modeling of dense granular media in gases}
 
-This section discusses the physical modeling of packed granular media transport applied to multiphase CFD simulations. This is a particularly complex field because dynamic response of same material solid particles respond differently to flow field depending on their size, \emph{i.e.} they can be treated as separate phases. It is easy to understand this if you think of a packed bed where particles of different sizes will have coordination numbers that differ. In what follows, focus on gas-solid flows with high solid content will be given. This includes, but is not restricted to \begin{inparaenum}[(i)] \item pneumatic transport (dune/slug flow), \item fluidized/packed bed \end{inparaenum} flows. The case of particle-laden (particles in a continuous gas) is not treated here since particles are dispersed. There are two main approaches for modeling these sort of flows \begin{inparaenum}[(i)] \item Euler-Lagrange, and \item Euler-Euler\end{inparaenum}. In the first, fluid is treated as a continuum (thus Euler in the name) and particles are tracked individually (Lagrangian approach). From this explanation, one may correctly guess that Euler-Euler approach by its term describes both phases as interpenetrating continua, introducing the notion of phase fraction that is solved over computational domain. A detailed discussion of the subject is given by \textcite{Crowe2011}.
+This section discusses the physical modeling of dense granular media transport applied to multiphase CFD simulations. This is a particularly complex field because dynamic response of same material solid particles respond differently to flow field depending on their size, \emph{i.e.} they can be treated as separate phases. It is easy to understand this if you think of a dense bed where particles of different sizes will have coordination numbers that differ. In what follows, focus on gas-solid flows with high solid content will be given. This includes, but is not restricted to \begin{inparaenum}[(i)] \item pneumatic transport (dune/slug flow), \item fluidized/dense bed \end{inparaenum} flows. The case of particle-laden (particles in a continuous gas) is not treated here since particles are dispersed. There are two main approaches for modeling these sort of flows \begin{inparaenum}[(i)] \item Euler-Lagrange, and \item Euler-Euler\end{inparaenum}. In the first, fluid is treated as a continuum (thus Euler in the name) and particles are tracked individually (Lagrangian approach). From this explanation, one may correctly guess that Euler-Euler approach by its term describes both phases as interpenetrating continua, introducing the notion of phase fraction that is solved over computational domain. A detailed discussion of the subject is given by \textcite{Crowe2011}.
 
 \subsubsection{Selecting an Euler-Euler model and solver in Ansys Fluent}
 
 For the case of granular flows, the system of equations closure is achieved by application of kinetic theory adapted to macroscopic scale. Thus, several of the topics we discuss in this section are related to it and sometimes adapted from molecular dynamics. Ansys Fluent Euler-Euler models suitable for granular flow include the Mixture Model and Eulerian Model. Notice that these models cannot treat particle combustion, phenomenon that must use a DPM approach. Solidification and melting are also not supported.
 
-Mixture Model is best suited for low loading flows, such as particle-laden and cyclone separators. It is also less computationally expensive than its counterpart and should be selected whenever in its applicability range. Eulerian Model is the most complex and general multiphase model in Fluent. Momentum is solved individually for each phase and coupling is achieved through pressure and interphase exchange coefficients. It can be used to model particle suspension and fluidized/packed beds. Since focus is given on packed granular media, Eulerian Model must be selected because particles are concentrated only in certain portions of the flow field. It is then selected as the \emph{right} choice for the case being treated here.
+Mixture Model is best suited for low loading flows, such as particle-laden and cyclone separators. It is also less computationally expensive than its counterpart and should be selected whenever in its applicability range. Eulerian Model is the most complex and general multiphase model in Fluent. Momentum is solved individually for each phase and coupling is achieved through pressure and interphase exchange coefficients. It can be used to model particle suspension and fluidized/dense beds. Since focus is given on dense granular media, Eulerian Model must be selected because particles are concentrated only in certain portions of the flow field. It is then selected as the \emph{right} choice for the case being treated here.
 
 To justify this choice we first evaluate the particulate loading or mass concentration\footnote{As it is referred to in reference \cite{Crowe2011}.} $\beta$ given by the ratio of relative specific weights of dispersed phase $d$ and carrier $c$:
 
@@ -22,39 +22,174 @@ To justify this choice we first evaluate the particulate loading or mass concent
 \beta=\frac{\rho_{d}\alpha_{d}}{\rho_{c}\alpha_{c}}
 \end{equation}
 
-\noindent{}where $\alpha$ denote the volume phase fraction and $\rho$ the specific weight. For a typical gas-solid flow in a packed bed $\beta>1000$ and high loading implies the use of Eulerian model. The inter-particle space~\cite{Crowe2011} can be estimated from dispersed phase volume fraction as
+\noindent{}where $\alpha$ denote the volume phase fraction and $\rho$ the specific weight. For a typical gas-solid flow in a dense bed $\beta>1000$ and high loading implies the use of Eulerian model. The inter-particle space~\cite{Crowe2011} can be estimated from dispersed phase volume fraction as
 
 \begin{equation}
 \frac{L}{d}=\left(\frac{\pi}{6\alpha_{d}}\right)^{\frac{1}{3}}
 \end{equation}
 
-For packed beds where $\alpha_{d}>0.5$ we have $\sfrac{L}{d}\le{}1$, meaning particles are in contact. Under such conditions two-way coupling of transport is required with addition of particle pressure and viscous stresses due to particles, what is only handled by the Eulerian Model.
+For dense beds where $\alpha_{d}>0.5$ we have $\sfrac{L}{d}\le{}1$, meaning particles are in contact. Under such conditions two-way coupling of transport is required with addition of particle pressure and viscous stresses due to particles, what is only handled by the Eulerian Model.
 
 Because of its complexity, higher order spatial and time discretization schemes are necessary. Second order time scheme is implemented using a Euler backward approximation in Fluent. Although a fully coupled solver is available, it is not as robust as the others for multiphase flows. In that case the best option is PC SIMPLE. In the case of steady-state solution, reducing the Courant number to as low as 4 can be useful for smooth convergence. If using PC SIMPLE, low under-relaxation of volume fraction is required, but that would dramatically increase computation time if using coupled solver.
 
-\subsubsection{Setting up Eulerian Model for packed granular flows in Fluent}
+\subsubsection{Setting up Eulerian Model for dense granular flows in Fluent}
 
 Eulerian Model supports any number of secondary phases, thus if poly-dispersed particles are to be modeled they can be treated as separate phases, as discussed in the introduction. A single pressure is shared by all phases and momentum and continuity are solved for each phase. Setting up the interactions of solid phases between themselves and with the fluid requires additional models and related parameters. All $k-\varepsilon$ and $k-\omega$ are available and may apply to all phases or mixture.
 
-Momentum conservation equation must include lift, wall lubrication, and turbulent dispersion forces. Virtual mass force can be neglected in this case because secondary phase is denser than carrier. Given the interactions between phases, an additional term is added to model those forces. This section will guide the selection of required models for the packed bed application. It must be emphasized that at the present there is no general formulation in the literature and these models are mostly empirically based.
+Momentum conservation equation must include lift, wall lubrication, and turbulent dispersion forces. Virtual mass force can be neglected in this case because secondary phase is denser than carrier. Given the interactions between phases, an additional term is added to model those forces. This section will guide the selection of required models for the dense bed application. It must be emphasized that at the present there is no general formulation in the literature and these models are mostly empirically based.
 
-For a single fluid packed bed reactor only fluid-solid exchange coefficients $K_{sl}$ are required. In its general form this coefficient is expressed as
+For a single fluid dense bed reactor only fluid-solid exchange coefficients $K_{sl}$ are required, so we will not treat the fluid-fluid models in what follows. In its general form this coefficient is expressed as
 
 \begin{equation}
 K_{sl}=\frac{\rho_{s}\alpha_{s}}{\tau_{s}}f\quad\text{where}\quad\tau_{s}=\frac{\rho_{s}d_{s}^{2}}{18\mu_{l}}\implies{}K_{sl}=\frac{18\alpha_{s}\mu_{l}}{d_{s}^{2}}f
 \end{equation}
 
-\noindent{}where the first denominator $\tau_{s}$ represents the particulate relaxation time. From this equation we see that viscous fluids and high particulate contents increase the interaction, while larger particles reduce it. The factor $f$ is a function of drag coefficient $C_{D}$ and it is the law describing it that must be adapted for the present case. Default option is \textcite{Syamlal1989} model which should only be used in conjunction of solid shear stresses kinetic component as defined by \textcite{Syamlal1993}, also the default. Although the model by \textcite{Wen1966} is not applicable to dense systems, an improvement proposed by \textcite{Gidaspow1992} through the use of \textcite{Ergun1952} equation allows the application to densely packed systems, better suited for the present case.
+\noindent{}where the first denominator $\tau_{s}$ represents the particulate relaxation time. From this equation we see that viscous fluids and high particulate contents increase the interaction, while larger particles reduce it. The factor $f$ is a function of drag coefficient $C_{D}$ and it is the law describing it that must be adapted for the present case. Most common option is \textcite{Syamlal1989} model which should only be used in conjunction of solid shear stresses kinetic component as defined by \textcite{Syamlal1993}, also the default. Although the model by \textcite{Wen1966} is not applicable to dense systems, an improvement proposed by \textcite{Gidaspow1992} through the use of \textcite{Ergun1952} equation allows the application to densely packed systems, better suited for the present case.
 %TODO check Fluent EMMS appliability too.
 
 Regarding solid-solid exchanges, coefficient $K_{ls}$ is computed taking into account the pair-wise restitution coefficient, the friction coefficient, and particle sizes~\cite{Syamlal1987b}. Drag modification does not seem required in the present context. Lift correction, wall lubrication model, and virtual mass are all non-applicable because they concern only liquid-gas systems, specially droplets and bubbles. Lift force modeling is also discarded because in dense bed reactors particle distances are small, same reason for why we may neglect turbulent dispersion corrections. Since in dense beds the kinetics theory application to particles is less relevant, then a granular temperature set to a constant low value. Impacts of this on shear stress are discussed in what follows.
 
-In cases where solids volume fraction is below the packing limit, the granular flow is said to be in compressible regime. In that case a solids pressure is computed independently and added by Ansys Fluent in the momentum equation. The most important parameter intervening in this case is the coefficient of restitution $e_{ss}$. Formulations are presented by \textcite{Gidaspow1994}, \textcite{Syamlal1993}, and \textcite{Ahmadi1990}. For solid phases the radial distribution function $g_{0}$ proposed by \textcite{Gidaspow1994} is to be used.
+% NOTE: in Fluent Theory Guide it is not Lun, but Gidaspow, although the option does not exist in the corresponding version of the software. For now I did not yet check the actual papers to understand if that factor really exists.
+In cases where solids volume fraction is below the packing limit, the granular flow is said to be in compressible regime. In that case a solids pressure is computed independently and added by Ansys Fluent in the momentum equation. The most important parameter intervening in this case is the coefficient of restitution $e_{ss}$. Formulations are presented by \textcite{Lun1984}, \textcite{Syamlal1993}, and \textcite{Ahmadi1990}. For one solid phase the radial distribution function $g_{0}$ proposed by \textcite{Lun1984} is to be used.
 
 Solids shear stress contains terms due to translation and collision. Pure collision term is modeled as proposed by \textcite{Gidaspow1992}. For its kinetic component the default model is the one by \textcite{Syamlal1993} and the one by \textcite{Gidaspow1992} is also available. The component of bulk viscosity  is by default zero and can be included through the model by \textcite{Lun1984}. Once a threshold frictional packing limit is reached, a corresponding term is added, by default as per \textcite{Schaeffer1987} to account for the viscous-plastic transition that occurs. It is recommended to apply this term because at solid fraction the application of kinetic theory is no longer relevant and frictional stresses need to be considered. The associated frictional pressure is mainly semi-empirical and models are provided by \textcite{Johnson1987} and \textcite{Syamlal1993}. If using one of the models by \textcite{Lun1984} or \textcite{Gidaspow1992} for the radial distribution function, the Ansys Fluent provides an \emph{based-ktgf} model for handling high packing fraction solids pressure.
  
 Heat transfer in granular flow can be described through the Nusselt number correlation proposed by \textcite{Gunn1978}. Notice that this is applicable to Reynolds numbers below $10^5$. Thermal conductivity $\kappa_q$ of phases is then required as a parameter.
 
 To close the set of required closure models one needs to select a turbulence description. Since we are discussing granular multiphase flow, turbulence applies only to the primary gas phase. Standard $k-\varepsilon$ or $k-\omega$ models can be selected and no turbulence interaction parameters are required.
+
+In summary, the multiphase parameters from Table~\ref{tab:eulerian-dense-bed} can be selected in Ansys Fluent for the granular phases (each particle diameter for the same physical phase of matter being considered a separate granular phase).
+
+\begin{table}[!ht]
+\caption{\label{tab:eulerian-dense-bed}Models for Eulerian granular dense bed.}
+\small\centering%
+\begin{tabular}{lcc}
+\toprule[2pt]
+  \textbf{Parameter}
+& \textbf{Model}
+& \textbf{References}
+\\
+\midrule[1pt]
+\multicolumn{3}{c}{\textbf{Granular (solid) phase description}}\\
+\midrule
+  Granular Temperature Model
+& \Verb|Phase Property|
+&
+\\[6pt]
+  %OK
+  Granular Viscosity
+& \Verb|gidaspow|
+& \cite{Gidaspow1992}
+\\[6pt]
+  %OK
+  Granular Bulk Viscosity
+& \Verb|lun-et-al|
+& \cite{Lun1984}
+\\[6pt]
+  %OK
+  Solids Pressure
+& \Verb|lun-et-al|
+& \cite{Lun1984}
+\\[6pt]
+  %OK
+  Granular Temperature
+& \Verb|algebraic|
+&
+\\[6pt]
+  %OK
+  Frictional Viscosity
+& \Verb|schaeffer|
+& \cite{Schaeffer1987}
+\\[6pt]
+  %OK
+  Frictional Pressure
+& \Verb|based-ktgf|
+& 
+\\[6pt]
+  %OK
+  Friction Packing Limit
+& \Verb|0.61|
+&
+\\[6pt]
+  %OK
+  Angle Of Internal Friction
+& \Verb|30.0|
+&
+\\[6pt]
+  %OK
+  Packing Limit
+& \Verb|0.63|
+&
+\\[6pt]
+  %OK
+  Radial Distribution
+& \Verb|lun-et-al|
+& \cite{Lun1984}
+\\[6pt]
+  %OK
+  Frictional Modulus
+& \Verb|derived|
+&
+\\[6pt]
+  %OK
+  Elastic Modulus
+& \Verb|derived|
+&
+\\
+\midrule
+\multicolumn{3}{c}{\textbf{Phase interactions -- Forces between fluid-solid}}\\
+\midrule
+  Drag Coefficient
+& \Verb|gidaspow|
+& \cite{Ergun1952,Wen1966,Gidaspow1992}
+\\[6pt]
+  Drag Coefficient Modification
+& \Verb|none|
+& 
+\\[6pt]
+  Lift Coefficient
+& \Verb|none|
+& 
+\\[6pt]
+  Wall Lubrication
+& \Verb|none|
+& 
+\\[6pt]
+  Turbulence Interaction
+& \Verb|none|
+& 
+\\[6pt]
+  Virtual Mass Coefficient
+& \Verb|none|
+& 
+\\[6pt]
+  Surface Tension Coefficient
+& \Verb|none|
+& 
+\\
+\midrule
+\multicolumn{3}{c}{\textbf{Phase interactions -- Forces between solid-solid}}\\
+\midrule
+  Restitution Coefficient
+& $<0.5$ for hot brittle phases
+& 
+\\
+\midrule
+\multicolumn{3}{c}{\textbf{Phase interactions -- Heat transfer between fluid-solid}}\\
+\midrule
+  Heat Transfer Coefficient
+& \Verb|gunn|
+& \cite{Gunn1978}
+\\
+\midrule
+\multicolumn{3}{c}{\textbf{Phase interactions -- Interfacial area between fluid-solid}}\\
+\midrule
+  Interfacial Area
+& \Verb|ia-particle|
+& 
+\\
+\bottomrule[2pt]
+\end{tabular}
+\end{table}
 
 \endinput
