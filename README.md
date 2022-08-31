@@ -4,6 +4,10 @@ Study materials for general scientific computing matters.
 
 If you are here, maybe you are also interested in the event list from [PRACE](https://events.prace-ri.eu/).
 
+More about my projects in my personal [Github.io Page](https://wallytutor.github.io/).
+
+[Majordome](https://python-majordome.readthedocs.io/en/latest/index.html) is the Python package where you find boilerplate code that is used all across this repository.
+
 ---
 
 ## Programming
