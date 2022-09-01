@@ -312,7 +312,8 @@ Recombine Surface   {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
 Extrude {0, 0, 0.006} {
     Surface{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-    Layers{0.006 * no_nodes};
+    // Layers{0.006 * no_nodes};
+    Layers{10};
     Recombine;
 }
   
