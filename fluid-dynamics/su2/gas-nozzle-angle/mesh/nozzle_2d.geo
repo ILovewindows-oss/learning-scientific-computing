@@ -3,7 +3,7 @@
 // ************************************************************* //
 
 // Characteristic mesh size [m].
-SIZE = 0.0002;
+SIZE = 0.0001;
 
 // Refining factor dividing SIZE.
 REFINEMENT = 1;
@@ -310,7 +310,7 @@ Recombine Surface   {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 //                       MESH EXTRUSION                          //
 // ************************************************************* //
 
-Extrude {0, 0, 0.006} {
+Extrude {0, 0, 1} {
     Surface{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     Layers{1};
     Recombine;
@@ -320,11 +320,22 @@ Extrude {0, 0, 0.006} {
 //                       PHYSICAL NAMES                          //
 // ************************************************************* //
 
-Physical Surface("inlet") = {60,82,104,126,148};
-Physical Surface("outlet") = {316,338,360};
-Physical Surface("wall_upper") = {144,232,298,364};
-Physical Surface("wall_lower") = {48,52,158,162,246,312};
-Physical Surface("back") = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-Physical Surface("front") = {61,83,105,127,149,171,193,215,
-                             237,259,281,303,325,347,369};
-Physical Volume("internal") = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+Physical Surface("inlet") = {
+    60,82,104,126,148
+};
+Physical Surface("outlet") = {
+    316,338,360
+};
+Physical Surface("walls") = {
+    144,232,298,364,48,52,158,162,246,312
+};
+Physical Surface("symmetry_front") = {
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+};
+Physical Surface("symmetry_back") = {
+    61,83,105,127,149,171,193,215,
+    237,259,281,303,325,347,369
+};
+Physical Volume("internal") = {
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+};

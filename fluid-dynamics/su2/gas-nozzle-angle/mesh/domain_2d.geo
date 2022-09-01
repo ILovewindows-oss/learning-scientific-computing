@@ -3,7 +3,7 @@
 // ************************************************************* //
 
 // Characteristic mesh size [m].
-SIZE = 0.0001;
+SIZE = 0.0002;
 
 // Refining factor dividing SIZE.
 REFINEMENT = 1;
@@ -34,6 +34,9 @@ slope2 = 0.029881;
 // Length of attack plane of outer outlet.
 slope3 =  0.0078416;
 
+// Length of free volume extension of noozle.
+slope4 = 0.5;
+
 // ************************************************************* //
 //                        X-COORDINATES                          //
 // ************************************************************* //
@@ -55,6 +58,9 @@ x04 = x03 - slope3 * Cos(theta4);
 
 // Intermediate point to smooth mesh.
 x05 = 0.5 * (x01 + x04);
+
+//
+x06 = x02 + slope4 * Cos(theta1 + Pi/12);
 
 // ************************************************************* //
 //                        Y-COORDINATES                          //
@@ -99,6 +105,18 @@ y11 = y01 + (x03 - x01) * Tan(theta1);
 // Position of BL over lower part of third slice.
 y12 = y06 + (x03 - x01) * Tan(theta1) * 0.9;
 
+//
+y13 = y02 + slope4 * Sin(theta1 - Pi/8);
+
+//
+y14 = y13 + 0.050;
+
+//
+y15 = y03 + slope4 * Sin(theta1 + Pi/12);
+
+//
+y16 = y15 - 0.050; 
+
 // ************************************************************* //
 //                      LENGTHS AND NODES                        //
 // ************************************************************* //
@@ -108,6 +126,7 @@ HL1 = x00;
 HL2 = x01 - x00;
 HL3 = x03 - x01;
 HL4 = x02 - x03;
+HL5 = slope4;
 
 // Vertical lengths.
 VL1 = y00;
@@ -124,6 +143,8 @@ NH1 = 1 + HL1 * no_nodes;
 NH2 = 1 + HL2 * no_nodes;
 NH3 = 1 + HL3 * no_nodes;
 NH4 = 1 + HL4 * no_nodes;
+NH5 = 1 + 500;
+
 NV1 = 1 + VL1 * no_nodes;
 NV2 = 1 + VL2 * no_nodes;
 NV3 = 1 + VL3 * no_nodes;
@@ -166,6 +187,12 @@ Point(23) = {x05, y08, 0.0};
 // Third vertical slice.
 Point(24) = {x03, y12, 0.0};
 Point(25) = {x03, y09, 0.0};
+
+//
+Point(26) = {x06, y13, 0.0};
+Point(27) = {x06, y14, 0.0};
+Point(28) = {x06, y16, 0.0};
+Point(29) = {x06, y15, 0.0};
 
 // ************************************************************* //
 //                            LINES                              //
@@ -226,6 +253,15 @@ Line(37) = {25, 23};
 Line(38) = {23, 21};
 Line(39) = {21, 15};
 
+//
+Line(40) = { 7, 26};
+Line(41) = {26, 27};
+Line(42) = {27, 8};
+Line(43) = {27, 28};
+Line(44) = {28,  9};
+Line(45) = {28, 29};
+Line(46) = {29, 10};
+
 // ************************************************************* //
 //                      LOOPS AND SURFACES                       //
 // ************************************************************* //
@@ -253,6 +289,11 @@ Line Loop(13) = {  6,   7,  32, -26};
 Line Loop(14) = {-32,   8,  36, -27};
 Line Loop(15) = {-36,   9,  10, -28};
 
+//
+Line Loop(16) = { 40,  41,  42,  -7};
+Line Loop(17) = {-42,  43,  44,  -8};
+Line Loop(18) = {-44,  45,  46,  -9};
+
 // Create surfaces from loops.
 Plane Surface(1)  = {1};
 Plane Surface(2)  = {2};
@@ -269,6 +310,9 @@ Plane Surface(12) = {12};
 Plane Surface(13) = {13};
 Plane Surface(14) = {14};
 Plane Surface(15) = {15};
+Plane Surface(16) = {16};
+Plane Surface(17) = {17};
+Plane Surface(18) = {18};
 
 // ************************************************************* //
 //                       REPORTING CHECK                         //
@@ -278,6 +322,7 @@ Printf("HL1 = %.8f, NP = %.0f", HL1, NH1);
 Printf("HL2 = %.8f, NP = %.0f", HL2, NH2);
 Printf("HL3 = %.8f, NP = %.0f", HL3, NH3);
 Printf("HL4 = %.8f, NP = %.0f", HL4, NH4);
+Printf("HL5 = %.8f, NP = %.0f", HL5, NH5);
 Printf("VL1 = %.8f, NP = %.0f", VL1, NV1);
 Printf("VL2 = %.8f, NP = %.0f", VL2, NV2);
 Printf("VL3 = %.8f, NP = %.0f", VL3, NV3);
@@ -293,49 +338,48 @@ Transfinite Line {1,-29,-31,-35,-39,13} = NH1 Using Progression 1.00;
 Transfinite Line {3,-30,-34,-38,12}     = NH2 Using Progression 1.00;
 Transfinite Line {5,-33,-37,11}         = NH3 Using Progression 1.00;
 Transfinite Line {6,-36,-32,10}         = NH4 Using Progression 1.00;
+Transfinite Line {-40,42,44,46}         = NH5 Using Progression 1.00;
 
 // Vertical discretization (structured).
 Transfinite Line {2,-18}                = NV1 Using Progression 1.00;
 Transfinite Line {4,19,-17}             = NV2 Using Progression 1.00;
 Transfinite Line {7,26}                 = NV3 Using Progression 1.00;
-Transfinite Line {23,20,-16}            = NV3 Using Progression 1.00;
-Transfinite Line {8,27,24,21,-15}       = NV4 Using Progression 1.00;
-Transfinite Line {9,28,25,22,-14}       = NV5 Using Progression 1.00;
+Transfinite Line {23,20,-16,41}         = NV3 Using Progression 1.00;
+Transfinite Line {8,27,24,21,-15,43}    = NV4 Using Progression 1.00;
+Transfinite Line {9,28,25,22,-14,45}    = NV5 Using Progression 1.00;
 
 // Recombine to force restructuring.
-Transfinite Surface {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-Recombine Surface   {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+Transfinite Surface {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+Recombine Surface   {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
 
 // ************************************************************* //
 //                       MESH EXTRUSION                          //
 // ************************************************************* //
 
 Extrude {0, 0, 0.006} {
-    Surface{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-    Layers{0.006 * no_nodes};
+    Surface{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+    Layers{1};
     Recombine;
 }
-  
+
 // ************************************************************* //
 //                       PHYSICAL NAMES                          //
 // ************************************************************* //
 
 Physical Surface("inlet") = {
-    60,82,104,126,148
+    67,89,111,133,155
 };
 Physical Surface("outlet") = {
-    316,338,360
+    385,389,411,433,437
 };
 Physical Surface("walls") = {
-    144,232,298,364,48,52,158,162,246,312
+    55,59,165,169,253,319,151,239,305,371
 };
-Physical Surface("wall_front") = {
-    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-};
-Physical Surface("wall_back") = {
-    61,83,105,127,149,171,193,215,
-    237,259,281,303,325,347,369
+Physical Surface("symmetry") = {
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,
+    15,68,90,112,134,156,178,200,222,244,266,
+    288,310,332,354,376,398,420,442
 };
 Physical Volume("internal") = {
-    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
 };
