@@ -46,3 +46,4 @@ def postprocess(history, scale, n_jets=8):
 
 postprocess("case-00-2d-steady/history.csv", scale=0.006)
 postprocess("case-01-3d-steady/history.csv", scale=1.000)
+postprocess("case-02-2d-steady/history.csv", scale=0.006)
