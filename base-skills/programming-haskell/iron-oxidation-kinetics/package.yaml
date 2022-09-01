@@ -1,0 +1,49 @@
+name:                oxyl
+version:             0.1.0.0
+github:              "waltermateriais/oxyl"
+license:             BSD3
+author:              "Walter Dal&#39;Maz Silva"
+maintainer:          "walter.dalmazsilva@gmail.com"
+copyright:           "Walter Dal&#39;Maz Silva 2021"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Science
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/waltermateriais/oxyl#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  oxyl-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -static
+    dependencies:
+    - oxyl
+
+tests:
+  oxyl-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - oxyl
