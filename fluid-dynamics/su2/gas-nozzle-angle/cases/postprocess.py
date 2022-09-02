@@ -44,7 +44,10 @@ def postprocess(history, scale, n_jets=8):
     plt.show()
 
 
-postprocess("case-00-2d-steady/history.csv", scale=0.06)
-postprocess("case-01-3d-steady/history.csv", scale=1.000)
-postprocess("case-02-2d-steady/history.csv", scale=0.06)
-postprocess("case-03-2d-steady/history.csv", scale=0.06)
+depth2d = 0.1
+depth3d = 0.006
+
+postprocess("case-00-2d-steady/history.csv", scale=0.006/depth2d)
+postprocess("case-01-3d-steady/history.csv", scale=0.006/depth3d)
+postprocess("case-02-2d-steady/history.csv", scale=0.006/depth2d)
+postprocess("case-03-2d-steady/history.csv", scale=0.006/depth2d)
