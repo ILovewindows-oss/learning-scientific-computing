@@ -1,0 +1,81 @@
+\subsection{Discrete Element Method}
+
+This section describes the discrete element method (DEM) as per the available models from \href{https://github.com/msolids/musen}{MUSEN}. In the absence of references, the content is as provide in the package documentation.
+
+\subsubsection{Contact Models}
+
+\paragraph{Hertz Contact:} assume a pair of spherical particles $P_{1}$ and $P_{2}$, with radii $r_{1}$ and $r_{2}$ and centered at $O_{1}$ and $O_{2}$, respectively. It is intuitive that the contact point $\vec{C}$ can be computed, taking particle $P_{1}$ as a reference, as
+
+\begin{equation}
+\vec{C} = \vec{O}_{1} + \left(\dfrac{\vec{O}_{2} - \vec{O}_{1}}{\vec{r}_{1} + \vec{O}_{2}}\right)\vec{r}_{1}
+\end{equation}
+
+The second term in the sum above is the contact vector $\vec{r}_{c}=\vec{C} - \vec{O}_{1}$, whose unit vector is denoted $\vec{r}_{n}=\sfrac{\vec{r}_{c}}{\vert\vec{r}_{c}\vert}$. The relative velocity between particles is given by
+
+%TODO check the next expression, I think there is a typo in MUSEN docs and the angular velocities multiply the position vector of the particles themselves.
+\begin{equation}
+\vec{v}_{rel} = \vec{v}_{2} - \vec{v}_{1} + \vec{\omega}_{1}\times\vec{r}_{1} - \vec{\omega}_{2}\times\vec{r}_{2}
+\end{equation}
+
+\noindent{}where angular velocity of particle $j$ is $\vec{\omega}_{j}$. From the projection of this vector over the normal and tangential directions with respect of contact vector one finds the respective components of the velocity, $\vec{v}_{rel,n}$ and $\vec{v}_{rel,t}$:
+
+\begin{equation}
+\begin{aligned}
+\vec{v}_{rel,n} &= \vec{r}_n\cdotp\left(\vec{r}_n\cdotp\vec{v}_{rel}\right)\\[6pt]
+\vec{v}_{rel,t} &= \vec{v}_{rel} - \vec{v}_{rel,n}
+\end{aligned}
+\end{equation}
+
+The pair equivalent radius is $R^{\star}=\sfrac{\vec{r}_{1}\cdotp{}\vec{r}_{2}}{\left(\vec{r}_{1}+\vec{r}_{2}\right)}$. Another equivalent property that is required in what follows is the elastic (Young) modulus $E^{\star}$, which is computed from materials moduli $E_{j}$ and respective Poisson coefficients $\nu_{j}$ as provided below
+
+\begin{equation}
+E^{\star} = \left(\dfrac{1 + \nu_{1}^2}{E_{1}}+\dfrac{1 + \nu_{2}^2}{E_{2}}\right)^{-1}
+\end{equation}
+
+To overcome the need to solve elastic mechanics equations for all particles in the domain (what would be computationally prohibitive and require coupling to finite element solver), DEM approach uses small time-steps so that particle normal overlap $\xi_{n}=\vec{r}_{1}+\vec{r}_{2}-\vert\vec{O}_{2}-\vec{O}_{1}\vert$ remains small. This quantity is used in place of an actual deformation. The normal force $\vec{F}_{n}$ between the pair can be computed in analogy with Hooke's law as
+
+\begin{equation}
+\vec{F}_{n} = -\dfrac{2}{3}k_{n}\cdotp\xi_{n}\cdotp\vec{r}_{n}
+\quad\text{where}\quad{}k_{n}=2{E}^{\star}\sqrt{\xi_{n}R^{\star}}
+\end{equation}
+
+During a single time-step the incremental tangential displacement is $\Delta\vec{\xi}_{t}=\vec{v}_{rel,t}\Delta{}t$. Using an analogous approach, the incremental shearing stress that develops during the interval is
+
+%TODO check in the sqrt below if it is the overlap or incremental tangential displacement that should actually be used.
+\begin{equation}
+\Delta\vec{F}_{t}=k_{t}\cdotp\Delta\vec{\xi}_{t}
+\quad\text{where}\quad{}k_{t}=8{G}^{\star}\sqrt{{\xi}_{n}{R}^{\star}}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\vec{F}_{t,pr}^{cor} &= \vec{F}_{t,pr}-\vec{r}_n\cdotp\left(\vec{r}_n\cdotp\vec{F}_{t,pr}\right)\\[6pt]
+\vec{F}_{t,pr}^{cor} &= \vec{F}_{t,pr}^{cor}\cdotp\dfrac{\vert\vec{F}_{t,pr}\vert}{\vec{F}_{t,pr}^{cor}}\\[6pt]
+\vec{F}_{t}&=\vec{F}_{t,pr}^{cor}+\Delta\vec{F}_{t}
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\vert\vec{F}_{t}\vert &>\mu_{sl}\vert\vec{F}_{n}\vert\\[6pt]
+\vec{F}_{t}&=\mu_{sl}\vert\vec{F}_{n}\vert\cdotp\dfrac{\vec{F}_{t}}{\vert\vec{F}_{t}\vert}
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\vec{M}_{ro,1} &= -\mu_{ro}\vert\vec{F}_{n}\vert{}r_{1}\dfrac{\vec{\omega}_{1}}{\vert\vec{\omega}_{1}\vert}\\[6pt]
+\vec{M}_{ro,2} &= -\mu_{ro}\vert\vec{F}_{n}\vert{}r_{2}\dfrac{\vec{\omega}_{2}}{\vert\vec{\omega}_{2}\vert}
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\vec{F}_{tot} &= \vec{F}_{n} + \vec{F}_{t}\\[6pt]
+\vec{F}_{1} &= \vec{F}_{tot}\\[6pt]
+\vec{F}_{2} &= -\vec{F}_{1}\\[6pt]
+\vec{M}_{tot,1} &= \vec{r}_{n}\times\vec{F}_{t}\cdotp{}r_{1} + \vec{M}_{ro,1}\\[6pt]
+\vec{M}_{tot,2} &= -\vec{r}_{n}\times\vec{F}_{t}\cdotp{}r_{2} + \vec{M}_{ro,2}
+\end{aligned}
+\end{equation}
+\endinput
