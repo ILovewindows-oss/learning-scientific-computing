@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-rm -rf *.cgns *.su2
+rm -rf generated/*.cgns generated/*.su2
