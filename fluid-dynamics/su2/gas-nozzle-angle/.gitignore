@@ -2,7 +2,8 @@
 /cases/**/*[.csv|.dat|.vtu]
 
 # Generated mesh
-/mesh/*[.cgns|.su2]
+/mesh/generated/*.cgns
+/mesh/generated/*.su2
 
 # Private stuff
 /private/
