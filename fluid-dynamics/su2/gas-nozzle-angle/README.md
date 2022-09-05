@@ -61,5 +61,5 @@ For the present case two types of meshes were conceived: a first set used for se
 
 - [case-00-2d-steady](cases/case-00-2d-steady) 2D simulation of **Case A** at steady state.
 - [case-01-3d-steady](cases/case-01-3d-steady) 3D simulation of **Case A** at steady state.
-- [case-02-2d-steady](cases/case-02-2d-steady) 2D simulation of **Case B** at steady state.
-- [case-03-2d-steady](cases/case-03-2d-steady) same as [case-02-2d-steady](cases/case-02-2d-steady) but a slightly higher inlet pressure because the previous did not reach the target mass flow rate.
+- [case-02-2d-steady](cases/case-02-2d-steady) **FAIL** 2D simulation of **Case B** at steady state.
+- [case-03-2d-steady](cases/case-03-2d-steady) **FAIL** same as [case-02-2d-steady](cases/case-02-2d-steady) but a slightly higher inlet pressure because the previous did not reach the target mass flow rate.
