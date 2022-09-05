@@ -26,20 +26,20 @@ The second term in the sum above is the contact vector $\vec{r}_{c}=\vec{C} - \v
 \end{aligned}
 \end{equation}
 
-The pair equivalent radius is $R^{\star}=\sfrac{\vec{r}_{1}\cdotp{}\vec{r}_{2}}{\left(\vec{r}_{1}+\vec{r}_{2}\right)}$. Another equivalent property that is required in what follows is the elastic (Young) modulus $E^{\star}$, which is computed from materials moduli $E_{j}$ and respective Poisson coefficients $\nu_{j}$ as provided below
+The pair equivalent radius is $\sfrac{1}{R^{\star}}=\sfrac{1}{\vec{r}_{1}}+\sfrac{1}{\vec{r}_{2}}$. Another equivalent property that is required in what follows is the elastic (Young) modulus $E^{\star}$, which is computed from materials moduli $E_{j}$ and respective Poisson's ratios $\nu_{j}$ as provided below
 
 \begin{equation}
-E^{\star} = \left(\dfrac{1 + \nu_{1}^2}{E_{1}}+\dfrac{1 + \nu_{2}^2}{E_{2}}\right)^{-1}
+E^{\star} = \left(\dfrac{1 - \nu_{1}^2}{E_{1}}+\dfrac{1 - \nu_{2}^2}{E_{2}}\right)^{-1}
 \end{equation}
 
-To overcome the need to solve elastic mechanics equations for all particles in the domain (what would be computationally prohibitive and require coupling to finite element solver), DEM approach uses small time-steps so that particle normal overlap $\xi_{n}=\vec{r}_{1}+\vec{r}_{2}-\vert\vec{O}_{2}-\vec{O}_{1}\vert$ remains small. This quantity is used in place of an actual deformation. The normal force $\vec{F}_{n}$ between the pair can be computed in analogy with Hooke's law as
+To overcome the need to solve elastic mechanics equations for all particles in the domain (what would be computationally prohibitive and require coupling to finite element solver), DEM approach uses small time-steps so that particle normal overlap $\xi_{n}=\vec{r}_{1}+\vec{r}_{2}-\vert\vec{O}_{2}-\vec{O}_{1}\vert$ remains small. This quantity is used in place of an actual deformation. The normal force $\vec{F}_{n}$ can be computed in analogy with Hooke's law as through normal stiffness $k_{n}$
 
 \begin{equation}
 \vec{F}_{n} = -\dfrac{2}{3}k_{n}\cdotp\xi_{n}\cdotp\vec{r}_{n}
 \quad\text{where}\quad{}k_{n}=2{E}^{\star}\sqrt{\xi_{n}R^{\star}}
 \end{equation}
 
-During a single time-step the incremental tangential displacement is $\Delta\vec{\xi}_{t}=\vec{v}_{rel,t}\Delta{}t$. Using an analogous approach, the incremental shearing stress that develops during the interval is
+During a single time-step the incremental tangential displacement is $\Delta\vec{\xi}_{t}=\vec{v}_{rel,t}\Delta{}t$. Using an analogous approach, the incremental shearing stress that develops during the interval is provided in terms of tangential stiffness $k_{t}$
 
 %TODO check in the sqrt below if it is the overlap or incremental tangential displacement that should actually be used.
 \begin{equation}
@@ -47,35 +47,42 @@ During a single time-step the incremental tangential displacement is $\Delta\vec
 \quad\text{where}\quad{}k_{t}=8{G}^{\star}\sqrt{{\xi}_{n}{R}^{\star}}
 \end{equation}
 
+\noindent{}where equivalent shear modulus $G^{\star}$ is given by
+
+\begin{equation}
+G^{\star} = \dfrac{2 - \nu_{1}^2}{G_{1}}+\dfrac{2 - \nu_{2}^2}{G_{2}}
+\end{equation}
+
+With these elements the tangential force in previous step $\vec{F}_{t,pr}$ can be corrected with the following expressions
+
 \begin{equation}
 \begin{aligned}
 \vec{F}_{t,pr}^{cor} &= \vec{F}_{t,pr}-\vec{r}_n\cdotp\left(\vec{r}_n\cdotp\vec{F}_{t,pr}\right)\\[6pt]
-\vec{F}_{t,pr}^{cor} &= \vec{F}_{t,pr}^{cor}\cdotp\dfrac{\vert\vec{F}_{t,pr}\vert}{\vec{F}_{t,pr}^{cor}}\\[6pt]
-\vec{F}_{t}&=\vec{F}_{t,pr}^{cor}+\Delta\vec{F}_{t}
+\vec{F}_{t,pr}^{cor} &= \vec{F}_{t,pr}^{cor}\cdotp\dfrac{\vert\vec{F}_{t,pr}\vert}{\vec{F}_{t,pr}^{cor}}
 \end{aligned}
 \end{equation}
 
+This result is then used to update the tangential force as, where the conditional expression $\vert\vec{F}_{t}\vert\leq\mu_{sl}\vert\vec{F}_{n}\vert$ evaluates if sliding regime is active, \emph{i.e.} whether tangential force overcomes sliding friction threshold imposed by coefficient $\mu_{sl}$ and the normal force
+
 \begin{equation}
-\begin{aligned}
-\vert\vec{F}_{t}\vert &>\mu_{sl}\vert\vec{F}_{n}\vert\\[6pt]
-\vec{F}_{t}&=\mu_{sl}\vert\vec{F}_{n}\vert\cdotp\dfrac{\vec{F}_{t}}{\vert\vec{F}_{t}\vert}
-\end{aligned}
+\vec{F}_{t} =\vec{F}_{t,pr}^{cor}+\Delta\vec{F}_{t}\quad\text{if}\quad\vert\vec{F}_{t}\vert\leq\mu_{sl}\vert\vec{F}_{n}\vert\quad\text{else}\quad\mu_{sl}\vert\vec{F}_{n}\vert\cdotp\dfrac{\vec{F}_{t}}{\vert\vec{F}_{t}\vert}
 \end{equation}
+
+The rolling friction which takes place with coefficient $\mu_{ro}$ for particle $j$ is expressed through the moment in con as follows.
+
+\begin{equation}
+\vec{M}_{ro,j} = -\mu_{ro}\vert\vec{F}_{n}\vert{}r_{j}\dfrac{\vec{\omega}_{j}}{\vert\vec{\omega}_{j}\vert}
+\end{equation}
+
+To wrap up, the total forces acting over the participating particles is then $\vec{F}_{tot}=\vec{F}_{n}+\vec{F}_{t}$ and according to Newton's third law $\vec{F}_{1}=-\vec{F}_{2}=\vec{F}_{tot}$. The total momenta is then given by the shear and rolling components as
 
 \begin{equation}
 \begin{aligned}
-\vec{M}_{ro,1} &= -\mu_{ro}\vert\vec{F}_{n}\vert{}r_{1}\dfrac{\vec{\omega}_{1}}{\vert\vec{\omega}_{1}\vert}\\[6pt]
-\vec{M}_{ro,2} &= -\mu_{ro}\vert\vec{F}_{n}\vert{}r_{2}\dfrac{\vec{\omega}_{2}}{\vert\vec{\omega}_{2}\vert}
-\end{aligned}
-\end{equation}
-
-\begin{equation}
-\begin{aligned}
-\vec{F}_{tot} &= \vec{F}_{n} + \vec{F}_{t}\\[6pt]
-\vec{F}_{1} &= \vec{F}_{tot}\\[6pt]
-\vec{F}_{2} &= -\vec{F}_{1}\\[6pt]
 \vec{M}_{tot,1} &= \vec{r}_{n}\times\vec{F}_{t}\cdotp{}r_{1} + \vec{M}_{ro,1}\\[6pt]
 \vec{M}_{tot,2} &= -\vec{r}_{n}\times\vec{F}_{t}\cdotp{}r_{2} + \vec{M}_{ro,2}
 \end{aligned}
 \end{equation}
+
+\paragraph{Hertz-Mindlin Contact:} this is the basic contact model for DEM~\cite{Wang2021}.
+
 \endinput
