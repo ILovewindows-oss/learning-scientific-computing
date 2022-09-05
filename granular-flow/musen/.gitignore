@@ -1,2 +1,3 @@
 # Ignore case files
 *.mdem
+*.mdem.lock
