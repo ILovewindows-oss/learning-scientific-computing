@@ -50,8 +50,6 @@ SCALE_RANGES Y N 300.0 1000.0
 GRAPHICS_FORMAT 5 dumps/results-macro Y
 RENDER
 
-@$ @$LIST EXCELL_CSV_FILE T NP(*) post/results-macro-07.csv
+EXIT Y
 
-@$ EXIT Y
-
-SET INTERACTIVE
+@$ SET INTERACTIVE
