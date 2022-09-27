@@ -293,6 +293,10 @@ The following links provide simple implementations to learn DEM development:
 
 - [Musen repository](https://github.com/msolids/musen)
 
+### GranOO
+
+- [GranOO webpage](https://www.granoo.org/)
+
 ---
 
 ## Molecular Dynamics and DFT
@@ -389,7 +393,7 @@ The following links provide simple implementations to learn DEM development:
 - [GitHub - fwitte/fluprodia: Fluid property diagrams](https://github.com/fwitte/fluprodia)
 - [shiftkey/desktop](https://github.com/shiftkey/desktop/releases)
 - [bjodah/chempy: A package useful for chemistry written in Python](https://github.com/bjodah/chempy)
-
+- [BenLand100/chroma: Ultra-fast Photon Monte Carlo](https://github.com/BenLand100/chroma)
 
 <!-- TODO
 Courses to follow:
