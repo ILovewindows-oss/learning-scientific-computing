@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="FlaskApp">
+    <meta name="author" content="Walter Dal'Maz Silva">
+
+    <title>{% block title %}Base{% endblock %}</title>
+
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='flaskapp.css') }}" />
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <div class="container">
+        {% block content %}
+
+        {% endblock content%}
+    <div>
+    <script src="{{ url_for('static', filename='flaskapp.js') }}"></script>
+    </div>
+</body>
+
+</html>
