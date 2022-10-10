@@ -12,7 +12,7 @@ django-filter
 djangorestframework
 dtreeviz
 exifread
-# fipy
+fipy
 flake8
 flask
 flask-admin
@@ -38,8 +38,8 @@ jupyter-core
 jupyter_contrib_nbextensions
 jupyter_nbextensions_configurator
 jupyterlab
-# KratosMultiphysics-all
-# maicos
+KratosMultiphysics-all
+maicos
 matplotlib
 meshio
 MDAnalysis
@@ -48,6 +48,7 @@ mpi4py
 nb-lua-kernel
 nbconvert
 networkx
+neuralprophet
 nltk
 notebook
 numba
@@ -65,6 +66,7 @@ pillow
 pint
 plotly
 pre-commit
+pyaf
 pyarrow
 pycalphad
 pycodestyle
@@ -92,6 +94,7 @@ spacy
 sphinx
 sphinx-toggleprompt
 sphinxcontrib-bibtex
+statsforecast
 statsmodels
 streamlit
 sympy

@@ -10,7 +10,7 @@ Copy `deps/` directory to target machine where same Python version is installed 
 
 In target machine run the following to install all packages:
 
-```
+```bash
 pip install -r requirements-prod.txt --no-index --find-links deps
 ```
 
