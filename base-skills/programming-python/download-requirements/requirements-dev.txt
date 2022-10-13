@@ -6,6 +6,7 @@ casadi
 catboost
 click
 cmake-format
+cvxpy
 cython
 django
 django-filter
@@ -40,6 +41,7 @@ jupyter_nbextensions_configurator
 jupyterlab
 KratosMultiphysics-all
 maicos
+manim
 matplotlib
 meshio
 MDAnalysis
