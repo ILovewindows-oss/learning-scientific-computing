@@ -131,6 +131,12 @@ Dyssol is process unit operations simulator conceived from granular processes.
 - [Dyssol repository](https://github.com/FlowsheetSimulation/Dyssol-open)
 - [Dyssol documentation](https://flowsheetsimulation.github.io/Dyssol-open/)
 
+### DWSIM
+
+Generical chemical process simulation software.
+
+- [DWSIM](https://dwsim.org/)
+
 ### Other software
 
 - [Ascend4 (legacy)](https://ascend4.org/)
