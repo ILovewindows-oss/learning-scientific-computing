@@ -36,6 +36,14 @@ If you are starting, Excercism is a nice entry-point:
 
 ### Octave
 
+### OpenCL
+
+### Pascal
+
+- [Free Pascal Docs](https://www.freepascal.org/docs.html)
+- [Free Pascal Wiki](https://wiki.freepascal.org/Main_Page)
+- [Pascal Wikibook](https://en.wikibooks.org/wiki/Pascal_Programming)
+
 ### Python
 
 - [8 surprising ways how to use Jupyter Notebook](https://mljar.com/blog/how-to-use-jupyter-notebook/)
