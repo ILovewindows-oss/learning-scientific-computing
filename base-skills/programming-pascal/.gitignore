@@ -1,2 +1,11 @@
+# FPC stuff.
 *.o
 *.exe
+
+# Lazarus stuff.
+*.ico
+*.lpi
+*.lps
+*.res
+backup/
+lib/

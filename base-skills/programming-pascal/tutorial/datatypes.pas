@@ -39,4 +39,5 @@ BEGIN
     writeln('Your age is ', validated_age);
 
     writeln('Random favorite month ', the_month);
+    readkey;
 END.
