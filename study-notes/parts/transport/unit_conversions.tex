@@ -1,0 +1,17 @@
+\subsection{Unit conversions}
+
+\subsubsection{Gas flow units}
+
+Because gases change volume as temperature and/or pressure change, a more convenient way is to report gas flows under a reference state. Several conventions are adopted and ideally one should report the gas flow rate already in mass units to avoid any ambiguity. A common situation is the expression in \emph{normal volume}, defined as \SI{1}{\cubic\meter} of gas at \SI{273.15}{\kelvin} and \SI{101325}{\pascal}. If gas supply conditions are such that ideal gas approximation remains valid, mass flow rate $\dot{m}$ in \si{\kilo\gram\per\second} can be computed from normal flow $\dot{Q}^{\phi}$ of a gas given in \si{\Normcubicmeter\per\hour} with known mean molar mass $\bar{M}$ as
+
+\begin{equation}
+\dot{m}=\frac{P^{\phi}\bar{M}}{RT^{\phi}}\frac{\dot{Q}^{\phi}}{3600}\approxeq{}0.012393\bar{M}\dot{Q}^{\phi}
+\end{equation} 
+
+In the imperial system an equivalent definition is that of standard cubic foot per minute, \si{\scfm}. There is no consensus over its definition and the reference state is often taken as \SI{293.15}{\kelvin} and \SI{101325}{\pascal}. In the case of air, often it is assumed a relative humidity of 50\%. This makes the use of this unit undesirable without the documentation of measurement device. Conversion between systems can be performed by computing first values in molar flow and applying conversion of feet to metric system. Using a superscript $\phi$ to denote normal metric system and $\theta$ for imperial system we can find the following expression, where factor $f$ performs time and volume conversion so that left-hand side is given in \si{\Normcubicmeter\per\hour}.
+
+\begin{equation}
+\dot{Q}^{\phi}=\frac{T^{\phi}}{T^{\theta}}\dot{Q}^{\theta}f\approxeq{}1.5831\dot{Q}^{\theta}
+\end{equation}
+
+\endinput

@@ -33,6 +33,9 @@
 
 \newcommand{\newSection}[1]{\cleardoublepage\section{#1}}
 
+\DeclareSIUnit\scfm{SCFM}
+\DeclareSIUnit\Normcubicmeter{Nm^3}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TITLE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,6 +66,7 @@
 
 \newSection{Transport Phenomena}
 \input{parts/transport/dimensionless_groups.tex}
+\input{parts/transport/unit_conversions.tex}
 \input{parts/transport/multiphase_granular.tex}
 \input{parts/transport/fluent_meshing.tex}
 \input{parts/transport/ansys_reminders.tex}
