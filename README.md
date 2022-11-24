@@ -286,6 +286,21 @@ The following links provide simple implementations to learn DEM development:
 
 - [pyLBM documentation](https://pylbm.readthedocs.io/en/latest/)
 
+## Smooth Particle Hydrodynamics
+
+### DualSPHysics
+
+- [DualSPHysics webpage](https://dual.sphysics.org/)
+- [DualSPHysics wiki](https://github.com/DualSPHysics/DualSPHysics/wiki)
+
+### Other software
+
+- [Several projects](https://www.spheric-sph.org/sph-projects-and-codes)
+- [GPUSPH](https://www.gpusph.org/)
+- [SPHinXsys](https://www.sphinxsys.org/)
+- [SPlisHSPlasH](https://github.com/InteractiveComputerGraphics/SPlisHSPlasH)
+- [PySPH](https://github.com/pypr/pysph)
+
 ---
 
 ## Granular Flow
