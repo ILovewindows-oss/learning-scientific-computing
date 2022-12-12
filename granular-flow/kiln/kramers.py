@@ -5,7 +5,6 @@ from casadi import nlpsol
 from majordome.utilities.capturing import Capturing
 from scipy.integrate import solve_ivp
 from scipy.integrate import trapz
-from scipy.optimize import root
 import casadi as cs
 import numpy as np
 import matplotlib.pyplot as plt
@@ -183,7 +182,7 @@ def _validate_analytical_fig3():
     for ht in hvals:
         h = ht * R * n_phi
 
-        with Capturing() as out:
+        with Capturing() as _:
             sol = solver(x0=h, p=cs.vertcat(h, xn), lbx=0, lbg=0, ubg=0)
 
         hx = (sol["x"] / (R * n_phi))
