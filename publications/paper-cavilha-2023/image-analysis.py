@@ -221,8 +221,14 @@ def run_regions(all_files, sigma=10, cutoff=200):
 
 def generate_summary(regex, saveas):
     """ Concatenate all data matching one sample. """
-    all_tables = Path("media/outputs/regions").glob(regex)
-    df = pd.concat([pd.read_excel(f) for f in all_tables], ignore_index=True)
+    all_tables = []
+
+    for f in Path("media/outputs/regions").glob(regex):
+        df = pd.read_excel(f)
+        df["source"] = f.stem
+        all_tables.append(df)
+
+    df = pd.concat(all_tables, ignore_index=True)
     df.to_excel(saveas, index=False)
 
 
@@ -231,10 +237,7 @@ if __name__ == "__main__":
     run_porosity(all_files)
     run_regions(all_files)
 
-    regex = "*Ti_pure_1*.xlsx"
-    saveas = "media/outputs/summary-regions-pure-1.xlsx"
-    generate_summary(regex, saveas)
-
-    regex = "*Ti_pure_2*.xlsx"
-    saveas = "media/outputs/summary-regions-pure-2.xlsx"
-    generate_summary(regex, saveas)
+    for sh in [50, 70, 80]:
+        regex = f"*Ti_pure*{sh:0d}.*.xlsx"
+        saveas = f"media/outputs/summary-regions-{sh:0d}.xlsx"
+        generate_summary(regex, saveas)
