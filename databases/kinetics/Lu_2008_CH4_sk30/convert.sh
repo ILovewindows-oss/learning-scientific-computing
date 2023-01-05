@@ -3,5 +3,5 @@ chemkinToFoam -newFormat \
     chem.inp  \
     therm.dat \
     transport.foam  \
-    OF-hydrocarbon-zhukov-2018-sk23-mech.foam \
-    OF-hydrocarbon-zhukov-2018-sk23-ther.foam
+    OF-hydrocarbon-lu-2008-sk30-mech.foam \
+    OF-hydrocarbon-lu-2008-sk30-ther.foam
