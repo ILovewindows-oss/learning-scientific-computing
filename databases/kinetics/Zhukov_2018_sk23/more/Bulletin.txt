@@ -1,0 +1,17 @@
+﻿Dear Colleagues,
+
+You have asked me about the methane kinetic mechanism. Recently I have published it in a journal. Please find enclosed: the article, the mechanism in Chemkin format, thermodynamic and transport data. I have plans to support the users of the mechanism. I would like help the users of the mechanism. Therefore, I would like provide the users with additional information which helps to the successful use of the mechanism. Please find below important information about the skeletal mechanism of Zhukov and Kong (Prog. Reac. Kinet. Mec., 2018, 43(1), 62–78, https://doi.org/10.3184/146867818X15066862094914).
+
+1. Reduction of reaction mechanisms generally assumes some loss of accuracy. For high pressures and methane–oxygen mixtures, the loss of the accuracy of the mechanism is negligible.
+2. The reaction mechanism is supposed to work well in the pressure range of 1–150 bar in methane–air and methane–oxygen mixtures. The accuracy of the mechanism in mixtures with mole fraction of Ar, He, or N2 of around 95% was not checked.
+3. Target parameters for the mechanism are flame temperatures and ignition delay times, which can be interpreted as a characteristic reaction time.
+4. Flame simulations with the mechanism are sensitive to Lewis number (Le). The assumption of Le=1 (usually used for flamelet library generation) leads to a decrease of the accuracy of several percentages in rich mixtures with equivalence ratios around 2.5. Near this equivalence ratio, the difference between the skeletal(reduced) and detailed mechanisms can reach up to 5%.
+5. The mechanism predicts lower velocities of premixed methane–air flames; a solution for this issue is in progress. Premixed flame speeds depend strongly on the concentration of H atoms. For premixed flame simulations, the latest version of the methane mechanism by Slavinskaya et al. (AIAA 2016-4781), which is unfortunately not accurate in ignition delay times, can be used.
+6. In premixed methane-oxygen flames, the difference between the skeletal(reduced) and detailed mechanisms is noticeable but not essential.
+7. In non-premixed flames, temperature and species profiles are OK. Depending on variable, the difference between the skeletal(reduced) and detailed mechanisms varies from 0.5 to 2%.
+8. Accuracy is not the only essential characteristics of reduced mechanisms. For CFD simulations, stiffness of mechanism, perhaps, is a more important characteristic. The stiffness of the mechanism alongside with the accuracy in predicting flame temperature is one of strengths of the mechanism.
+9. At present, several groups are using the mechanism for flamelet library generation to model methane rocket engines. The mechanism is also used for nozzle flow simulations as the finite-rate chemistry model.
+10. The mechanism is stored in Chemkin format in 3 files: reaction set, thermodynamic data, and trasnport properties.
+
+Sincerely yours
+Victor Zhukov
