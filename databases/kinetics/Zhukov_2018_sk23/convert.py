@@ -15,11 +15,11 @@ convertMech(
 
 convertMech(
     "chem.inp", 
-    thermoFile="therm_alt.dat",
-    transportFile="tran_alt.dat",
+    thermoFile="alternative/therm.dat",
+    transportFile="alternative/tran.dat",
     surfaceFile=None,
     phaseName="gas",
-    outName="zhukov23_gri30_alt.cti",
+    outName="alternative/zhukov23_gri30.cti",
     quiet=False,
     permissive=None,
 )
