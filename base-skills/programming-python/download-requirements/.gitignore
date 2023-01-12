@@ -1,5 +1,7 @@
 # Local files.
 deps/
+embed/
+tmp-*/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
